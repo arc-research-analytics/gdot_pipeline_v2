@@ -182,7 +182,7 @@ fetch("data/GDOT_export.geojson")
           "UNDER-CONSTRUCTION",
           "#009f00", // default color for under-construction
           "COMPLETED-CONSTRUCTION",
-          "#00009f", // default color for completed-construction
+          "#0000ec", // default color for completed-construction
           "#888888", // default color
         ],
         // "line-width": 8,
