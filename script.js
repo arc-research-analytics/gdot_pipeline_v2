@@ -71,6 +71,12 @@ map.on("load", () => {
     ),
     fetch("data/RCs/RCs.geojson").then((response) => response.json()),
     fetch("data/RCs/RCs_centroids.geojson").then((response) => response.json()),
+    fetch("data/Workforce/workforce.geojson").then((response) =>
+      response.json()
+    ),
+    fetch("data/Workforce/workforce_centroids.geojson").then((response) =>
+      response.json()
+    ),
   ]).then(
     ([
       cdData,
@@ -80,14 +86,17 @@ map.on("load", () => {
       agingLabelData,
       rcData,
       rcLabelData,
+      workforceData,
+      workforceLabelData,
     ]) => {
       // Store the new layer data globally for easy access
       window.additionalLayers = {
-        // workforce: workforceData,
         aging: agingData,
         agingLabels: agingLabelData,
         rc: rcData,
         rcLabels: rcLabelData,
+        workforce: workforceData,
+        workforceLabels: workforceLabelData,
       };
 
       // Congressional Districts outlines
@@ -150,8 +159,6 @@ map.on("load", () => {
           "text-halo-width": 2,
         },
       });
-
-      console.log("additional layers", window.additionalLayers);
 
       // attach event listeners for checkbox changes after map load
       setupCheckboxListeners();
@@ -228,26 +235,26 @@ fetch("data/GDOT_export.geojson")
         listingEl.appendChild(itemLink);
       });
 
-      // add event listener for hovering over any part of the listingEl to simply console.log a message
-      listingEl.addEventListener("mouseover", (event) => {
-        const featureId = Number(event.target.dataset.featureId);
+      // // add event listener for hovering over any part of the listingEl to simply console.log a message
+      // listingEl.addEventListener("mouseover", (event) => {
+      //   const featureId = Number(event.target.dataset.featureId);
 
-        const feature = data.features.find((f) => f.id === featureId);
-        if (feature) {
-          const coordinates = feature.geometry.coordinates[0];
-          popup
-            .setLngLat(coordinates)
-            .setHTML(
-              `<div style="text-align: center;"><span style="font-family: Arial, sans-serif; font-size: 14px;">${feature.properties.Project_description}</span></div>`
-            )
-            .addTo(map);
-        }
-      });
+      //   const feature = data.features.find((f) => f.id === featureId);
+      //   if (feature) {
+      //     const coordinates = feature.geometry.coordinates[0];
+      //     popup
+      //       .setLngLat(coordinates)
+      //       .setHTML(
+      //         `<div style="text-align: center;"><span style="font-family: Arial, sans-serif; font-size: 14px;">${feature.properties.Project_description}</span></div>`
+      //       )
+      //       .addTo(map);
+      //   }
+      // });
 
-      // Add an event listener to hide the popup when the mouse leaves the listingEl
-      listingEl.addEventListener("mouseleave", () => {
-        popup.remove(); // Remove the popup
-      });
+      // // Add an event listener to hide the popup when the mouse leaves the listingEl
+      // listingEl.addEventListener("mouseleave", () => {
+      //   popup.remove(); // Remove the popup
+      // });
 
       // Filter the map layer
       const filteredDescriptions = projectInfo
@@ -683,7 +690,7 @@ const layerStyles = {
       "line-color": "#41ab5d",
       "line-width": 2,
       "line-opacity": 1,
-      "line-dasharray": [1, 2],
+      "line-dasharray": [2, 1],
     },
   },
   "rc-labels-layer": {
@@ -696,6 +703,29 @@ const layerStyles = {
     },
     paint: {
       "text-color": "#41ab5d",
+      "text-halo-color": "#FFFFFF",
+      "text-halo-width": 1.5,
+    },
+  },
+  "workforce-layer": {
+    type: "line",
+    paint: {
+      "line-color": "#4292c6",
+      "line-width": 2,
+      "line-opacity": 1,
+      "line-dasharray": [3, 1],
+    },
+  },
+  "workforce-labels-layer": {
+    type: "symbol",
+    layout: {
+      "text-field": "{Name}",
+      "text-size": 14,
+      "text-allow-overlap": false,
+      "text-font": ["Roboto Bold Italic"],
+    },
+    paint: {
+      "text-color": "#4292c6",
       "text-halo-color": "#FFFFFF",
       "text-halo-width": 1.5,
     },
@@ -734,17 +764,27 @@ const toggleLayer = (layerId, sourceId, geoData, isChecked) => {
 
 // Attach event listeners for checkboxes
 const setupCheckboxListeners = () => {
-  // document.getElementById("workforceGeo").addEventListener("change", (e) => {
-  //   toggleLayer(
-  //     "workforce-layer",
-  //     "workforce-source",
-  //     window.additionalLayers.workforce,
-  //     e.target.checked
-  //   );
-  // });
+  document.getElementById("workforceGeo").addEventListener("sl-change", (e) => {
+    console.log("Workforce data:", window.additionalLayers.workforce);
+    console.log(
+      "Workforce labels data:",
+      window.additionalLayers.workforceLabels
+    );
+    toggleLayer(
+      "workforce-layer",
+      "workforce-source",
+      window.additionalLayers.workforce,
+      e.target.checked
+    );
+    toggleLayer(
+      "workforce-labels-layer",
+      "workforce-labels-source",
+      window.additionalLayers.workforceLabels,
+      e.target.checked
+    );
+  });
 
   document.getElementById("agingGeo").addEventListener("sl-change", (e) => {
-    console.log(e.target.checked);
     toggleLayer(
       "aging-layer",
       "aging-source",
