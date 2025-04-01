@@ -854,11 +854,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Attach event listener to download button
   if (downloadBtn) {
     downloadBtn.addEventListener("click", () => {
-      const csvFile = "GDOT_export.csv";
+      const csvFile = "GDOT_export_joined.csv";
       const link = document.createElement("a");
       link.href = csvFile;
-      link.download = csvFile;
+      link.download = "GDOT_export.csv"; // Set the desired file name
+      document.body.appendChild(link); // Add the link to the DOM
       link.click();
+      document.body.removeChild(link); // Clean up after download
     });
   } else {
     console.error("downloadBtn element not found at DOMContentLoaded.");
