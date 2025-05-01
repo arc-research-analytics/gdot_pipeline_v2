@@ -1,422 +1,422 @@
 [
     {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":1,
-        "total_projects":44,
-        "total_cost":295450343.8500000238,
-        "average_cost":6714780.5420454554
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":1,
+        "total_projects":41,
+        "total_cost":271974401.8100000024,
+        "average_cost":6633521.9953658534
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":2,
-        "total_projects":52,
-        "total_cost":384382975.9599999785,
-        "average_cost":7391980.3069230765
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":2,
+        "total_projects":48,
+        "total_cost":378992632.4199999571,
+        "average_cost":7895679.8420833321
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":3,
-        "total_projects":38,
-        "total_cost":267016967.0699999928,
-        "average_cost":7026762.2913157893
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":3,
+        "total_projects":36,
+        "total_cost":242911978.9099999964,
+        "average_cost":6747554.9697222225
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":4,
-        "total_projects":14,
-        "total_cost":139741931.8300000131,
-        "average_cost":9981566.5592857152
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":4,
+        "total_projects":12,
+        "total_cost":126035791.650000006,
+        "average_cost":10502982.6375000011
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":5,
-        "total_projects":24,
-        "total_cost":209560202.0500000119,
-        "average_cost":8731675.0854166672
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":5,
+        "total_projects":20,
+        "total_cost":134947905.5300000012,
+        "average_cost":6747395.2764999997
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":6,
-        "total_projects":21,
-        "total_cost":333141698.1299999952,
-        "average_cost":15863890.3871428575
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":7,
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":6,
         "total_projects":19,
-        "total_cost":3008306268.3400001526,
-        "average_cost":158331908.8600000143
+        "total_cost":246204187.1100000143,
+        "average_cost":12958115.1110526323
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":8,
-        "total_projects":54,
-        "total_cost":230715382.1200000048,
-        "average_cost":4272507.076296296
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":9,
-        "total_projects":38,
-        "total_cost":582732681.0099999905,
-        "average_cost":15335070.5528947357
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":10,
-        "total_projects":37,
-        "total_cost":277294827.8700000048,
-        "average_cost":7494454.8072972978
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":11,
-        "total_projects":24,
-        "total_cost":257903565.0099999905,
-        "average_cost":10745981.8754166663
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":12,
-        "total_projects":45,
-        "total_cost":352785904.3700000048,
-        "average_cost":7839686.7637777776
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":13,
-        "total_projects":24,
-        "total_cost":151339189.400000006,
-        "average_cost":6305799.5583333336
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":14,
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":7,
         "total_projects":18,
-        "total_cost":236849827.1099999845,
-        "average_cost":13158323.7283333316
+        "total_cost":3091125198.8100004196,
+        "average_cost":171729177.7116667032
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":1,
-        "total_projects":238,
-        "total_cost":9746416288.5500011444,
-        "average_cost":40951328.9434873983
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":8,
+        "total_projects":46,
+        "total_cost":200754596.1800000072,
+        "average_cost":4364230.3517391309
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":2,
-        "total_projects":219,
-        "total_cost":2417852111.4200000763,
-        "average_cost":11040420.6000913251
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":9,
+        "total_projects":34,
+        "total_cost":448449232.0400000215,
+        "average_cost":13189683.295294119
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":3,
-        "total_projects":199,
-        "total_cost":3361301633.6199998856,
-        "average_cost":16890962.9830150753
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":10,
+        "total_projects":36,
+        "total_cost":274596124.8700000048,
+        "average_cost":7627670.1352777779
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":4,
-        "total_projects":77,
-        "total_cost":29059600647.0400009155,
-        "average_cost":377397411.0005195141
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":11,
+        "total_projects":21,
+        "total_cost":280459817.219999969,
+        "average_cost":13355229.3914285693
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":5,
-        "total_projects":104,
-        "total_cost":15133764672.3099994659,
-        "average_cost":145516968.0029807687
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":12,
+        "total_projects":44,
+        "total_cost":343923435.25,
+        "average_cost":7816441.7102272725
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":6,
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":13,
+        "total_projects":21,
+        "total_cost":198886890.75,
+        "average_cost":9470804.3214285709
+    },
+    {
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":14,
+        "total_projects":17,
+        "total_cost":234477591.7199999988,
+        "average_cost":13792799.5129411761
+    },
+    {
+        "Status":"PRE-CONSTRUCTION",
+        "District":1,
+        "total_projects":240,
+        "total_cost":9750765174.1900005341,
+        "average_cost":40628188.2257916704
+    },
+    {
+        "Status":"PRE-CONSTRUCTION",
+        "District":2,
+        "total_projects":223,
+        "total_cost":2353920237.0900001526,
+        "average_cost":10555696.1304484308
+    },
+    {
+        "Status":"PRE-CONSTRUCTION",
+        "District":3,
+        "total_projects":194,
+        "total_cost":2733587434.7100000381,
+        "average_cost":14090656.879948454
+    },
+    {
+        "Status":"PRE-CONSTRUCTION",
+        "District":4,
+        "total_projects":72,
+        "total_cost":22640417616.8400001526,
+        "average_cost":314450244.6783333421
+    },
+    {
+        "Status":"PRE-CONSTRUCTION",
+        "District":5,
         "total_projects":98,
-        "total_cost":10346348308.0799999237,
-        "average_cost":105574982.7355102003
+        "total_cost":7559507633.2300004959,
+        "average_cost":77137832.9921428561
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":7,
-        "total_projects":82,
-        "total_cost":5050887531.6999998093,
-        "average_cost":61596189.4109756052
+        "Status":"PRE-CONSTRUCTION",
+        "District":6,
+        "total_projects":88,
+        "total_cost":10120910452.1000003815,
+        "average_cost":115010346.0465909094
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":8,
-        "total_projects":400,
-        "total_cost":4824706453.0199995041,
-        "average_cost":12061766.1325499993
+        "Status":"PRE-CONSTRUCTION",
+        "District":7,
+        "total_projects":75,
+        "total_cost":1644796721.5599999428,
+        "average_cost":21930622.9541333318
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":9,
-        "total_projects":165,
-        "total_cost":4121670177.5399999619,
-        "average_cost":24979819.2578181811
+        "Status":"PRE-CONSTRUCTION",
+        "District":8,
+        "total_projects":399,
+        "total_cost":4459070394.9600000381,
+        "average_cost":11175615.0249624066
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":10,
-        "total_projects":256,
-        "total_cost":5766113745.8199996948,
-        "average_cost":22523881.8196093738
+        "Status":"PRE-CONSTRUCTION",
+        "District":9,
+        "total_projects":162,
+        "total_cost":3782239503.6500000954,
+        "average_cost":23347157.4299382716
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":11,
-        "total_projects":133,
-        "total_cost":2990619482.3200001717,
-        "average_cost":22485860.769323308
+        "Status":"PRE-CONSTRUCTION",
+        "District":10,
+        "total_projects":248,
+        "total_cost":5374714192.1099996567,
+        "average_cost":21672234.6456048377
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":12,
-        "total_projects":607,
-        "total_cost":3831247903.0999999046,
-        "average_cost":6311775.7876441516
+        "Status":"PRE-CONSTRUCTION",
+        "District":11,
+        "total_projects":130,
+        "total_cost":2822046659.1700000763,
+        "average_cost":21708051.2243846171
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":13,
-        "total_projects":66,
-        "total_cost":2169229323.2800002098,
-        "average_cost":32867110.9587878808
+        "Status":"PRE-CONSTRUCTION",
+        "District":12,
+        "total_projects":591,
+        "total_cost":3590648081.7199997902,
+        "average_cost":6075546.6695769876
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":14,
+        "Status":"PRE-CONSTRUCTION",
+        "District":13,
+        "total_projects":61,
+        "total_cost":1833353012.9800000191,
+        "average_cost":30054967.4259016402
+    },
+    {
+        "Status":"PRE-CONSTRUCTION",
+        "District":14,
         "total_projects":121,
-        "total_cost":2822064377.5799999237,
-        "average_cost":23322846.0957024805
+        "total_cost":2818420354.6999998093,
+        "average_cost":23292730.2041322291
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":1,
-        "total_projects":89,
-        "total_cost":1213503281.6199998856,
-        "average_cost":13634868.3328089882
+        "Status":"UNDER-CONSTRUCTION",
+        "District":1,
+        "total_projects":91,
+        "total_cost":1207164754.7000000477,
+        "average_cost":13265546.7549450547
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":2,
-        "total_projects":62,
-        "total_cost":1025059652.6000000238,
-        "average_cost":16533220.2032258064
+        "Status":"UNDER-CONSTRUCTION",
+        "District":2,
+        "total_projects":61,
+        "total_cost":1010549992.9099999666,
+        "average_cost":16566393.3263934422
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":3,
-        "total_projects":58,
-        "total_cost":571983842.6499999762,
-        "average_cost":9861790.3905172404
+        "Status":"UNDER-CONSTRUCTION",
+        "District":3,
+        "total_projects":53,
+        "total_cost":449627011.2200000286,
+        "average_cost":8483528.5135849062
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":4,
-        "total_projects":24,
-        "total_cost":1152274581.6800000668,
-        "average_cost":48011440.9033333361
+        "Status":"UNDER-CONSTRUCTION",
+        "District":4,
+        "total_projects":20,
+        "total_cost":1142664206.7599999905,
+        "average_cost":57133210.3379999995
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":5,
-        "total_projects":49,
-        "total_cost":752920423.5199999809,
-        "average_cost":15365722.9289795905
+        "Status":"UNDER-CONSTRUCTION",
+        "District":5,
+        "total_projects":47,
+        "total_cost":643538286.8500000238,
+        "average_cost":13692303.9755319152
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":6,
-        "total_projects":51,
-        "total_cost":2245765869.1599998474,
-        "average_cost":44034624.885490194
+        "Status":"UNDER-CONSTRUCTION",
+        "District":6,
+        "total_projects":41,
+        "total_cost":2018919010.4099998474,
+        "average_cost":49241927.0831707269
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":7,
-        "total_projects":26,
-        "total_cost":1115633669.5999999046,
-        "average_cost":42908987.2923076898
+        "Status":"UNDER-CONSTRUCTION",
+        "District":7,
+        "total_projects":25,
+        "total_cost":1083762870.8900001049,
+        "average_cost":43350514.8356000036
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":8,
-        "total_projects":96,
-        "total_cost":759908791.1299999952,
-        "average_cost":7915716.5742708333
+        "Status":"UNDER-CONSTRUCTION",
+        "District":8,
+        "total_projects":98,
+        "total_cost":766173405.9600000381,
+        "average_cost":7818095.9791836739
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":9,
-        "total_projects":42,
-        "total_cost":739090891.3700000048,
-        "average_cost":17597402.1754761897
+        "Status":"UNDER-CONSTRUCTION",
+        "District":9,
+        "total_projects":35,
+        "total_cost":639101150.9800000191,
+        "average_cost":18260032.8851428591
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":10,
-        "total_projects":62,
-        "total_cost":965279377.6900000572,
-        "average_cost":15569022.2208064534
+        "Status":"UNDER-CONSTRUCTION",
+        "District":10,
+        "total_projects":56,
+        "total_cost":859599837.7599999905,
+        "average_cost":15349997.1028571427
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":11,
+        "Status":"UNDER-CONSTRUCTION",
+        "District":11,
         "total_projects":23,
-        "total_cost":414337622.4200000167,
-        "average_cost":18014679.2356521748
+        "total_cost":432672288.3300000429,
+        "average_cost":18811838.6230434813
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":12,
-        "total_projects":129,
-        "total_cost":824406046.8500000238,
-        "average_cost":6390744.549224806
+        "Status":"UNDER-CONSTRUCTION",
+        "District":12,
+        "total_projects":137,
+        "total_cost":814651611.6000000238,
+        "average_cost":5946362.1284671538
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":13,
-        "total_projects":33,
-        "total_cost":550447239.3600000143,
-        "average_cost":16680219.374545455
+        "Status":"UNDER-CONSTRUCTION",
+        "District":13,
+        "total_projects":23,
+        "total_cost":381905778.3000000119,
+        "average_cost":16604599.0565217398
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":14,
-        "total_projects":33,
-        "total_cost":458909816.2700000405,
-        "average_cost":13906358.0687878802
+        "Status":"UNDER-CONSTRUCTION",
+        "District":14,
+        "total_projects":32,
+        "total_cost":368027693.5,
+        "average_cost":11500865.421875
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":1,
-        "total_projects":371,
-        "total_cost":11255369914.0200004578,
-        "average_cost":30337924.2965498678
+        "Status":"ALL",
+        "District":1,
+        "total_projects":372,
+        "total_cost":11229904330.7000007629,
+        "average_cost":30187914.8674731217
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":2,
-        "total_projects":333,
-        "total_cost":3827294739.9800000191,
-        "average_cost":11493377.597537538
+        "Status":"ALL",
+        "District":2,
+        "total_projects":332,
+        "total_cost":3743462862.4200000763,
+        "average_cost":11275490.5494578313
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":3,
-        "total_projects":295,
-        "total_cost":4200302443.3400001526,
-        "average_cost":14238313.3672542386
+        "Status":"ALL",
+        "District":3,
+        "total_projects":283,
+        "total_cost":3426126424.8400001526,
+        "average_cost":12106453.798021201
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":4,
-        "total_projects":115,
-        "total_cost":30351617160.5500030518,
-        "average_cost":263927105.7439130843
+        "Status":"ALL",
+        "District":4,
+        "total_projects":104,
+        "total_cost":23909117615.25,
+        "average_cost":229895361.6850961447
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":5,
-        "total_projects":177,
-        "total_cost":16096245297.8799991608,
-        "average_cost":90939238.9710734487
+        "Status":"ALL",
+        "District":5,
+        "total_projects":165,
+        "total_cost":8337993825.6100006104,
+        "average_cost":50533295.9127878845
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":6,
+        "Status":"ALL",
+        "District":6,
+        "total_projects":148,
+        "total_cost":12386033649.6200008392,
+        "average_cost":83689416.5514864922
+    },
+    {
+        "Status":"ALL",
+        "District":7,
+        "total_projects":118,
+        "total_cost":5819684791.2600002289,
+        "average_cost":49319362.6377966106
+    },
+    {
+        "Status":"ALL",
+        "District":8,
+        "total_projects":543,
+        "total_cost":5425998397.1000003815,
+        "average_cost":9992630.565561695
+    },
+    {
+        "Status":"ALL",
+        "District":9,
+        "total_projects":231,
+        "total_cost":4869789886.6700000763,
+        "average_cost":21081341.5007359311
+    },
+    {
+        "Status":"ALL",
+        "District":10,
+        "total_projects":340,
+        "total_cost":6508910154.7399997711,
+        "average_cost":19143853.396294117
+    },
+    {
+        "Status":"ALL",
+        "District":11,
+        "total_projects":174,
+        "total_cost":3535178764.7199997902,
+        "average_cost":20317119.3374712616
+    },
+    {
+        "Status":"ALL",
+        "District":12,
+        "total_projects":772,
+        "total_cost":4749223128.5699996948,
+        "average_cost":6151843.4307901552
+    },
+    {
+        "Status":"ALL",
+        "District":13,
+        "total_projects":105,
+        "total_cost":2414145682.0300002098,
+        "average_cost":22991863.6383809559
+    },
+    {
+        "Status":"ALL",
+        "District":14,
         "total_projects":170,
-        "total_cost":12925255875.3699989319,
-        "average_cost":76030916.9139411747
+        "total_cost":3420925639.9199995995,
+        "average_cost":20123091.9995294102
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":7,
-        "total_projects":127,
-        "total_cost":9174827469.6399993896,
-        "average_cost":72242735.9814173132
+        "Status":"ALL",
+        "District":"ALL",
+        "total_projects":3857,
+        "total_cost":99776495153.4499969482,
+        "average_cost":25868938.3337956965
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":8,
-        "total_projects":550,
-        "total_cost":5815330626.2699995041,
-        "average_cost":10573328.4113999996
+        "Status":"COMPLETED-CONSTRUCTION",
+        "District":"ALL",
+        "total_projects":413,
+        "total_cost":6473739784.2700004578,
+        "average_cost":15674914.7318886202
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":9,
-        "total_projects":245,
-        "total_cost":5443493749.9200000763,
-        "average_cost":22218341.8364081644
+        "Status":"PRE-CONSTRUCTION",
+        "District":"ALL",
+        "total_projects":2702,
+        "total_cost":81484397469.0100097656,
+        "average_cost":30157067.9011880122
     },
     {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":10,
-        "total_projects":355,
-        "total_cost":7008687951.3799991608,
-        "average_cost":19742782.9616338015
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":11,
-        "total_projects":180,
-        "total_cost":3662860669.7500004768,
-        "average_cost":20349225.9430555589
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":12,
-        "total_projects":781,
-        "total_cost":5008439854.3199996948,
-        "average_cost":6412855.1271702945
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":13,
-        "total_projects":123,
-        "total_cost":2871015752.0400004387,
-        "average_cost":23341591.4800000042
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":14,
-        "total_projects":172,
-        "total_cost":3517824020.9600000381,
-        "average_cost":20452465.2381395362
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"ALL",
-        "DISTRICT":"ALL",
-        "total_projects":3994,
-        "total_cost":121158565525.4199981689,
-        "average_cost":30335144.0975012518
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"COMPLETED-CONSTRUCTION",
-        "DISTRICT":"ALL",
-        "total_projects":452,
-        "total_cost":6727221764.1199998856,
-        "average_cost":14883233.991415929
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"PRE-CONSTRUCTION",
-        "DISTRICT":"ALL",
-        "total_projects":2765,
-        "total_cost":101641822655.3800048828,
-        "average_cost":36760152.8590886071
-    },
-    {
-        "CONSTRUCTION_STATUS_DERIVED":"UNDER-CONSTRUCTION",
-        "DISTRICT":"ALL",
-        "total_projects":777,
-        "total_cost":12789521105.9200000763,
-        "average_cost":16460130.1234491635
+        "Status":"UNDER-CONSTRUCTION",
+        "District":"ALL",
+        "total_projects":742,
+        "total_cost":11818357900.1700000763,
+        "average_cost":15927706.0649191383
     }
 ]

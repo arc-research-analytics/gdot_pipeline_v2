@@ -52,6 +52,7 @@ map.addControl(scale);
 
 let projectInfo = [];
 let hoveredProjectId = null;
+let updateTable;
 
 // Load map and layers
 map.on("load", () => {
@@ -148,7 +149,7 @@ map.on("load", () => {
         minzoom: 7.5,
         maxzoom: 15,
         layout: {
-          "text-field": "District {DISTRICT}",
+          "text-field": "District  {DISTRICT}",
           "text-size": 16,
           "text-allow-overlap": true,
           "text-font": ["Roboto Bold"],
@@ -183,7 +184,7 @@ fetch("data/GDOT_export.geojson")
       paint: {
         "line-color": [
           "match",
-          ["get", "CONSTRUCTION_STATUS_DERIVED"],
+          ["get", "Status"],
           "PRE-CONSTRUCTION",
           "#CC5500", // default color for pre-construction
           "UNDER-CONSTRUCTION",
@@ -206,25 +207,57 @@ fetch("data/GDOT_export.geojson")
     // create an array of project info
     projectInfo = data.features.map((feature) => {
       return {
-        description: feature.properties.Project_description,
-        url: feature.properties.Project_URL,
-        constructionStatus: feature.properties.CONSTRUCTION_STATUS_DERIVED,
+        id: feature.properties.ID,
+        description: feature.properties.Desc_short || "",
+        url: feature.properties.URL,
+        constructionStatus: feature.properties.Status,
         featureId: feature.id,
       };
     });
 
-    const popup = new mapboxgl.Popup({ closeButton: false });
-
     // function to filter and update the table
-    const updateTable = (filterQuery) => {
+    updateTable = (filterQuery) => {
       const filteredProjects = projectInfo.filter((project) => {
-        return project.description
+        return (project.description || "")
           .toLowerCase()
           .includes(filterQuery.toLowerCase());
       });
 
       const listingEl = document.getElementById("feature-listing");
+
+      // add hover event listeners
+      listingEl.addEventListener("mouseover", (e) => {
+        const target = e.target.closest("a.project-link");
+        if (!target) return;
+        const featureId = target.dataset.featureId;
+        map.setFeatureState(
+          {
+            source: "projects-source",
+            id: featureId,
+          },
+          {
+            hover: true,
+          }
+        );
+      });
+
+      listingEl.addEventListener("mouseout", (e) => {
+        const target = e.target.closest("a.project-link");
+        if (!target) return;
+        const featureId = target.dataset.featureId;
+        map.setFeatureState(
+          {
+            source: "projects-source",
+            id: featureId,
+          },
+          {
+            hover: false,
+          }
+        );
+      });
+
       listingEl.innerHTML = "";
+
       filteredProjects.forEach((project) => {
         const itemLink = document.createElement("a");
         itemLink.textContent = project.description;
@@ -235,39 +268,16 @@ fetch("data/GDOT_export.geojson")
         listingEl.appendChild(itemLink);
       });
 
-      // // add event listener for hovering over any part of the listingEl to simply console.log a message
-      // listingEl.addEventListener("mouseover", (event) => {
-      //   const featureId = Number(event.target.dataset.featureId);
-
-      //   const feature = data.features.find((f) => f.id === featureId);
-      //   if (feature) {
-      //     const coordinates = feature.geometry.coordinates[0];
-      //     popup
-      //       .setLngLat(coordinates)
-      //       .setHTML(
-      //         `<div style="text-align: center;"><span style="font-family: Arial, sans-serif; font-size: 14px;">${feature.properties.Project_description}</span></div>`
-      //       )
-      //       .addTo(map);
-      //   }
-      // });
-
-      // // Add an event listener to hide the popup when the mouse leaves the listingEl
-      // listingEl.addEventListener("mouseleave", () => {
-      //   popup.remove(); // Remove the popup
-      // });
-
       // Filter the map layer
-      const filteredDescriptions = projectInfo
-        .filter((project) =>
-          project.description.toLowerCase().includes(filterQuery.toLowerCase())
-        )
-        .map((project) => project.description);
+      const filteredDescriptions = filteredProjects.map(
+        (project) => project.description
+      );
 
       map.setFilter("all-projects", [
         "any",
         ...filteredDescriptions.map((description) => [
           "==",
-          ["get", "Project_description"],
+          ["get", "Desc_short"],
           description,
         ]),
       ]);
@@ -275,43 +285,23 @@ fetch("data/GDOT_export.geojson")
 
     // Initial update of the table
     updateTable("");
+
+    // Filter and update table on load after waiting 200 ms
+    map.on("idle", () => {
+      filterAndUpdateTable(); // Filter and update on initial load
+    });
   });
 
-// Mouse click event to link to project URL
-map.on("click", "all-projects", (e) => {
-  if (e.features.length > 0) {
-    // Get the clicked feature's properties
-    const clickedFeature = e.features[0].properties;
-
-    // Redirect to the project's URL
-    const projectUrl = clickedFeature.Project_URL; // Assuming 'Project_URL' is the correct property
-    if (projectUrl) {
-      window.open(projectUrl, "_blank"); // Navigate to the project URL
-    } else {
-      console.log("No URL available for this project.");
-    }
-  }
-});
-
 // Update table based on visible map extent
-const updateTableFromMapExtent = (visibleDescriptions) => {
+const updateTableFromMapExtent = (visibleIDs) => {
   if (projectInfo.length === 0) return; // Wait for projectInfo to load
 
   const listingEl = document.getElementById("feature-listing");
   listingEl.innerHTML = "";
 
-  // Ensure the table isn't completely emptied when zooming
-  if (visibleDescriptions.length === 0) {
-    updateTable(""); // Reset to all projects
-    return;
-  }
-
   // Filter projects by both the search query and map extent
   const filteredProjects = projectInfo.filter((project) =>
-    visibleDescriptions.some(
-      (desc) =>
-        desc.trim().toLowerCase() === project.description.trim().toLowerCase()
-    )
+    visibleIDs.includes(project.id)
   );
 
   // If no projects match, don't clear the entire table
@@ -349,19 +339,19 @@ const filterAndUpdateTable = () => {
     { layers: ["all-projects"] }
   );
 
+  if (!visibleFeatures || visibleFeatures.length === 0) {
+    console.warn("No visible features found on the map.");
+    return; // Prevent clearing the table
+  }
+
   // Extract project descriptions of visible features
   const visibleDescriptions = visibleFeatures.map(
-    (feature) => feature.properties.Project_description
+    (feature) => feature.properties.ID
   );
 
   // Update the table to only show visible projects
   updateTableFromMapExtent(visibleDescriptions);
 };
-
-// Filter and update table on load after waiting 200 ms
-map.on("idle", () => {
-  filterAndUpdateTable(); // Filter and update on initial load
-});
 
 // Filter and update table when the user moves the map
 map.on("moveend", () => {
@@ -371,6 +361,22 @@ map.on("moveend", () => {
 // tooltips for the all-projects
 var popup = new mapboxgl.Popup({ closeButton: false });
 
+// Mouse click event to link to project URL
+map.on("click", "all-projects", (e) => {
+  if (e.features.length > 0) {
+    // Get the clicked feature's properties
+    const clickedFeature = e.features[0].properties;
+
+    // Redirect to the project's URL
+    const projectUrl = clickedFeature.URL; // Assuming 'URL' is the correct property
+    if (projectUrl) {
+      window.open(projectUrl, "_blank"); // Navigate to the project URL
+    } else {
+      console.log("No URL available for this project.");
+    }
+  }
+});
+
 // change the cursor to a pointer when the mouse is over a feature
 map.on("mousemove", "all-projects", (e) => {
   // Change the cursor style as a UI indicator.
@@ -378,10 +384,18 @@ map.on("mousemove", "all-projects", (e) => {
 
   // Populate the popup and set its coordinates based on the feature.
   const feature = e.features[0];
+  const costFormatted = Math.round(
+    feature.properties.Cost_estimate
+  ).toLocaleString();
   popup
     .setLngLat(e.lngLat)
     .setHTML(
-      `<div style="text-align: center;"><span style="font-family: Arial, sans-serif; font-size: 14px;">${feature.properties.Project_description}</span></div>`
+      `<div style="text-align: center;"><span style="font-family: Arial, sans-serif; font-size: 14px;">
+      ${feature.properties.Desc_long}<br>
+      <hr>
+      <i>Total Estimated Cost: $${costFormatted}</i><br>
+      <i>Click to visit project page.</i>
+      </span></div>`
     )
     .addTo(map);
 
@@ -523,7 +537,7 @@ const updateMapLayer = () => {
     return; // Prevent further errors
   }
 
-  const selectedStatus = statusSelect.value;
+  const selectedStatus = statusSelect.value || "ALL";
   const selectedDistrict = districtSelect.value;
 
   if (!map.isStyleLoaded()) {
@@ -537,7 +551,7 @@ const updateMapLayer = () => {
   let districtFilter =
     selectedDistrict === "ALL"
       ? null
-      : ["==", ["get", "DISTRICT"], parseInt(selectedDistrict, 10)];
+      : ["==", ["get", "District"], parseInt(selectedDistrict, 10)];
 
   // Apply the filter when ALL statuses are selected
   if (selectedStatus === "ALL") {
@@ -551,7 +565,7 @@ const updateMapLayer = () => {
     // Apply status filter
     const statusFilter = [
       "in",
-      ["downcase", ["get", "CONSTRUCTION_STATUS_DERIVED"]],
+      ["downcase", ["get", "Status"]],
       ["literal", selectedStatus.toLowerCase()],
     ];
 
@@ -581,32 +595,29 @@ const updateSummaryStats = (summaryData) => {
   // Handle when both "ALL" is selected for status and district (statewide summary)
   if (selectedStatus === "ALL" && selectedDistrict === "ALL") {
     filteredData = summaryData.find(
-      (item) =>
-        item.CONSTRUCTION_STATUS_DERIVED === "ALL" && item.DISTRICT === "ALL"
+      (item) => item.Status === "ALL" && item.District === "ALL"
     );
   }
   // Handle when "ALL" is selected for district but a specific status is selected
   else if (selectedDistrict === "ALL") {
     filteredData = summaryData.find(
-      (item) =>
-        item.CONSTRUCTION_STATUS_DERIVED === selectedStatus &&
-        item.DISTRICT === "ALL"
+      (item) => item.Status === selectedStatus && item.District === "ALL"
     );
   }
   // Handle when "ALL" is selected for status but a specific district is selected
   else if (selectedStatus === "ALL") {
     filteredData = summaryData.find(
       (item) =>
-        item.CONSTRUCTION_STATUS_DERIVED === "ALL" &&
-        item.DISTRICT === parseInt(selectedDistrict, 10)
+        item.Status === "ALL" &&
+        item.District === parseInt(selectedDistrict, 10)
     );
   }
   // Handle when both status and district are specifically selected
   else {
     filteredData = summaryData.find(
       (item) =>
-        item.CONSTRUCTION_STATUS_DERIVED === selectedStatus &&
-        item.DISTRICT === parseInt(selectedDistrict, 10)
+        item.Status === selectedStatus &&
+        item.District === parseInt(selectedDistrict, 10)
     );
   }
 
