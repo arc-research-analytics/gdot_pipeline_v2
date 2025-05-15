@@ -47,7 +47,7 @@ sl-button.openDrawer {
   font-size: 20px;
   border-radius: 10px;
   border: none;
-  width: 350px;
+  width: 225px;
   transition: var(--sl-transition-medium) background-color ease, var(--sl-transition-medium) border ease;
 
   
@@ -248,23 +248,39 @@ width: 100%;
   line-height: 1; /* Ensures consistent alignment */
 }
 
-/* Center the radio group */
-.radio-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* margin-left: 40px;  */
-  text-align: center;
+/* Target the theme toggle radio group specifically */
+.radio-container-theme sl-radio-group {
+  border: none;
+  border-radius: 10px;
+  padding: 0px;
+  background-color: #efefef;
+  position: absolute;
+  bottom: 88px;
+  left: 264px;
+  opacity: var(--opacity-value);
 }
 
-.radio-container sl-radio-group {
-  text-align: center;
-  width: 100%
+/* Using Shoelace CSS custom properties for the theme toggle */
+.radio-container-theme sl-radio-group {
+  --sl-input-border-color: black;
+  --sl-input-border-width: 2px;
+  --sl-input-border-radius-medium: 8px;
+  --sl-input-background-color: #f0f5ff;
 }
 
-/* Add space after the label inside the radio group */
-.radio-container sl-radio-group::part(form-control-label) {
-  margin-bottom: 10px; /* Adjust the value as needed */
+/* Styling the radio buttons within the theme toggle */
+.radio-container-theme sl-radio-button::part(base) {
+  --sl-color-primary-600: #005495; /* Selected state color */
+}
+
+/* Customizing the theme toggle icons */
+.radio-container-theme sl-radio-button sl-icon {
+  font-size: 1.2rem; /* Make icons larger */
+}
+
+/* Add hover effects just to the theme toggle */
+.radio-container-theme sl-radio-button::part(base):hover {
+  background-color: none;
 }
 
 @media screen and (max-width: 768px) {
@@ -275,12 +291,22 @@ width: 100%;
     width: 75px;
   }
 
+  /* reposition legend to be top-right */
+  .legend {
+    position: absolute;
+    top: 70px;
+    left: 15px;
+    bottom: auto;
+    right: auto;
+  }
+
   /* remove the following elements on mobile */
   .map-overlay,
   .header-logo,
   .mapboxgl-ctrl-geocoder,
   .gdot-logo,
   .arc-logo,
+  .radio-container-theme,
   #downloadBtn {
       display: none !important;  /* Hides elements on smaller screens */
   }

@@ -168,7 +168,7 @@ map.on("load", () => {
 });
 
 // Load the projects, create the filter and table ---------v-----------
-fetch("data/GDOT_export.geojson")
+fetch("data/GDOT_export_new.geojson")
   .then((response) => response.json())
   .then((data) => {
     map.addSource("projects-source", {
@@ -513,7 +513,7 @@ function updateButtonText() {
     button.innerHTML = `<span class="material-symbols-outlined">map_search</span>`;
   } else {
     button.innerHTML = `
-      Map filters & metrics
+      More
       <span class="material-symbols-outlined">map_search</span>
     `;
   }
@@ -528,7 +528,7 @@ window.addEventListener("resize", updateButtonText);
 // Function to update the map layer based on filters
 const updateMapLayer = () => {
   const statusSelect = document.getElementById("statusSelect");
-  const districtSelect = document.getElementById("districtSelect");
+  const districtSelect = document.getElementById("geoDropdownSelect");
 
   if (!statusSelect || !districtSelect) {
     console.error(
@@ -587,7 +587,7 @@ map.on("idle", () => {
 // Function to update summary stats based on dropdown selections
 const updateSummaryStats = (summaryData) => {
   const selectedStatus = document.getElementById("statusSelect").value;
-  const selectedDistrict = document.getElementById("districtSelect").value;
+  const selectedDistrict = document.getElementById("geoDropdownSelect").value;
 
   // Filter the summaryData based on the selected filters
   let filteredData;
@@ -773,7 +773,7 @@ const toggleLayer = (layerId, sourceId, geoData, isChecked) => {
   }
 };
 
-// Attach event listeners for checkboxes
+// Attach event listeners for geo layer checkboxes
 const setupCheckboxListeners = () => {
   document.getElementById("workforceGeo").addEventListener("sl-change", (e) => {
     console.log("Workforce data:", window.additionalLayers.workforce);
@@ -829,7 +829,7 @@ const setupCheckboxListeners = () => {
 // Run this once on page load to apply the default filter
 document.addEventListener("DOMContentLoaded", () => {
   const statusSelect = document.getElementById("statusSelect");
-  const districtSelect = document.getElementById("districtSelect");
+  const districtSelect = document.getElementById("geoDropdownSelect");
   const downloadBtn = document.getElementById("downloadBtn");
   const drawer = document.querySelector(".drawer-placement");
   const openButton = document.querySelector(".openDrawer");
@@ -844,7 +844,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "legend-construction-complete"
   );
   const legendAll = document.getElementById("legend-all");
-  const radioGroup = document.querySelector("sl-radio-group");
+  const themeToggle = document.querySelector(
+    ".radio-container-theme sl-radio-group"
+  );
+  const geographyRadioGroup = document.getElementById("geographySelect");
 
   // if window.innerWidth is less than 768, remove downloadBtn
   if (window.innerWidth < 768) {
@@ -927,7 +930,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Attach event listener to radio group to change basemap
-  radioGroup.addEventListener("sl-change", (event) => {
+  themeToggle.addEventListener("sl-change", (event) => {
     const selectedValue = event.target.value;
 
     // Define the new tile URL based on selection
@@ -949,7 +952,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   document
-    .getElementById("districtSelect")
+    .getElementById("geoDropdownSelect")
     .addEventListener("sl-change", async () => {
       const summaryData = await loadSummaryData(); // Reload data if needed
       updateSummaryStats(summaryData);
