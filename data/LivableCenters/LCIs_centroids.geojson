@@ -1,0 +1,1068 @@
+{
+  "type": "FeatureCollection",
+  "name": "LCIs_centroids",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 1, "LCI_Name": "Stonecrest" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.097689721108807, 33.690890393949417]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 2, "LCI_Name": "Marietta Univ. District" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.519009065138988, 33.936994725270786]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 3, "LCI_Name": "Midtown" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.385951812308832, 33.783064042802636]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 4, "LCI_Name": "Suwanee" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.071686603433889, 34.051171853569748]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 5, "LCI_Name": "Fayetteville" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.455934504232161, 33.449802465412354]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 6, "LCI_Name": "Powder Springs" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.681181751249738, 33.853111507802701]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 7, "LCI_Name": "Kensington Station" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.249349295301045, 33.77379874836025]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 8, "LCI_Name": "Austell" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.634523377891938, 33.813499649561265]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 9, "LCI_Name": "Bolton/Moores Mill" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.45619832235927, 33.813794402409719]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 10, "LCI_Name": "H.E. Holmes" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.477365123195099, 33.752953647470342]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 11, "LCI_Name": "Woodstock" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.521046118353425, 34.094883992022254]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 12, "LCI_Name": "Sandtown" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.574183545140869, 33.717201817291411]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 13, "LCI_Name": "Norcross" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.211744787688204, 33.94428932053556]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 14, "LCI_Name": "Perimeter" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.343731810135665, 33.923178037598944]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 15, "LCI_Name": "Northlake-Tucker" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.238085172280208, 33.846080032821227]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 16, "LCI_Name": "Cumberland" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.460564915345316, 33.892066704476413]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 17, "LCI_Name": "Buckhead" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.372612408236577, 33.844647006065252]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 18, "LCI_Name": "Acworth" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.677224259645172, 34.066393273390808]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 19, "LCI_Name": "Marietta" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.539094536549683, 33.949102277395845]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 20, "LCI_Name": "Sandy Springs" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.376060438766956, 33.925476910996395]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 21, "LCI_Name": "West End" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.414598369777764, 33.737416757287313]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 22, "LCI_Name": "Peachtree City" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.599706097831714, 33.396358598137979]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 23, "LCI_Name": "Morrow" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.33590720697012, 33.594741002977202]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 24, "LCI_Name": "Duluth" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.147340739473989, 34.001707298328427]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 25, "LCI_Name": "Stockbridge" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.245486318945538, 33.543214545277472]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 26, "LCI_Name": "Douglasville" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.748953882441882, 33.74500195907401]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 27, "LCI_Name": "Mableton" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.5799715400086, 33.824326664613224]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 28, "LCI_Name": "Old National" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.472194583521443, 33.604133377690928]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 29, "LCI_Name": "Union City" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.539803576424603, 33.576858450569397]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 30, "LCI_Name": "Jonesboro" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.353808298220898, 33.525851541152967]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 31, "LCI_Name": "Stone Mountain" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.17223601852298, 33.803496911505874]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 32, "LCI_Name": "Lithonia" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.106369946399127, 33.712494345490903]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 33, "LCI_Name": "Snellville" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.016659892059963, 33.857107319979264]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 34, "LCI_Name": "Smyrna" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.509467266427563, 33.887739098669442]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 35, "LCI_Name": "Kennesaw" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.615508869866076, 34.023089956647468]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 36,
+        "LCI_Name": "ChattHill Country West Village"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.744309643287778, 33.577918225579765]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 37, "LCI_Name": "Emory Village" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.327014602995163, 33.788213236716388]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 38, "LCI_Name": "Roswell" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.348887903379676, 34.031703244817457]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 39, "LCI_Name": "Clarkston" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.240232661170651, 33.810594524001502]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 40, "LCI_Name": "Northwest Clayton" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.443937617697287, 33.605997763718364]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 41, "LCI_Name": "Buford" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.998436081416585, 34.112326415307187]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 42, "LCI_Name": "Upper Westside" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.416308745181809, 33.781170473577781]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 43, "LCI_Name": "East Point" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.444837473298179, 33.684603578802282]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 44, "LCI_Name": "Town Center" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.565754476126742, 34.023893152375152]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 45, "LCI_Name": "Delk Road TOD" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.490363155119994, 33.92760208200805]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 46, "LCI_Name": "McDonough" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.156398332672879, 33.444725132722816]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 47,
+        "LCI_Name": "Oakland City / Fort McPherson"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.425989728676527, 33.711555733115048]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 48, "LCI_Name": "Holly Springs" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.500721613757179, 34.17342456019859]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 49, "LCI_Name": "Hwy 78" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.054019853782421, 33.844818744570176]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 50, "LCI_Name": "Bankhead" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.430687696467857, 33.772372469499885]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 51, "LCI_Name": "Brookhaven" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.337067519564513, 33.867044838804155]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 52, "LCI_Name": "McFarland-Stoney Point" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.211770484630591, 34.119257990423939]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 53, "LCI_Name": "Hapeville" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.410193904144023, 33.661374662799325]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 54,
+        "LCI_Name": "Highway 278 Covington-Newton"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.842739181392702, 33.599091957460594]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 55, "LCI_Name": "West Lake" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.443048715282586, 33.755482780135118]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 56, "LCI_Name": "Dallas" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.84587733984938, 33.92028271429394]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 57, "LCI_Name": "Griffin" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.265994562343096, 33.249640123218121]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 58, "LCI_Name": "Candler-Flat Shoals" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.264032542164301, 33.699731288518834]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 59, "LCI_Name": "Riverdale" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.410554395977101, 33.566319999661246]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 60, "LCI_Name": "Downtown Alpharetta" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.297637026118267, 34.075926901204141]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 61, "LCI_Name": "Sugar Hill" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.032843794953322, 34.107282183794297]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 62, "LCI_Name": "South Moreland" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.349569256908921, 33.721518063648453]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 63, "LCI_Name": "North Point" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.298377057817333, 34.04948065153075]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 64, "LCI_Name": "SR 9-Atlanta RD" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.35933849791364, 34.014538718438907]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 65, "LCI_Name": "Monroe" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.712404526917098, 33.793211169550936]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 66, "LCI_Name": "Highway 92" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.689918961399812, 33.74305428479996]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 67, "LCI_Name": "Bells Ferry" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.5831224062307, 34.099836949641556]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 68, "LCI_Name": "Austell Rd" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.601210487357619, 33.857824181415019]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 69, "LCI_Name": "Downtown Lawrenceville" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.987868435389615, 33.955051621098498]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 70, "LCI_Name": "Jimmy Carter Boulevard" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.211708815133008, 33.916477586797214]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 71, "LCI_Name": "Ponce de Leon" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.36298943158603, 33.773504922051039]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 72, "LCI_Name": "Moreland" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.347745719387831, 33.758655826470488]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 73, "LCI_Name": "Roswell Road" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.376917098121396, 33.895689216657878]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 74, "LCI_Name": "Indian Trail-Lilburn" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.159818017050711, 33.911944556116651]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 75, "LCI_Name": "Palmetto Town Center" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.66676643999719, 33.523356913605532]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 76, "LCI_Name": "Tri County Crossroads" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.283712274627518, 33.198664719318522]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 77, "LCI_Name": "Norcross Activity Center" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.196884916073287, 33.932217815308334]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 78, "LCI_Name": "Vine City" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.40999168744446, 33.758676129832565]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 79, "LCI_Name": "Park Place" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.110345394216637, 33.823010884792936]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 80, "LCI_Name": "Fairburn Town Center" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.583149529184595, 33.568239891388963]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 81, "LCI_Name": "Loganville" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.895606695713809, 33.83794762154848]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 82, "LCI_Name": "North Druid Hills" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.323477186140451, 33.823622525323515]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 83, "LCI_Name": "West Griffin" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.285365649804575, 33.254418320987462]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 84, "LCI_Name": "Winder" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.7245231850534, 33.992237853218242]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 85, "LCI_Name": "Hudson Bridge" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.221824823427013, 33.486058545700196]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 86,
+        "LCI_Name": "DL Hollowell-Veterans Memorial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.502722791778581, 33.793795896761154]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 87, "LCI_Name": "Downtown Atlanta" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.387109025162985, 33.758043635914376]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 88, "LCI_Name": "Dunwoody Village" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.334540853413259, 33.947535890687988]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 89, "LCI_Name": "Hampton Town Center" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.284261737639, 33.383755422902212]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 90, "LCI_Name": "Morrow - Southlake Mall" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.344369100747997, 33.576062052502493]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 91,
+        "LCI_Name": "Wesley Chapel Activity Center"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.220269300928734, 33.718030249948669]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 92, "LCI_Name": "Forest Park" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.354580800104216, 33.61776928928569]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 93, "LCI_Name": "Six Flags" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.562004072521802, 33.769295113432577]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 94, "LCI_Name": "Milton - Hwy 9" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.271210218920729, 34.09849633468631]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 95,
+        "LCI_Name": "Georgetown / North Shallowford"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.308961100398136, 33.925493329604876]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 96, "LCI_Name": "Highway 29" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.133899333622765, 33.896844461409103]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 97, "LCI_Name": "Decatur" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.296732943599096, 33.771182609561997]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 98, "LCI_Name": "Lakewood" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.392096377189105, 33.706089621738371]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 99, "LCI_Name": "Medline" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.282473185485813, 33.793600726641607]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 100, "LCI_Name": "Avondale Estates" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.270831656181642, 33.777200180267101]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 101, "LCI_Name": "Newnan" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.796473152568012, 33.375618511068566]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 102, "LCI_Name": "Hiram" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.758029627514844, 33.878680725932348]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 103, "LCI_Name": "BeltLine Subarea 7" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.386067395368158, 33.814042448934572]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 104, "LCI_Name": "BeltLine Subarea 3" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.367163230920156, 33.727339617055783]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 105, "LCI_Name": "Roswell" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.323221331827796, 34.023161511297083]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 106, "LCI_Name": "Milton" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.345179825628591, 34.094116189356932]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 107, "LCI_Name": "Peachtree Corners" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.224554658220057, 33.965883220341567]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 108, "LCI_Name": "Canton" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.490773843752436, 34.234410644789854]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 109, "LCI_Name": "Turner Field " },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.39316130364567, 33.732462901927427]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 110, "LCI_Name": "Locust Grove" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.117399850200272, 33.349716558517443]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 111, "LCI_Name": "Powder Springs" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.679770974657671, 33.851883407394375]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 112, "LCI_Name": "College Park" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.457554770827159, 33.650287337203402]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 113, "LCI_Name": "Greenbriar" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.49455325951638, 33.686673248559586]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 114, "LCI_Name": "Conyers" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.018114093958587, 33.663440787523186]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 115, "LCI_Name": "Memorial Drive" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.340945252666259, 33.747665283812459]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 116, "LCI_Name": "Ball Ground" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.378974713480886, 34.336314831574796]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 117, "LCI_Name": "Sugarloaf" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.085142530467024, 33.983787390615525]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 118, "LCI_Name": "Gwinnett Place" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.116054835235275, 33.955772971026917]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 119, "LCI_Name": "Doraville" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.284370796463847, 33.903740106075574]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 120, "LCI_Name": "Buford Highway" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.287534451666076, 33.885659227266615]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 121, "LCI_Name": "Chamblee" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.299971806636549, 33.894157110606685]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 122, "LCI_Name": "Auburn" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.824435295362591, 34.011844972868452]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 123, "LCI_Name": "Villa Rica" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.92028795322075, 33.741328859747718]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 124, "LCI_Name": "Tyrone" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.595915882875971, 33.474749947709995]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 125, "LCI_Name": "Senoia" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.553243114721155, 33.309680125470543]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 126, "LCI_Name": "Grantville" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.836994451150233, 33.234237159368277]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 127, "LCI_Name": "Tara Boulevard Gateway" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.35693155202415, 33.518657333560654]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 130, "LCI_Name": "Powder Springs" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.684350448676199, 33.852297189416255]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 132, "LCI_Name": "Town Center" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.567875437273997, 34.023889231501009]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 133, "LCI_Name": "Jimmy Carter Boulevard" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.209289324003265, 33.909277205934259]
+      }
+    }
+  ]
+}

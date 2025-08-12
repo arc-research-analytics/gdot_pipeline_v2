@@ -1,0 +1,261 @@
+{
+  "type": "FeatureCollection",
+  "name": "CIDs_centroids",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 1, "Sh_Name": "Buckhead" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.371487240789463, 33.848080185456638]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 2, "Sh_Name": "South Fulton" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.585970966195589, 33.536483814153215]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 3, "Sh_Name": "Midtown" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.386728316275594, 33.783823729424967]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 4, "Sh_Name": "Mountain Industrial Blvd." },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.193342619282873, 33.84222095685373]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 5, "Sh_Name": "Red Top" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.742389327174649, 34.122514367713919]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 6, "Sh_Name": "Tucker-Northlake" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.23881748015188, 33.843484827404019]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 8, "Sh_Name": "Aerotropolis - Airport West" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.49388729337187, 33.648772927464307]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 9,
+        "Sh_Name": "Aerotropolis - Airport South"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.429359633944898, 33.63118853115207]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 10, "Sh_Name": "Braselton" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.823690786649053, 34.119031175186464]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 11, "Sh_Name": "Boulevard" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.571416803164595, 33.732595790611263]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 12, "Sh_Name": "Sugarloaf" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.087483825178992, 33.987537596677889]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 13, "Sh_Name": "East Metro DeKalb" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.215432510539685, 33.722038761134165]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 14, "Sh_Name": "Gwinnett Place" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.130278896484342, 33.956292865264466]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 15, "Sh_Name": "Evermore" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.076964142649857, 33.83620459744602]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 16, "Sh_Name": "Little 5 Points" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.351328921408125, 33.761251742465518]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 19, "Sh_Name": "Perimeter" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.349606956623489, 33.923799600493489]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 20, "Sh_Name": "Lilburn" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.134041549840219, 33.893641334835557]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 21, "Sh_Name": "North Fulton" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.284297780428659, 34.062343723684343]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 22, "Sh_Name": "Gateway85 Gwinnett" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.203803923328309, 33.917476883372949]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 23, "Sh_Name": "Assembly" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.285299980457523, 33.90359511890783]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 24, "Sh_Name": "Highway 278" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.849764091808183, 33.601623906574581]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 25, "Sh_Name": "West End" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.418986315753145, 33.737223412398883]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 26, "Sh_Name": "Upper Westside" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.414949705784835, 33.796713509609404]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 28, "Sh_Name": "Downtown Atlanta" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.38984751417442, 33.760882088777102]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 29, "Sh_Name": "Chamblee Doraville" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.296102003388313, 33.895171098888639]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 30, "Sh_Name": "South Forsyth" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.2228245037157, 34.109183185869441]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 31, "Sh_Name": "Metro South" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.334933915922605, 33.676678952026791]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 32, "Sh_Name": "Savannah Waterfront" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-81.088771967551722, 32.080916918469029]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 33, "Sh_Name": "Marietta Gateway" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.500488295030507, 33.935399507045332]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 35, "Sh_Name": "Cumberland" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.462205997574799, 33.890464760616169]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "OBJECTID": 36, "Sh_Name": "Town Center" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.574799339955305, 34.017855114854342]
+      }
+    }
+  ]
+}

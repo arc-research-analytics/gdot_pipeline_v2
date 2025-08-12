@@ -8,3 +8,7 @@
 scraped/
 
 data/Workforce/ga_xwalk.csv
+
+python-prep/
+
+.cursor/

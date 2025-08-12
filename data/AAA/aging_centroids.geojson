@@ -13,7 +13,7 @@
 { "type": "Feature", "properties": { "Name": "Northwest Georgia" }, "geometry": { "type": "Point", "coordinates": [ -85.166336715769063, 34.492160774826232 ] } },
 { "type": "Feature", "properties": { "Name": "River Valley" }, "geometry": { "type": "Point", "coordinates": [ -84.479196331203212, 32.237476408495922 ] } },
 { "type": "Feature", "properties": { "Name": "Southern Georgia" }, "geometry": { "type": "Point", "coordinates": [ -82.829047569271708, 31.155047855462744 ] } },
-{ "type": "Feature", "properties": { "Name": "Sowega" }, "geometry": { "type": "Point", "coordinates": [ -84.301334496652217, 31.252994610242268 ] } },
+{ "type": "Feature", "properties": { "Name": "Sowega Council" }, "geometry": { "type": "Point", "coordinates": [ -84.301334496652217, 31.252994610242268 ] } },
 { "type": "Feature", "properties": { "Name": "Three Rivers" }, "geometry": { "type": "Point", "coordinates": [ -84.576984784129749, 33.102349399214837 ] } }
 ]
 }
