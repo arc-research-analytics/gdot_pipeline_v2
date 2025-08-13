@@ -60,20 +60,6 @@ export function initializeMap() {
   });
   mapInstance.addControl(scale);
 
-  // // add geocoder
-  // const geocoder = new MapboxGeocoder({
-  //   accessToken: mapboxgl.accessToken,
-  //   mapboxgl: mapboxgl,
-  //   placeholder: "Search for an address:",
-  //   bbox: [
-  //     -85.89267692462637, 30.054826521831735, -80.98644957596557,
-  //     35.92237987867771,
-  //   ],
-  //   limit: 5,
-  // });
-  // const geocoderContainer = geocoder.onAdd(mapInstance);
-  // document.getElementById("geocoder-container").appendChild(geocoderContainer);
-
   // Populate Info Dialog with last updated date and static info
   fetch(`${BASE_URL}/data/current_date.txt`)
     .then(response => {
@@ -84,10 +70,10 @@ export function initializeMap() {
     })
     .then(dateRaw => {
       const dateText = (dateRaw || '').toString().trim();
-      const lastUpdatedText = `Transportation project data are current as of ${dateText}.`;
+      const lastUpdatedText = `Transportation project data accessed ${dateText} from the Georgia Department of Transportation API.`;
       const contentEl = document.getElementById('infoDialogContent');
       if (contentEl) {
-        contentEl.innerHTML = `${lastUpdatedText} <br/> <br/> "Total allocated cost" calculates the total project cost and assigns the commensurate dollar value to the portion of the project that lies within the filtered jurisdiction. <br/><br/> This map was produced by the Atlanta Regional Commission's <a href="https://atlantaregional.org/what-we-do/research-and-data/" target="_blank">Research and Analytics Department</a>. For questions about this map or the underlying data, please reach out to <a href="mailto:wwright@atlantaregional.org?subject=GDOT%20tracker%20inquiry">Will Wright</a>.`;
+        contentEl.innerHTML = `${lastUpdatedText} <br/> <br/> The "total allocated cost" is an estimate of a jurisdiction's total project value. It is calculated by determining what proportion of each project's roadway falls within the jurisdiction's boundaries. <br/><br/> This map was produced by the Atlanta Regional Commission's <a href="https://atlantaregional.org/what-we-do/research-and-data/" target="_blank">Research and Analytics Department</a>. For questions about this map or the underlying data, please reach out to <a href="mailto:wwright@atlantaregional.org?subject=GDOT%20tracker%20inquiry">Will Wright</a>.`;
       } else {
         console.warn('Info dialog content element not found');
       }

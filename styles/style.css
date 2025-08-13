@@ -48,7 +48,7 @@ header {
 /* Base styling for the open drawer button */
 sl-button.openDrawer {
   position: absolute;
-  bottom: 88px;
+  top: 125px;
   left: 15px;
   z-index: 99;
   /* Remove any background or border from the host element */
@@ -301,7 +301,7 @@ sl-button.openDrawer::part(base):hover {
   padding: 0px;
   background-color: #efefef;
   position: absolute;
-  bottom: 150px;
+  top: 70px;
   left: 15px;
   opacity: var(--opacity-value);
 }
@@ -430,4 +430,46 @@ sl-drawer::part(footer) {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+}
+
+/* Push the drawer Close button to the bottom-right within the footer */
+sl-drawer sl-button.close-button {
+  margin-left: auto;
+}
+sl-drawer sl-button.close-button::part(base) {
+  margin-left: auto;
+}
+
+/* About button anchored at bottom-left of the map */
+#aboutBtn {
+  position: absolute;
+  left: 15px;
+  bottom: 75px;
+  z-index: 2;
+  background: transparent;
+  border: none;
+}
+
+#aboutBtn::part(base) {
+  border-radius: var(--border-radius);
+  background-color: #efefef;
+  opacity: var(--opacity-value);
+  color: black;
+  font-size: 16px;
+  width: 100px;
+  transition: var(--sl-transition-medium) background-color ease, var(--sl-transition-medium) border ease;
+  border: 1px solid black;
+  overflow: hidden;
+}
+
+#aboutBtn::part(button) {
+  border-radius: var(--border-radius);
+  width: 100%;
+  height: 100%;
+}
+
+#aboutBtn::part(base):hover {
+  background-color: #005495;
+  color: white;
+  border: 1px solid white;
 }

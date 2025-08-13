@@ -52,7 +52,7 @@
   </header>
 
   <!-- shoelace drawer for filters -->
-  <sl-drawer label="" placement="start" class="drawer-placement" hidden>
+  <sl-drawer label="" placement="start" class="drawer-placement" open>
 
     <div style="text-align: center; margin-top: -20px; margin-bottom: -10px;">
       <h3>Select Geography Level</h3>
@@ -60,10 +60,10 @@
 
     <div style="text-align: center;">
       <sl-radio-group id="geographySelect" label="" value="District">
-        <sl-radio-button value="City">City</sl-radio-button>
-        <sl-radio-button value="County">County</sl-radio-button>
+        <sl-radio-button value="Statewide">State</sl-radio-button>
         <sl-radio-button value="District">District</sl-radio-button>
-        <sl-radio-button value="Statewide">Statewide</sl-radio-button>
+        <sl-radio-button value="County">County</sl-radio-button>
+        <sl-radio-button value="City">City</sl-radio-button>
       </sl-radio-group>
     </div>
 
@@ -72,7 +72,7 @@
     </div>
 
     <!-- City jurisdiction dropdown (shown when City is selected) -->
-    <sl-select id="cityDropdownSelect" label="Select City:" value="Atlanta" style="display: none;">
+    <sl-select id="cityDropdownSelect" label="By City:" value="Atlanta" style="display: none;">
       <sl-option value="Acworth">Acworth</sl-option>
       <sl-option value="Alpharetta">Alpharetta</sl-option>
       <sl-option value="Atlanta">Atlanta</sl-option>
@@ -163,7 +163,7 @@
     </sl-select>
 
     <!-- County jurisdiction dropdown (shown when County is selected) -->
-    <sl-select id="countyDropdownSelect" label="Select County:" value="Fulton" style="display: none;">
+    <sl-select id="countyDropdownSelect" label="By County:" value="Fulton" style="display: none;">
       <sl-option value="Barrow">Barrow</sl-option>
       <sl-option value="Bartow">Bartow</sl-option>
       <sl-option value="Carroll">Carroll</sl-option>
@@ -239,7 +239,7 @@
 
     <!-- Dropdown for additional geographic boundaries -->
     <div style="text-align: center; margin-top: 30px; margin-bottom: -10px;">
-      <h3>Show Additional Boundaries</h3>
+      <h3>Add Basemap Reference</h3>
     </div>
     <sl-select id="additionalGeoSelect" label="" value="None">
       <sl-option value="None">None</sl-option>
@@ -251,14 +251,11 @@
     </sl-select>
 
     <div style="margin-top: 25px;"></div>
-    <sl-switch id="toggleProjectsSwitch">Turn off project layer</sl-switch>
+    <sl-switch id="toggleProjectsSwitch">Show projects layer</sl-switch>
 
     <br />
 
-    <!-- footer buttons: About (left) and Close (right) -->
-    <sl-button slot="footer" class="info-button drawer-info-left" variant="default" outline onclick="document.getElementById('infoDialog').show()">
-      About
-    </sl-button>
+    <!-- footer button: Close -->
     <sl-button slot="footer" class="close-button" variant="primary">
       Close
     </sl-button>
@@ -269,7 +266,7 @@
     <div id="infoDialogContent" style="line-height: 1.6; font-size: 14px;">
       Loading info...
     </div>
-    <sl-button slot="footer" variant="primary" onclick="document.getElementById('infoDialog').hide()">OK</sl-button>
+    <sl-button slot="footer" variant="primary" onclick="document.getElementById('infoDialog').hide()">Close</sl-button>
   </sl-dialog>
 
   <!-- Download data button -->
@@ -279,11 +276,10 @@
     </sl-button>
   </sl-tooltip>
 
-  <!-- open map filter -->
-  <!-- <sl-tooltip content="Open side panel for map filters and metrics."> -->
+  <!-- open map settings -->
   <sl-button class="openDrawer" variant="plain" outline>
-    <sl-icon slot="prefix" name="filter-circle"></sl-icon>
-    More
+    <sl-icon slot="prefix" name="gear" style="margin-left: 10px; margin-right: -1px;"></sl-icon>
+    <p style="margin-left: -6px; margin-right: 2px; margin-top: 0px; margin-bottom: 0px;"> Settings</p>
   </sl-button>
   <!-- </sl-tooltip> -->
 
@@ -310,6 +306,11 @@
         class="arc-logo"></a></div>
   <div><a href="https://www.dot.ga.gov/Pages/default.aspx" target="_blank"><img src="assets/gdot_logo.png" alt="Logo"
         class="gdot-logo"></a></div>
+
+  <!-- About button anchored bottom-left -->
+  <sl-button id="aboutBtn" variant="plain" outline onclick="document.getElementById('infoDialog').show()">
+    <sl-icon name="info-circle" style="margin-right: 5px;"></sl-icon>About
+  </sl-button>
 
   <!-- Reference the external JavaScript file -->
   <script src="js/main.js" , type="module"></script>

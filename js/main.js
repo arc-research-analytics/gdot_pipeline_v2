@@ -61,12 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Hook up the projects visibility switch
   const toggleProjectsSwitch = document.getElementById('toggleProjectsSwitch');
   if (toggleProjectsSwitch) {
-    // Initialize switch state from current visibility
-    toggleProjectsSwitch.checked = !window.__GDOT_PROJECTS_VISIBLE__ ? true : false; // label says Turn off projects
+    // Initialize switch state to reflect current visibility (Show projects layer)
+    toggleProjectsSwitch.checked = window.__GDOT_PROJECTS_VISIBLE__ ? true : false;
 
     toggleProjectsSwitch.addEventListener('sl-change', () => {
-      const shouldTurnOff = toggleProjectsSwitch.checked === true; // switch ON means turn off
-      window.__GDOT_PROJECTS_VISIBLE__ = !shouldTurnOff;
+      const shouldShow = toggleProjectsSwitch.checked === true; // switch ON means show projects
+      window.__GDOT_PROJECTS_VISIBLE__ = shouldShow;
       const layerId = 'projects-layer';
       const sourceId = 'projects-source';
 
