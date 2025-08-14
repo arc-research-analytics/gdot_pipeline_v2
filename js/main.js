@@ -58,6 +58,21 @@ document.addEventListener("DOMContentLoaded", () => {
     window.__GDOT_PROJECTS_VISIBLE__ = true;
   }
 
+  // Open the drawer on desktop by default, keep closed on mobile
+  // Wait until the web component is defined to avoid timing issues
+  if (drawer) {
+    // Hide until ready to avoid flash
+    drawer.style.visibility = 'hidden';
+    customElements.whenDefined('sl-drawer').then(() => {
+      const isDesktop = window.innerWidth >= 768; // match CSS breakpoint
+      drawer.open = isDesktop;
+      // reveal after applying state
+      requestAnimationFrame(() => {
+        drawer.style.visibility = '';
+      });
+    });
+  }
+
   // Hook up the projects visibility switch
   const toggleProjectsSwitch = document.getElementById('toggleProjectsSwitch');
   if (toggleProjectsSwitch) {

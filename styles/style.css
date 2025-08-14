@@ -19,6 +19,15 @@ header {
   opacity: .95;
 }
 
+/* Desktop and mobile header title variants */
+.header-title-mobile { display: none; }
+.header-title-desktop { display: inline; }
+
+/* Prevent flash of unstyled drawer before Web Component upgrades */
+sl-drawer.drawer-placement:not(:defined) {
+  visibility: hidden;
+}
+
 .arc-logo {
   position: absolute;
   right: 10px;
@@ -389,30 +398,34 @@ sl-button.openDrawer::part(base):hover {
 
   /* reposition Filter button to be centered left-to-right */
   sl-button.openDrawer {
-    bottom: 75px;
+    top: 59px;
+    left: 10px;
     width: 75px;
   }
 
-  /* reposition legend to be top-right */
-  .legend {
+  /* reposition legend */
+  .map-legend {
     position: absolute;
-    top: 70px;
-    left: 15px;
-    bottom: auto;
-    right: auto;
+    bottom: 10px;
+    right: 10px;
   }
 
   /* remove the following elements on mobile */
+  .mapboxgl-ctrl-bottom-left .mapboxgl-ctrl-scale,
   .map-overlay,
   .header-logo,
   .mapboxgl-ctrl-geocoder,
   .gdot-logo,
   .arc-logo,
   .radio-container-theme,
+  .mapboxgl-ctrl-attrib,
   #downloadBtn {
     display: none !important;
     /* Hides elements on smaller screens */
   }
+  /* Swap header titles on mobile */
+  .header-title-desktop { display: none; }
+  .header-title-mobile { display: inline; }
 }
 
 /* Position the Info button to the left within the drawer footer */
@@ -443,8 +456,8 @@ sl-drawer sl-button.close-button::part(base) {
 /* About button anchored at bottom-left of the map */
 #aboutBtn {
   position: absolute;
-  left: 15px;
-  bottom: 75px;
+  left: 10px;
+  bottom: 35px;
   z-index: 2;
   background: transparent;
   border: none;
