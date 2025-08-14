@@ -257,7 +257,7 @@
 
     <!-- footer button: Close -->
     <sl-button slot="footer" class="close-button" variant="primary">
-      Close
+      <sl-icon name="arrow-bar-left" style="margin-right: 5px;"></sl-icon>Close
     </sl-button>
   </sl-drawer>
 
@@ -278,26 +278,20 @@
 
   <!-- open map settings -->
   <sl-button class="openDrawer" variant="plain" outline>
-    <sl-icon slot="prefix" name="gear" style="margin-left: 10px; margin-right: -1px;"></sl-icon>
-    <p style="margin-left: -6px; margin-right: 2px; margin-top: 0px; margin-bottom: 0px;"> Settings</p>
+    <p style="margin-left: 15px; margin-right: -5px; margin-top: 0px; margin-bottom: 0px;">Settings</p>
+    <sl-icon slot="suffix" name="arrow-bar-right" style="margin-right: 15px;"></sl-icon>
   </sl-button>
   <!-- </sl-tooltip> -->
 
   <!-- buttons for Carto base map selection -->
   <div class="radio-container-theme">
     <sl-radio-group label="" name="a" value="light">
-
-      <sl-tooltip content="Enable dark mode.">
         <sl-radio-button value="dark">
           <sl-icon name="moon"></sl-icon>
         </sl-radio-button>
-      </sl-tooltip>
-
-      <sl-tooltip content="Enable light mode.">
         <sl-radio-button value="light">
           <sl-icon name="brightness-high"></sl-icon>
         </sl-radio-button>
-      </sl-tooltip>
     </sl-radio-group>
   </div>
 
