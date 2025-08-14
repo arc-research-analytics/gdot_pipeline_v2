@@ -165,7 +165,7 @@ function addAdditionalGeoLayer(map, geojson) {
       source: SOURCE_ID,
       paint: {
         'fill-color': buildFillColorExpression(),
-        'fill-opacity': 0.10,
+        'fill-opacity': 0.40,
       },
     };
     if (beforeLayerId) {
@@ -274,7 +274,7 @@ async function loadAdditionalGeo(map, key) {
           },
           paint: {
             'text-color': textColorExpr,
-            'text-opacity': 0.55,
+            'text-opacity': 0.80,
             'text-halo-color': 'rgba(255,255,255,0.7)',
             'text-halo-width': 1.25,
             'text-halo-blur': 0.25,
