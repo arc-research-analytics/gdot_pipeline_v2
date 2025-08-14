@@ -283,9 +283,9 @@ export function addProjectsToMap(map, projectData, geographyType, statusFilter =
     const unselectedLabelLayerId = "boundary-labels-unselected";
     let beforeLayerId = null;
 
-    // If we're loading District geography, check if labels exist
+    // If we're loading District or County geography, check if labels exist
     // and add projects below the bottom-most label layer
-    if (geographyType === "District") {
+    if (geographyType === "District" || geographyType === "County") {
         // Check for both label layers and choose the bottom one to place projects below
         if (map.getLayer(unselectedLabelLayerId)) {
             beforeLayerId = unselectedLabelLayerId;

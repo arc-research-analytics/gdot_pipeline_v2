@@ -174,16 +174,13 @@ function showProjectPopup(map, e) {
     // Add project URL if it exists
     if (projectUrl && projectUrl.trim() !== '' && projectUrl !== 'null') {
         popupContent += `
-            <div style="margin-bottom: 10px;">
-                <div style="font-weight: bold; color: #34495e; margin-bottom: 4px;">Project URL:</div>
-                <div>
-                    <a href="${projectUrl}" target="_blank" style="color: #3498db; text-decoration: none; word-break: break-all; font-size: 15px;" 
-                       onmouseover="this.style.textDecoration='underline'" 
-                       onmouseout="this.style.textDecoration='none'">
-                        View Project Details ↗
-                    </a>
-                </div>
-            </div>
+			<div style="margin-top: 10px; margin-bottom: 2px;">
+				<a href="${projectUrl}" target="_blank" style="color: #3498db; text-decoration: none; word-break: break-all; font-size: 15px;"
+				   onmouseover="this.style.textDecoration='underline'"
+				   onmouseout="this.style.textDecoration='none'">
+					View Project Details ↗
+				</a>
+			</div>
         `;
     }
     

@@ -23,6 +23,13 @@ export function updateLegend(statusColors, statusFilter, statusMapping) {
 
     // Format status labels to be more readable
     const formatStatusLabel = (status) => {
+        // Special-case to preserve dash for Pre-Construction
+        if (status === 'PRE-CONSTRUCTION') {
+            return 'Pre-Construction';
+        }
+        if (status === 'COMPLETED-CONSTRUCTION') {
+            return 'Completed';
+        }
         // First replace hyphens and underscores with spaces
         let formatted = status.replace(/-/g, ' ').replace(/_/g, ' ');
 
