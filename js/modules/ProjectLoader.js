@@ -42,6 +42,8 @@ import { updateBoundaryLayer } from './GeoBoundaryLoader.js';
 import { updateProjectStats, initializeProjectStats } from './ProjectStats.js';
 // Import project detail interactivity module
 import { setupProjectInteractivity, removeProjectInteractivity } from './ProjectDetail.js';
+// Import URL management functions
+import { getFiltersFromURL, updateURLParams } from './URLManager.js';
 
 /**
  * Loads project GeoJSON data based on the selected geography type.
@@ -382,17 +384,18 @@ export function setupProjectLoaderListener(map) {
     function loadInitialProjects() {
         
         
-        // Hardcode defaults to ensure consistent initial state
-        const initialGeography = "District";
-        const initialStatus = "All";
-        const initialJurisdiction = 4;
+        // Get initial values from URL parameters
+        const urlFilters = getFiltersFromURL();
+        const initialGeography = urlFilters.level;
+        const initialStatus = urlFilters.status;
+        const initialJurisdiction = urlFilters.jurisdiction;
         
         
         
         // Debug file path resolution
         
 
-        // Ensure HTML elements have correct default values
+        // Ensure HTML elements have correct values from URL
         if (geographySelect.value !== initialGeography) {
             
             geographySelect.value = initialGeography;
@@ -402,11 +405,27 @@ export function setupProjectLoaderListener(map) {
             statusSelect.value = initialStatus;
         }
         
-        // Ensure district dropdown has correct default value
-        const districtDropdown = document.getElementById("geoDropdownSelect");
-        if (districtDropdown && districtDropdown.value !== initialJurisdiction.toString()) {
-            
-            districtDropdown.value = initialJurisdiction.toString();
+        // Set jurisdiction dropdown values based on geography type and URL
+        if (initialGeography === "District" && initialJurisdiction !== null) {
+            const districtDropdown = document.getElementById("geoDropdownSelect");
+            if (districtDropdown && districtDropdown.value !== initialJurisdiction.toString()) {
+                
+                districtDropdown.value = initialJurisdiction.toString();
+            }
+        } else if (initialGeography === "County" && initialJurisdiction !== null) {
+            const countyDropdown = document.getElementById("countyDropdownSelect");
+            if (countyDropdown && countyDropdown.value !== initialJurisdiction) {
+                countyDropdown.value = initialJurisdiction;
+            }
+        } else if (initialGeography === "City" && initialJurisdiction !== null) {
+            const cityDropdown = document.getElementById("cityDropdownSelect");
+            if (cityDropdown) {
+                // Convert spaces to underscores for dropdown value
+                const dropdownValue = initialJurisdiction.replace(/ /g, '_');
+                if (cityDropdown.value !== dropdownValue) {
+                    cityDropdown.value = dropdownValue;
+                }
+            }
         }
 
         // Update dropdown visibility for initial geography
@@ -480,6 +499,8 @@ export function setupProjectLoaderListener(map) {
             // Get jurisdiction after dropdown visibility is updated
             const selectedJurisdiction = getCurrentJurisdiction(selectedGeography);
             
+            // Update URL with new filters
+            updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus);
 
             // Update both projects and boundaries when geography changes
             Promise.all([
@@ -497,6 +518,9 @@ export function setupProjectLoaderListener(map) {
         const selectedGeography = geographySelect.value;
         const selectedStatus = event.target.value;
         const selectedJurisdiction = getCurrentJurisdiction(selectedGeography);
+
+        // Update URL with new filters
+        updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus);
 
         loadProjectGeoJSON(selectedGeography)
             .then(data => addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction))
@@ -524,7 +548,8 @@ function setupJurisdictionEventListeners(map, geographySelect, statusSelect) {
         const selectedStatus = statusSelect.value;
         const selectedJurisdiction = getCurrentJurisdiction(selectedGeography);
         
-        
+        // Update URL with new filters
+        updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus);
 
         // Update both projects and boundaries when jurisdiction changes
         Promise.all([

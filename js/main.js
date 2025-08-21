@@ -5,6 +5,7 @@ import { initThemeManager } from "./modules/ThemeManager.js";
 import { setupProjectLoaderListener } from './modules/ProjectLoader.js';
 import { setupCSVExportListener } from './modules/csvExport.js';
 import { setupAdditionalGeosListener } from './modules/AdditionalGeos.js';
+import { initializeURLState, setupBrowserNavigation } from './modules/URLManager.js';
 
 // Base URL for relative paths (same approach as in other modules)
 const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
@@ -16,6 +17,17 @@ const map = initializeMap();
 
 // Initialize the theme manager
 const themeManager = initThemeManager(map);
+
+// Initialize URL state and set up browser navigation
+const initialFilters = initializeURLState();
+
+// Set up browser back/forward navigation
+setupBrowserNavigation((filters) => {
+  // When user navigates back/forward, update the UI to match URL
+  updateUIFromFilters(filters);
+  // Trigger a reload of projects with new filters
+  triggerFilterReload();
+});
 
 // Wait for map to load before setting up listeners
 map.on('load', () => {
@@ -29,8 +41,59 @@ map.on('load', () => {
   setupAdditionalGeosListener(map);
 });
 
-// Run this once on page load to apply the default filter
+// Helper functions for URL-based navigation
+function updateUIFromFilters(filters) {
+  // Update geography radio selection
+  const geographySelect = document.getElementById("geographySelect");
+  if (geographySelect && geographySelect.value !== filters.level) {
+    geographySelect.value = filters.level;
+  }
+
+  // Update status dropdown
+  const statusSelect = document.getElementById("statusSelect");
+  if (statusSelect && statusSelect.value !== filters.status) {
+    statusSelect.value = filters.status;
+  }
+
+  // Update jurisdiction dropdowns based on level
+  if (filters.level === "District") {
+    const districtSelect = document.getElementById("geoDropdownSelect");
+    if (districtSelect && filters.jurisdiction && districtSelect.value !== filters.jurisdiction.toString()) {
+      districtSelect.value = filters.jurisdiction.toString();
+    }
+  } else if (filters.level === "County") {
+    const countySelect = document.getElementById("countyDropdownSelect");
+    if (countySelect && filters.jurisdiction && countySelect.value !== filters.jurisdiction) {
+      countySelect.value = filters.jurisdiction;
+    }
+  } else if (filters.level === "City") {
+    const citySelect = document.getElementById("cityDropdownSelect");
+    if (citySelect && filters.jurisdiction) {
+      // Convert spaces back to underscores for the dropdown value
+      const dropdownValue = filters.jurisdiction.replace(/ /g, '_');
+      if (citySelect.value !== dropdownValue) {
+        citySelect.value = dropdownValue;
+      }
+    }
+  }
+}
+
+function triggerFilterReload() {
+  // Trigger a change event on geography select to reload everything
+  const geographySelect = document.getElementById("geographySelect");
+  if (geographySelect) {
+    geographySelect.dispatchEvent(new CustomEvent('sl-change', { 
+      detail: { value: geographySelect.value },
+      bubbles: true 
+    }));
+  }
+}
+
+// Run this once on page load to apply the filter from URL
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize UI elements from URL parameters
+  updateUIFromFilters(initialFilters);
+
   const downloadBtn = document.getElementById("downloadBtn");
   const drawer = document.querySelector(".drawer-placement");
   const openButton = document.querySelector(".openDrawer");
