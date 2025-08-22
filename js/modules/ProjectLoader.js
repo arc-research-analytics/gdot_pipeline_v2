@@ -432,6 +432,9 @@ export function setupProjectLoaderListener(map) {
         
         updateJurisdictionDropdownVisibility(initialGeography);
         
+        // Update URL to show current state on initial load
+        updateURLParams(initialGeography, initialJurisdiction, initialStatus);
+        
         // Use a more conservative delay and add retry logic
         
         setTimeout(() => {
