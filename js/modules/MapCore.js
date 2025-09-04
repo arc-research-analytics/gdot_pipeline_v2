@@ -73,7 +73,7 @@ export function initializeMap() {
       const lastUpdatedText = `Welcome to an interactive tracker of Georgia Department of Transportation projects! This application was developed and is maintained by the Atlanta Regional Commission's <a href="https://atlantaregional.org/what-we-do/research-and-data/" target="_blank">Research and Analytics Department</a>. <br/><br/> Project data last accessed on ${dateText} from the GDOT API.`;
       const contentEl = document.getElementById('infoDialogContent');
       if (contentEl) {
-        contentEl.innerHTML = `${lastUpdatedText} <br/> <br/> The "total allocated cost" is an estimate of a jurisdiction's total project value. It is calculated by determining what proportion of each project's roadway falls within the selected jurisdiction's boundaries. <br/><br/> For questions about this map or the source data, please reach out to <a href="mailto:wwright@atlantaregional.org?subject=GDOT%20tracker%20inquiry">Will Wright</a>, lead developer on the project at the ARC.`;
+        contentEl.innerHTML = `${lastUpdatedText} <br/> <br/> The "total allocated cost" is an estimate of a jurisdiction's total project value. It is calculated by determining the proportion of each project's roadway that falls within the selected jurisdiction's boundaries and then applying that proportion to the project's total cost. <br/><br/> For questions about this map or the source data, please reach out to <a href="mailto:wwright@atlantaregional.org?subject=GDOT%20tracker%20inquiry">Will Wright</a>, lead developer on the project at the ARC.`;
       } else {
         console.warn('Info dialog content element not found');
       }
