@@ -288,8 +288,7 @@ export async function updateBoundaryLayer(map, geographyType) {
                 feature.properties.isSelected = isMatching;
               } else if (geographyType === "County") {
                 const isSelected =
-                  feature.properties.NAME === selectedValue ||
-                  feature.properties.ShortLabel === selectedValue;
+                  feature.properties.NAME === selectedValue;
                 feature.properties.isSelected = isSelected;
               }
             });
@@ -327,7 +326,7 @@ export async function updateBoundaryLayer(map, geographyType) {
               "text-field": geographyType === "District" ?
                 ["concat", "District ", ["to-string", ["get", "DISTRICT"]]] :
                 ["format",
-                  ["upcase", ["get", "ShortLabel"]],
+                  ["upcase", ["get", "NAME"]],
                   { "font-scale": 0.9, "text-font": ["Roboto Bold Italic", "Arial Unicode MS Bold"] }
                 ],
               "text-font": ["Roboto Bold", "Arial Unicode MS Bold"],
@@ -353,7 +352,7 @@ export async function updateBoundaryLayer(map, geographyType) {
               "text-field": geographyType === "District" ?
                 ["concat", "District ", ["to-string", ["get", "DISTRICT"]]] :
                 ["format",
-                  ["upcase", ["get", "ShortLabel"]],
+                  ["upcase", ["get", "NAME"]],
                   { "font-scale": 0.9, "text-font": ["Roboto Bold Italic", "Arial Unicode MS Bold"] }
                 ],
               "text-font": ["Roboto Bold", "Arial Unicode MS Bold"],
