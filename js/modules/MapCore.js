@@ -69,7 +69,25 @@ export function initializeMap() {
       return response.text();
     })
     .then(dateRaw => {
-      const dateText = (dateRaw || '').toString().trim();
+      const rawDateText = (dateRaw || '').toString().trim();
+      
+      // Format the date to remove zero-padding from days
+      let dateText = rawDateText;
+      try {
+        const parsedDate = new Date(rawDateText);
+        if (!isNaN(parsedDate.getTime())) {
+          // Format as "Month D, YYYY" without zero-padding
+          dateText = parsedDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+        }
+      } catch (error) {
+        console.warn('Could not parse date, using original format:', error);
+        // Fall back to original dateText if parsing fails
+      }
+      
       const lastUpdatedText = `Welcome to an interactive tracker of Georgia Department of Transportation projects! This application was developed and is maintained by the Atlanta Regional Commission's <a href="https://atlantaregional.org/what-we-do/research-and-data/" target="_blank">Research and Analytics Department</a>. <br/><br/> Project data last accessed on ${dateText} from the GDOT API.`;
       const contentEl = document.getElementById('infoDialogContent');
       if (contentEl) {
