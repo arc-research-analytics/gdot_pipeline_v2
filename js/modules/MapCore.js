@@ -1,6 +1,7 @@
 // Handles core map initialization and basic map controls
-mapboxgl.accessToken =
-  "pk.eyJ1Ijoid3dyaWdodDIxIiwiYSI6ImNtN2MwdjdtYjBqeTUycnBwbHI1cWJrZmIifQ.BztD8jx6SLKxOtjK1ae4kg";
+import { MAPBOX_ACCESS_TOKEN } from '../config.js';
+
+mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
 
 // Base URL for relative paths (same approach as in other modules)
