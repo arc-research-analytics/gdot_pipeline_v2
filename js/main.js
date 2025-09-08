@@ -7,19 +7,22 @@ import { setupCSVExportListener } from './modules/csvExport.js';
 import { setupAdditionalGeosListener } from './modules/AdditionalGeos.js';
 import { initializeURLState, setupBrowserNavigation } from './modules/URLManager.js';
 
-// Base URL for relative paths (same approach as in other modules)
-const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? '' // Local development - empty because we're already in js/
-  : '.'; // GitHub Pages or production
-
 // Initialize map
 const map = initializeMap();
 
 // Initialize the theme manager
-const themeManager = initThemeManager(map);
+initThemeManager(map);
 
 // Initialize URL state and set up browser navigation
 const initialFilters = initializeURLState();
+
+// Helper function to toggle legend visibility based on projects layer visibility
+function toggleLegendVisibility(shouldShowProjects) {
+  const legendContainer = document.getElementById('map-legend');
+  if (legendContainer) {
+    legendContainer.style.display = shouldShowProjects ? 'block' : 'none';
+  }
+}
 
 // Set up browser back/forward navigation
 setupBrowserNavigation((filters) => {
@@ -141,6 +144,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (toggleProjectsSwitch) {
     // Initialize switch state to reflect current visibility (Show projects layer)
     toggleProjectsSwitch.checked = window.__GDOT_PROJECTS_VISIBLE__ ? true : false;
+    
+    // Initialize legend visibility based on switch state
+    toggleLegendVisibility(toggleProjectsSwitch.checked);
 
     toggleProjectsSwitch.addEventListener('sl-change', () => {
       const shouldShow = toggleProjectsSwitch.checked === true; // switch ON means show projects
@@ -151,6 +157,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (map.getLayer(layerId)) {
         map.setLayoutProperty(layerId, 'visibility', window.__GDOT_PROJECTS_VISIBLE__ ? 'visible' : 'none');
       }
+
+      // Toggle legend visibility based on projects layer visibility
+      toggleLegendVisibility(shouldShow);
 
       // If user turned off projects, we do not remove sources/layers other than visibility
       // If user turned them back on and the layer doesn't exist (e.g., after filters reload),
