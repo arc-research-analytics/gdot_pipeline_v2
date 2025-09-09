@@ -44,6 +44,8 @@ import { updateProjectStats, initializeProjectStats } from './ProjectStats.js';
 import { setupProjectInteractivity, removeProjectInteractivity } from './ProjectDetail.js';
 // Import URL management functions
 import { getFiltersFromURL, updateURLParams } from './URLManager.js';
+// Import loading manager for handling loading states
+import { loadingManager } from './LoadingManager.js';
 
 /**
  * Loads project GeoJSON data based on the selected geography type.
@@ -435,36 +437,34 @@ export function setupProjectLoaderListener(map) {
         // Update URL to show current state on initial load
         updateURLParams(initialGeography, initialJurisdiction, initialStatus);
         
-        // Use a more conservative delay and add retry logic
+        // Start loading tracking for initial projects
+        loadingManager.startLoading();
         
+        // Use a more conservative delay and add retry logic
         setTimeout(() => {
-            
-            
             // Test each promise individually to see which one is failing
-            
             loadProjectGeoJSON(initialGeography)
                 .then(projectData => {
-                    
-                    
                     return updateBoundaryLayer(map, initialGeography)
                         .then(boundaryResult => {
-                            
-                            
                             if (!projectData || !projectData.features || projectData.features.length === 0) {
                                 console.warn(`⚠️ No features found in project data:`, projectData);
-                            } else {
-                                
                             }
                             
                             addProjectsToMap(map, projectData, initialGeography, initialStatus, initialJurisdiction);
+                            
+                            // Stop loading on success
+                            loadingManager.stopLoading();
                         })
                         .catch(boundaryError => {
                             console.error("❌ updateBoundaryLayer failed:", boundaryError);
                             console.error("❌ Boundary error details:", boundaryError.stack || boundaryError);
                             
                             // Try to add projects anyway without boundaries
-                            
                             addProjectsToMap(map, projectData, initialGeography, initialStatus, initialJurisdiction);
+                            
+                            // Stop loading even with boundary error (projects still loaded)
+                            loadingManager.stopLoading();
                         });
                 })
                 .catch(projectError => {
@@ -472,10 +472,12 @@ export function setupProjectLoaderListener(map) {
                     console.error("❌ Project error details:", projectError.stack || projectError);
                     console.error("❌ Failed URL:", PROJECT_FILE_PATHS[initialGeography]);
                     
+                    // Stop loading on project loading failure
+                    loadingManager.stopLoading();
+                    
                     // Try to test if the file exists
                     fetch(PROJECT_FILE_PATHS[initialGeography], { method: 'HEAD' })
                         .then(response => {
-                            
                             if (!response.ok) {
                                 console.error(`❌ File does not exist or is not accessible: ${PROJECT_FILE_PATHS[initialGeography]}`);
                             }
@@ -491,8 +493,6 @@ export function setupProjectLoaderListener(map) {
     geographySelect.addEventListener("sl-change", (event) => {
         const selectedGeography = event.target.value;
         const selectedStatus = statusSelect.value;
-        
-        
 
         // Update dropdown visibility when geography changes
         updateJurisdictionDropdownVisibility(selectedGeography);
@@ -505,14 +505,24 @@ export function setupProjectLoaderListener(map) {
             // Update URL with new filters
             updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus);
 
+            // Start loading tracking for geography change
+            loadingManager.startLoading();
+
             // Update both projects and boundaries when geography changes
             Promise.all([
                 loadProjectGeoJSON(selectedGeography),
                 updateBoundaryLayer(map, selectedGeography)
             ]).then(([data]) => {
-                
                 addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction);
-            }).catch(console.error);
+                
+                // Stop loading on success
+                loadingManager.stopLoading();
+            }).catch(error => {
+                console.error("Geography change loading error:", error);
+                
+                // Stop loading on error
+                loadingManager.stopLoading();
+            });
         }, 100); // Delay for dropdown initialization
     });
 
@@ -525,9 +535,22 @@ export function setupProjectLoaderListener(map) {
         // Update URL with new filters
         updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus);
 
+        // Start loading tracking for status change
+        loadingManager.startLoading();
+
         loadProjectGeoJSON(selectedGeography)
-            .then(data => addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction))
-            .catch(console.error);
+            .then(data => {
+                addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction);
+                
+                // Stop loading on success
+                loadingManager.stopLoading();
+            })
+            .catch(error => {
+                console.error("Status change loading error:", error);
+                
+                // Stop loading on error
+                loadingManager.stopLoading();
+            });
     });
 
     // Set up event listeners for jurisdiction dropdowns
@@ -554,13 +577,24 @@ function setupJurisdictionEventListeners(map, geographySelect, statusSelect) {
         // Update URL with new filters
         updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus);
 
+        // Start loading tracking for jurisdiction change
+        loadingManager.startLoading();
+
         // Update both projects and boundaries when jurisdiction changes
         Promise.all([
             loadProjectGeoJSON(selectedGeography),
             updateBoundaryLayer(map, selectedGeography)
         ]).then(([data]) => {
             addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction);
-        }).catch(console.error);
+            
+            // Stop loading on success
+            loadingManager.stopLoading();
+        }).catch(error => {
+            console.error("Jurisdiction change loading error:", error);
+            
+            // Stop loading on error
+            loadingManager.stopLoading();
+        });
     }
 
     // City dropdown change listener
