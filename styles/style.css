@@ -57,7 +57,7 @@ sl-drawer.drawer-placement:not(:defined) {
 /* Base styling for the open drawer button */
 sl-button.openDrawer {
   position: absolute;
-  top: 125px;
+  top: 70px;
   left: 15px;
   z-index: 99;
   /* Remove any background or border from the host element */
@@ -310,14 +310,14 @@ sl-button.openDrawer::part(base):hover {
   padding: 0px;
   background-color: #efefef;
   position: absolute;
-  top: 70px;
+  bottom: 21px;
   left: 15px;
   opacity: var(--opacity-value);
 }
 
 /* Using Shoelace CSS custom properties for the theme toggle */
 .radio-container-theme sl-radio-group {
-  --sl-input-border-color: black;
+  --sl-input-border-color: gray;
   --sl-input-border-width: 2px;
   --sl-input-border-radius-medium: 8px;
   --sl-input-background-color: #f0f5ff;
@@ -325,7 +325,7 @@ sl-button.openDrawer::part(base):hover {
 
 /* Styling the radio buttons within the theme toggle */
 .radio-container-theme sl-radio-button::part(base) {
-  --sl-color-primary-600: #005495;
+  --sl-color-primary-600: #0084c6;
   /* Selected state color */
 }
 
@@ -398,7 +398,7 @@ sl-button.openDrawer::part(base):hover {
 
   /* reposition Filter button to be centered left-to-right */
   sl-button.openDrawer {
-    top: 59px;
+    top: 30px;
     left: 10px;
     width: 75px;
   }
