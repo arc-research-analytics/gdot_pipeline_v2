@@ -1,6 +1,7 @@
 // Loading overlay management for handling loading states during project data loading
 // Shows a semi-transparent overlay with spinner for slow network connections
 
+// Using a singleton pattern to manage loading states
 class LoadingManager {
   constructor() {
     this.isLoading = false;
