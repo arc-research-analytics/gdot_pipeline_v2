@@ -508,6 +508,12 @@ sl-drawer sl-button.close-button::part(base) {
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 1;
+  transition: opacity 500ms ease-out; /* Smooth fade-out transition */
+}
+
+.loading-overlay.fade-out {
+  opacity: 0;
 }
 
 .loading-content {

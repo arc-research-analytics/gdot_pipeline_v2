@@ -6,9 +6,11 @@ class LoadingManager {
   constructor() {
     this.isLoading = false;
     this.loadingTimer = null;
+    this.fadeTimer = null;
     this.loadingStartTime = null;
     // Configurable threshold - can be easily adjusted as needed
     this.SHOW_DELAY_MS = 500; // Show spinner after 500ms by default
+    this.FADE_DURATION_MS = 500; // Fade out duration to prevent flickering
   }
 
   /**
@@ -20,12 +22,40 @@ class LoadingManager {
   }
 
   /**
+   * Set the fade duration for smooth overlay hiding
+   * @param {number} fadeMs - Fade duration in milliseconds
+   */
+  setFadeDuration(fadeMs) {
+    this.FADE_DURATION_MS = fadeMs;
+  }
+
+  /**
    * Start tracking a loading operation
    * @param {string} message - Loading message to display (defaults to "Loading projects...")
    */
   startLoading(message = 'Loading projects...') {
     this.isLoading = true;
     this.loadingStartTime = Date.now();
+    
+    // Clear any existing timers
+    if (this.loadingTimer) {
+      clearTimeout(this.loadingTimer);
+      this.loadingTimer = null;
+    }
+    if (this.fadeTimer) {
+      clearTimeout(this.fadeTimer);
+      this.fadeTimer = null;
+    }
+    
+    // If overlay is currently fading out, immediately show it again
+    const overlay = document.getElementById('loadingOverlay');
+    if (overlay && overlay.classList.contains('fade-out')) {
+      overlay.classList.remove('fade-out');
+      overlay.style.display = 'flex';
+      // Update message if overlay is already visible
+      const messageEl = overlay.querySelector('p');
+      if (messageEl) messageEl.textContent = message;
+    }
     
     // Only show overlay if loading takes longer than threshold
     this.loadingTimer = setTimeout(() => {
@@ -47,7 +77,7 @@ class LoadingManager {
       this.loadingTimer = null;
     }
     
-    this.hideOverlay();
+    this.hideOverlayWithFade();
   }
 
   /**
@@ -74,12 +104,47 @@ class LoadingManager {
   }
 
   /**
-   * Hide the loading overlay and restore map interaction
+   * Hide the loading overlay with smooth fade-out to prevent flickering
+   */
+  hideOverlayWithFade() {
+    const overlay = document.getElementById('loadingOverlay');
+    if (!overlay || overlay.style.display === 'none') {
+      return; // Already hidden or doesn't exist
+    }
+
+    // Start the fade-out animation
+    overlay.classList.add('fade-out');
+    
+    // Restore map interaction immediately (fade is just visual)
+    const mapContainer = document.getElementById('map');
+    if (mapContainer) {
+      mapContainer.style.pointerEvents = 'auto';
+    }
+
+    // Actually hide the element after fade completes
+    this.fadeTimer = setTimeout(() => {
+      if (overlay) {
+        overlay.style.display = 'none';
+        overlay.classList.remove('fade-out');
+      }
+      this.fadeTimer = null;
+    }, this.FADE_DURATION_MS);
+  }
+
+  /**
+   * Hide the loading overlay immediately (without fade)
    */
   hideOverlay() {
     const overlay = document.getElementById('loadingOverlay');
     if (overlay) {
       overlay.style.display = 'none';
+      overlay.classList.remove('fade-out');
+    }
+    
+    // Clear fade timer if running
+    if (this.fadeTimer) {
+      clearTimeout(this.fadeTimer);
+      this.fadeTimer = null;
     }
     
     // Restore map interaction
@@ -95,6 +160,14 @@ class LoadingManager {
    */
   getThreshold() {
     return this.SHOW_DELAY_MS;
+  }
+
+  /**
+   * Get the current fade duration setting
+   * @returns {number} Current fade duration in milliseconds
+   */
+  getFadeDuration() {
+    return this.FADE_DURATION_MS;
   }
 
   /**
