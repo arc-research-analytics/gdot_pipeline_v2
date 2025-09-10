@@ -398,7 +398,7 @@ sl-button.openDrawer::part(base):hover {
 
   /* reposition Filter button to be centered left-to-right */
   sl-button.openDrawer {
-    top: 30px;
+    top: 60px;
     left: 10px;
     width: 75px;
   }
