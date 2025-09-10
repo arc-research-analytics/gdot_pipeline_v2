@@ -1,5 +1,12 @@
 // Handles all theme-related functionality for the application
 
+// from config.js, import MAPBOX_ACCESS_TOKEN
+import { MAPBOX_ACCESS_TOKEN } from '../config.js';
+// from app-config.js, import non-sensitive configuration
+import { DEFAULT_THEME } from '../app-config.js';
+// import popup management for theme changes
+import { closeCurrentPopup } from './ProjectDetail.js';
+
 // Theme constants
 const THEMES = {
     LIGHT: 'light',
@@ -9,7 +16,12 @@ const THEMES = {
 // Theme-specific styles
 const THEME_STYLES = {
     [THEMES.LIGHT]: {
-        basemapUrl: 'https://a.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png',
+        // mapbox 
+        basemapUrl: 'https://api.mapbox.com/styles/v1/mapbox/light-v11/tiles/256/{z}/{x}/{y}@2x?access_token=' + MAPBOX_ACCESS_TOKEN,
+
+        // // OR use cartodb 
+        // basemapUrl: 'https://a.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png',
+
         unselectedBoundaryColor: '#737373',
         selectedBoundaryColor: '#000000',
         unselectedLineWidth: 0.5,
@@ -24,7 +36,12 @@ const THEME_STYLES = {
         unselectedLabelHaloWidth: 0.5
     },
     [THEMES.DARK]: {
-        basemapUrl: 'https://a.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png',
+        // mapbox 
+        basemapUrl: 'https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/256/{z}/{x}/{y}@2x?access_token=' + MAPBOX_ACCESS_TOKEN,
+
+        // // OR use cartodb 
+        // basemapUrl: 'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
+        
         unselectedBoundaryColor: '#5a5a5a',
         selectedBoundaryColor: '#ffffff',
         unselectedLineWidth: 0.5,
@@ -40,8 +57,8 @@ const THEME_STYLES = {
     }
 };
 
-// Keep track of the current theme
-let currentTheme = THEMES.LIGHT;
+// Keep track of the current theme - initialize with the configured default
+let currentTheme = DEFAULT_THEME;
 
 /**
  * Initializes the theme manager and sets up event listeners
@@ -52,15 +69,18 @@ export function initThemeManager(map) {
     // Set up theme toggle listener
     const themeToggle = document.querySelector('.radio-container-theme sl-radio-group');
 
-    // apply initial theme
-    applyTheme(map, currentTheme);
-
+    // Set the UI control to match the configured default theme
     if (themeToggle) {
+        themeToggle.value = currentTheme;
+        
         themeToggle.addEventListener('sl-change', (event) => {
             const selectedTheme = event.target.value;
             applyTheme(map, selectedTheme);
         });
     }
+
+    // apply initial theme
+    applyTheme(map, currentTheme);
 
     // Return the theme manager API
     return {
@@ -82,6 +102,9 @@ function applyTheme(map, theme) {
     }
 
     currentTheme = theme;
+
+    // Close any open popups before theme change to avoid styling conflicts
+    closeCurrentPopup();
 
     // Update the basemap tiles
     updateBasemap(map, theme);
@@ -245,6 +268,19 @@ function updateTextColors(theme) {
  */
 export function getCurrentTheme() {
     return currentTheme;
+}
+
+/**
+ * Returns the basemap URL for the specified theme (or current theme if not specified)
+ * @param {string} [theme] - The theme to get the basemap URL for (optional)
+ * @returns {string} - The basemap URL
+ */
+export function getBasemapUrl(theme = currentTheme) {
+    if (!THEME_STYLES[theme]) {
+        console.error(`Invalid theme: ${theme}`);
+        return THEME_STYLES[THEMES.LIGHT].basemapUrl; // fallback to light theme
+    }
+    return THEME_STYLES[theme].basemapUrl;
 }
 
 /**

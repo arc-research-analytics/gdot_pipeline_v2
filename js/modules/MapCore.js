@@ -1,5 +1,7 @@
 // Handles core map initialization and basic map controls
 import { MAPBOX_ACCESS_TOKEN } from '../config.js';
+import { DEFAULT_THEME } from '../app-config.js';
+import { getBasemapUrl } from './ThemeManager.js';
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
@@ -28,11 +30,11 @@ export function initializeMap() {
         carto: {
           type: "raster",
           tiles: [
-            "https://a.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png",
+            getBasemapUrl(DEFAULT_THEME),
           ],
           tileSize: 256,
           attribution:
-            '&copy; <a href="https://carto.com/">CARTO</a> | <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+            '&copy; <a href="https://www.mapbox.com/">Mapbox</a> | <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
         },
       },
       glyphs: "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",

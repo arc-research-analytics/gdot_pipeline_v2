@@ -1,6 +1,77 @@
 // Project Detail Module
 // Handles interactive tooltips and popups for individual projects on the map
 
+import { DEFAULT_THEME } from '../app-config.js';
+import { getCurrentTheme } from './ThemeManager.js';
+
+// Popup theme configuration - colors that work well against each basemap theme
+const POPUP_THEMES = {
+    light: {
+        // For light basemap - use darker popup to stand out
+        backgroundColor: '#2c3e50',
+        textColor: '#ffffff',
+        accentColor: '#3498db',
+        borderColor: '#34495e',
+        linkColor: '#5dade2'
+    },
+    dark: {
+        // For dark basemap - use lighter popup to stand out  
+        backgroundColor: '#f8f9fa',
+        textColor: '#2c3e50',
+        accentColor: '#2980b9',
+        borderColor: '#dee2e6',
+        linkColor: '#2980b9'
+    }
+};
+
+/**
+ * Gets the current popup theme based on the active map theme
+ * @returns {Object} - The popup theme object
+ */
+function getPopupTheme() {
+    const currentTheme = getCurrentTheme();
+    return POPUP_THEMES[currentTheme] || POPUP_THEMES[DEFAULT_THEME];
+}
+
+/**
+ * Styles the popup tip/anchor to match the popup background color
+ * @param {HTMLElement} popupElement - The popup DOM element
+ * @param {string} backgroundColor - The popup background color
+ */
+function stylePopupTip(popupElement, backgroundColor) {
+    if (!popupElement) return;
+    
+    const tip = popupElement.querySelector('.mapboxgl-popup-tip');
+    if (!tip) return;
+    
+    // Reset all border colors first
+    tip.style.borderTopColor = 'transparent';
+    tip.style.borderBottomColor = 'transparent';
+    tip.style.borderLeftColor = 'transparent';
+    tip.style.borderRightColor = 'transparent';
+    
+    // Check the popup's anchor class to determine tip direction
+    const classList = popupElement.classList;
+    
+    if (classList.contains('mapboxgl-popup-anchor-top') || 
+        classList.contains('mapboxgl-popup-anchor-top-left') || 
+        classList.contains('mapboxgl-popup-anchor-top-right')) {
+        // Popup is above click point, tip points down
+        tip.style.borderBottomColor = backgroundColor;
+    } else if (classList.contains('mapboxgl-popup-anchor-bottom') || 
+               classList.contains('mapboxgl-popup-anchor-bottom-left') || 
+               classList.contains('mapboxgl-popup-anchor-bottom-right')) {
+        // Popup is below click point, tip points up
+        tip.style.borderTopColor = backgroundColor;
+    } else if (classList.contains('mapboxgl-popup-anchor-left')) {
+        // Popup is to the left of click point, tip points right
+        tip.style.borderRightColor = backgroundColor;
+    } else if (classList.contains('mapboxgl-popup-anchor-right')) {
+        // Popup is to the right of click point, tip points left
+        tip.style.borderLeftColor = backgroundColor;
+    }
+}
+
 /**
  * Formats a number as currency (USD)
  * @param {number|string} amount - The amount to format
@@ -39,14 +110,17 @@ function showHoverTooltip(map, e) {
     // Remove any existing hover tooltip
     removeHoverTooltip(map);
     
+    // Get theme-appropriate colors
+    const theme = getPopupTheme();
+    
     // Create tooltip div
     const tooltip = document.createElement('div');
     tooltip.id = 'project-hover-tooltip';
     tooltip.innerHTML = 'Click for project detail';
     tooltip.style.cssText = `
         position: absolute;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
+        background: ${theme.backgroundColor};
+        color: ${theme.textColor};
         padding: 6px 10px;
         border-radius: 4px;
         pointer-events: none;
@@ -55,6 +129,7 @@ function showHoverTooltip(map, e) {
         z-index: 1000;
         white-space: nowrap;
         box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        border: 1px solid ${theme.borderColor};
     `;
     
     // Add to document first to get dimensions
@@ -140,7 +215,8 @@ function showProjectPopup(map, e) {
     const feature = e.features[0];
     const props = feature.properties;
     
-    
+    // Get theme-appropriate colors
+    const theme = getPopupTheme();
     
     // Extract and format the required fields
     const description = props.Description_short || "No description";
@@ -148,26 +224,26 @@ function showProjectPopup(map, e) {
     const allocatedCost = formatCurrency(props.allocated_cost);
     const projectUrl = props.URL;
     
-    // Create popup content HTML
+    // Create popup content HTML with theme-aware styling
     let popupContent = `
         <div style="font-family: 'Roboto', Arial, sans-serif; max-width: 300px;">
-            <div style="font-weight: bold; font-size: 17px; margin-bottom: 12px; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 8px;">
+            <div style="font-weight: bold; font-size: 17px; margin-bottom: 12px; color: ${theme.textColor}; border-bottom: 2px solid ${theme.accentColor}; padding-bottom: 8px;">
                 Project Details
             </div>
             
             <div style="margin-bottom: 10px;">
-                <div style="font-weight: bold; color: #34495e; margin-bottom: 4px;">Description:</div>
-                <div style="color: #2c3e50; line-height: 1.4; font-size: 15px;">${description}</div>
+                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 4px; opacity: 0.8;">Description:</div>
+                <div style="color: ${theme.textColor}; line-height: 1.4; font-size: 15px;">${description}</div>
             </div>
             
             <div style="margin-bottom: 10px;">
-                <div style="font-weight: bold; color: #34495e; margin-bottom: 4px;">Project Type:</div>
-                <div style="color: #2c3e50; font-size: 15px;">${type}</div>
+                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 4px; opacity: 0.8;">Project Type:</div>
+                <div style="color: ${theme.textColor}; font-size: 15px;">${type}</div>
             </div>
             
             <div style="margin-bottom: 10px;">
-                <div style="font-weight: bold; color: #34495e; margin-bottom: 4px;">Total Allocated Cost in Jurisdiction:</div>
-                <div style="color: #2c3e50; font-size: 15px;">${allocatedCost}</div>
+                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 4px; opacity: 0.8;">Total Allocated Cost in Jurisdiction:</div>
+                <div style="color: ${theme.textColor}; font-size: 15px;">${allocatedCost}</div>
             </div>
     `;
     
@@ -175,7 +251,7 @@ function showProjectPopup(map, e) {
     if (projectUrl && projectUrl.trim() !== '' && projectUrl !== 'null') {
         popupContent += `
 			<div style="margin-top: 10px; margin-bottom: 2px;">
-				<a href="${projectUrl}" target="_blank" style="color: #3498db; text-decoration: none; word-break: break-all; font-size: 15px;"
+				<a href="${projectUrl}" target="_blank" style="color: ${theme.linkColor}; text-decoration: none; word-break: break-all; font-size: 15px;"
 				   onmouseover="this.style.textDecoration='underline'"
 				   onmouseout="this.style.textDecoration='none'">
 					View Project Details ↗
@@ -196,11 +272,35 @@ function showProjectPopup(map, e) {
     const popup = new mapboxgl.Popup({
         closeButton: true,
         closeOnClick: true,
-        maxWidth: '320px'
+        maxWidth: '320px',
+        className: `gdot-popup gdot-popup-${getCurrentTheme()}`
     })
     .setLngLat(e.lngLat)
     .setHTML(popupContent)
     .addTo(map);
+    
+    // Apply theme-specific background styling to the popup
+    const popupElement = popup.getElement();
+    if (popupElement) {
+        const popupContent = popupElement.querySelector('.mapboxgl-popup-content');
+        if (popupContent) {
+            popupContent.style.backgroundColor = theme.backgroundColor;
+            popupContent.style.borderColor = theme.borderColor;
+            popupContent.style.border = `1px solid ${theme.borderColor}`;
+        }
+        
+        // Style the close button to match theme
+        const closeButton = popupElement.querySelector('.mapboxgl-popup-close-button');
+        if (closeButton) {
+            closeButton.style.color = theme.textColor;
+            closeButton.style.fontSize = '20px';
+        }
+        
+        // Style the popup tip to match background - delay to ensure anchor classes are applied
+        setTimeout(() => {
+            stylePopupTip(popupElement, theme.backgroundColor);
+        }, 0);
+    }
     
     
     
@@ -286,6 +386,21 @@ export function setupProjectInteractivity(map, layerId) {
     map.on('click', layerId, handleClick);
 
     
+}
+
+/**
+ * Closes any currently open project popup
+ * This is useful when switching themes to avoid styling conflicts
+ */
+export function closeCurrentPopup() {
+    if (currentProjectPopup) {
+        try { 
+            currentProjectPopup.remove(); 
+        } catch (err) { 
+            console.warn('⚠️ Error closing popup:', err); 
+        }
+        currentProjectPopup = null;
+    }
 }
 
 /**
