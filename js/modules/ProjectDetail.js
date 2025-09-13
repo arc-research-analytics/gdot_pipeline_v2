@@ -254,7 +254,7 @@ function showProjectPopup(map, e) {
 				<a href="${projectUrl}" target="_blank" style="color: ${theme.linkColor}; text-decoration: none; word-break: break-all; font-size: 15px;"
 				   onmouseover="this.style.textDecoration='underline'"
 				   onmouseout="this.style.textDecoration='none'">
-					View Project Details ↗
+					Visit Project Site ↗
 				</a>
 			</div>
         `;
