@@ -3,6 +3,7 @@
 
 import { DEFAULT_THEME } from '../app-config.js';
 import { getCurrentTheme } from './ThemeManager.js';
+import { getFiltersFromURL } from './URLManager.js';
 
 // Popup theme configuration - colors that work well against each basemap theme
 const POPUP_THEMES = {
@@ -81,9 +82,9 @@ function formatCurrency(amount) {
     if (amount === null || amount === undefined || amount === '' || isNaN(parseFloat(amount))) {
         return '$0';
     }
-    
+
     const numAmount = parseFloat(amount);
-    
+
     // Handle very large numbers with abbreviations
     if (numAmount >= 1000000000) {
         return '$' + (numAmount / 1000000000).toFixed(1) + 'B';
@@ -98,6 +99,29 @@ function formatCurrency(amount) {
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         }).format(numAmount);
+    }
+}
+
+/**
+ * Generates the jurisdiction-specific text for the allocated cost label
+ * @returns {string} The jurisdiction-specific label text
+ */
+function getJurisdictionLabel() {
+    const filters = getFiltersFromURL();
+    const level = filters.level;
+    const jurisdiction = filters.jurisdiction;
+
+    switch (level) {
+        case 'Statewide':
+            return 'Total Allocated Cost in the State';
+        case 'District':
+            return `Total Allocated Cost in District ${jurisdiction}`;
+        case 'County':
+            return `Total Allocated Cost in ${jurisdiction} County`;
+        case 'City':
+            return `Total Allocated Cost in ${jurisdiction}`;
+        default:
+            return 'Total Allocated Cost in Jurisdiction';
     }
 }
 
@@ -228,26 +252,27 @@ function showProjectPopup(map, e, layerId) {
     const type = props.Type || "Unknown";
     const allocatedCost = formatCurrency(props.allocated_cost);
     const projectUrl = props.URL;
-    
+    const jurisdictionLabel = getJurisdictionLabel();
+
     // Create popup content HTML with theme-aware styling
     let popupContent = `
         <div style="font-family: 'Roboto', Arial, sans-serif; max-width: 300px;">
             <div style="font-weight: bold; font-size: 17px; margin-bottom: 12px; color: ${theme.textColor}; border-bottom: 2px solid ${theme.accentColor}; padding-bottom: 8px;">
                 Project Details
             </div>
-            
+
             <div style="margin-bottom: 10px;">
-                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 4px; opacity: 0.8;">Description:</div>
+                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 2px; opacity: 0.8;">Description:</div>
                 <div style="color: ${theme.textColor}; line-height: 1.4; font-size: 15px;">${description}</div>
             </div>
-            
+
             <div style="margin-bottom: 10px;">
-                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 4px; opacity: 0.8;">Project Type:</div>
+                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 2px; opacity: 0.8;">Project Type:</div>
                 <div style="color: ${theme.textColor}; font-size: 15px;">${type}</div>
             </div>
-            
+
             <div style="margin-bottom: 10px;">
-                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 4px; opacity: 0.8;">Total Allocated Cost in Jurisdiction:</div>
+                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 2px; opacity: 0.8;">${jurisdictionLabel}:</div>
                 <div style="color: ${theme.textColor}; font-size: 15px;">${allocatedCost}</div>
             </div>
     `;
