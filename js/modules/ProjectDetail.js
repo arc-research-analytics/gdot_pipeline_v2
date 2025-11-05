@@ -202,12 +202,17 @@ function updateHoverTooltip(map, e) {
 // Keep a single reference to the currently open popup to avoid stacking
 let currentProjectPopup = null;
 
+// Track the currently selected feature for highlighting
+let selectedFeature = null;
+let selectedLayerId = null;
+
 /**
  * Creates and shows a detailed project popup
  * @param {Object} map - Mapbox map instance
  * @param {Object} e - Click event
+ * @param {string} layerId - ID of the project layer
  */
-function showProjectPopup(map, e) {
+function showProjectPopup(map, e, layerId) {
     // Remove hover tooltip when showing popup
     removeHoverTooltip(map);
     
@@ -307,6 +312,9 @@ function showProjectPopup(map, e) {
     // Save reference as the current popup
     currentProjectPopup = popup;
 
+    // Highlight the selected feature by making it thicker
+    highlightSelectedFeature(map, feature, layerId);
+
     // Stop click propagation from popup container and close button to avoid re-triggering map click
     const popupEl = popup.getElement();
     if (popupEl) {
@@ -328,10 +336,50 @@ function showProjectPopup(map, e) {
     // Remove hover tooltip when popup is closed
     popup.on('close', () => {
         removeHoverTooltip(map);
+        clearSelectedFeature(map);
         if (currentProjectPopup === popup) {
             currentProjectPopup = null;
         }
     });
+}
+
+/**
+ * Highlights a selected feature by making its line thicker
+ * @param {Object} map - Mapbox map instance
+ * @param {Object} feature - The selected feature
+ * @param {string} layerId - ID of the project layer
+ */
+function highlightSelectedFeature(map, feature, layerId) {
+    // Store the selected feature and layer
+    selectedFeature = feature;
+    selectedLayerId = layerId;
+
+    // Update the line-width paint property to make the selected feature 3x thicker
+    // Normal width is 4, so selected width is 12
+    map.setPaintProperty(layerId, 'line-width', [
+        'case',
+        ['==', ['get', 'Description_short'], feature.properties.Description_short],
+        12,  // 3x the normal width for selected feature
+        4    // normal width for other features
+    ]);
+}
+
+/**
+ * Clears the selected feature highlight and returns line width to normal
+ * @param {Object} map - Mapbox map instance
+ */
+function clearSelectedFeature(map) {
+    if (selectedFeature && selectedLayerId) {
+        // Check if the layer still exists before updating it
+        if (map.getLayer(selectedLayerId)) {
+            // Reset the line-width back to normal (4) for all features
+            map.setPaintProperty(selectedLayerId, 'line-width', 4);
+        }
+
+        // Clear the stored selection
+        selectedFeature = null;
+        selectedLayerId = null;
+    }
 }
 
 /**
@@ -369,7 +417,7 @@ export function setupProjectInteractivity(map, layerId) {
         removeHoverTooltip(map);
     };
     const handleClick = (e) => {
-        showProjectPopup(map, e);
+        showProjectPopup(map, e, layerId);
     };
 
     layerEventHandlers[layerId] = {
@@ -392,14 +440,18 @@ export function setupProjectInteractivity(map, layerId) {
  * Closes any currently open project popup
  * This is useful when switching themes to avoid styling conflicts
  */
-export function closeCurrentPopup() {
+export function closeCurrentPopup(map) {
     if (currentProjectPopup) {
-        try { 
-            currentProjectPopup.remove(); 
-        } catch (err) { 
-            console.warn('⚠️ Error closing popup:', err); 
+        try {
+            currentProjectPopup.remove();
+        } catch (err) {
+            console.warn('⚠️ Error closing popup:', err);
         }
         currentProjectPopup = null;
+    }
+    // Also clear any selected feature highlighting
+    if (map) {
+        clearSelectedFeature(map);
     }
 }
 
@@ -409,7 +461,7 @@ export function closeCurrentPopup() {
  * @param {string} layerId - ID of the project layer
  */
 export function removeProjectInteractivity(map, layerId) {
-    
+
 
     if (layerEventHandlers[layerId]) {
         const { mouseenter, mouseleave, mousemove, click } = layerEventHandlers[layerId];
@@ -418,18 +470,22 @@ export function removeProjectInteractivity(map, layerId) {
         try { map.off('mousemove', layerId, mousemove); } catch {}
         try { map.off('click', layerId, click); } catch {}
         delete layerEventHandlers[layerId];
-        
+
     } else {
         // Fallback in case we missed storing handlers for some reason
         try { map.off('mouseenter', layerId); } catch {}
         try { map.off('mouseleave', layerId); } catch {}
         try { map.off('mousemove', layerId); } catch {}
         try { map.off('click', layerId); } catch {}
-        
+
     }
 
     // Clean up any remaining tooltips
     removeHoverTooltip(map);
-    
-    
+
+    // Clear any selected feature highlighting if this layer is being removed
+    if (selectedLayerId === layerId) {
+        clearSelectedFeature(map);
+    }
+
 }

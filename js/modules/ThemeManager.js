@@ -104,7 +104,7 @@ function applyTheme(map, theme) {
     currentTheme = theme;
 
     // Close any open popups before theme change to avoid styling conflicts
-    closeCurrentPopup();
+    closeCurrentPopup(map);
 
     // Update the basemap tiles
     updateBasemap(map, theme);
