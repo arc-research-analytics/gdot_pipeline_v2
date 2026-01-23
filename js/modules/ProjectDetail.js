@@ -230,6 +230,10 @@ let currentProjectPopup = null;
 let selectedFeature = null;
 let selectedLayerId = null;
 
+// Track the currently hovered feature for highlighting
+let hoveredFeature = null;
+let hoveredLayerId = null;
+
 /**
  * Creates and shows a detailed project popup
  * @param {Object} map - Mapbox map instance
@@ -369,6 +373,77 @@ function showProjectPopup(map, e, layerId) {
 }
 
 /**
+ * Updates line width for a layer based on current hover and selection states
+ * @param {Object} map - Mapbox map instance
+ * @param {string} layerId - ID of the project layer
+ */
+function updateLineWidth(map, layerId) {
+    if (!map.getLayer(layerId)) return;
+
+    // Collect all Description_short values that should be highlighted (thick)
+    const highlightDescriptions = [];
+
+    if (selectedFeature && selectedLayerId === layerId) {
+        highlightDescriptions.push(selectedFeature.properties.Description_short);
+    }
+
+    if (hoveredFeature && hoveredLayerId === layerId) {
+        const hoveredDesc = hoveredFeature.properties.Description_short;
+        // Only add if not already in the list
+        if (!highlightDescriptions.includes(hoveredDesc)) {
+            highlightDescriptions.push(hoveredDesc);
+        }
+    }
+
+    if (highlightDescriptions.length > 0) {
+        // Make any hovered or selected features thick (12), others normal (4)
+        map.setPaintProperty(layerId, 'line-width', [
+            'case',
+            ['in', ['get', 'Description_short'], ['literal', highlightDescriptions]],
+            12,  // 3x the normal width for hovered or selected features
+            4    // normal width for other features
+        ]);
+    } else {
+        // No highlights needed, all features get normal width
+        map.setPaintProperty(layerId, 'line-width', 4);
+    }
+}
+
+/**
+ * Highlights a hovered feature by making its line thicker
+ * @param {Object} map - Mapbox map instance
+ * @param {Object} feature - The hovered feature
+ * @param {string} layerId - ID of the project layer
+ */
+function highlightHoveredFeature(map, feature, layerId) {
+    // Store the hovered feature and layer
+    hoveredFeature = feature;
+    hoveredLayerId = layerId;
+
+    // Update line width to reflect hover state
+    updateLineWidth(map, layerId);
+}
+
+/**
+ * Clears the hovered feature highlight
+ * @param {Object} map - Mapbox map instance
+ */
+function clearHoveredFeature(map) {
+    if (hoveredFeature && hoveredLayerId) {
+        const layerId = hoveredLayerId;
+
+        // Clear the stored hover state
+        hoveredFeature = null;
+        hoveredLayerId = null;
+
+        // Update line width to remove hover highlight
+        if (map.getLayer(layerId)) {
+            updateLineWidth(map, layerId);
+        }
+    }
+}
+
+/**
  * Highlights a selected feature by making its line thicker
  * @param {Object} map - Mapbox map instance
  * @param {Object} feature - The selected feature
@@ -379,14 +454,8 @@ function highlightSelectedFeature(map, feature, layerId) {
     selectedFeature = feature;
     selectedLayerId = layerId;
 
-    // Update the line-width paint property to make the selected feature 3x thicker
-    // Normal width is 4, so selected width is 12
-    map.setPaintProperty(layerId, 'line-width', [
-        'case',
-        ['==', ['get', 'Description_short'], feature.properties.Description_short],
-        12,  // 3x the normal width for selected feature
-        4    // normal width for other features
-    ]);
+    // Update line width to reflect selection state
+    updateLineWidth(map, layerId);
 }
 
 /**
@@ -395,15 +464,16 @@ function highlightSelectedFeature(map, feature, layerId) {
  */
 function clearSelectedFeature(map) {
     if (selectedFeature && selectedLayerId) {
-        // Check if the layer still exists before updating it
-        if (map.getLayer(selectedLayerId)) {
-            // Reset the line-width back to normal (4) for all features
-            map.setPaintProperty(selectedLayerId, 'line-width', 4);
-        }
+        const layerId = selectedLayerId;
 
         // Clear the stored selection
         selectedFeature = null;
         selectedLayerId = null;
+
+        // Update line width to remove selection highlight
+        if (map.getLayer(layerId)) {
+            updateLineWidth(map, layerId);
+        }
     }
 }
 
@@ -433,6 +503,10 @@ export function setupProjectInteractivity(map, layerId) {
     const handleMouseEnter = (e) => {
         map.getCanvas().style.cursor = 'pointer';
         showHoverTooltip(map, e);
+        // Highlight the hovered feature by making it thicker
+        if (e.features && e.features.length > 0) {
+            highlightHoveredFeature(map, e.features[0], layerId);
+        }
     };
     const handleMouseMove = (e) => {
         updateHoverTooltip(map, e);
@@ -440,6 +514,8 @@ export function setupProjectInteractivity(map, layerId) {
     const handleMouseLeave = () => {
         map.getCanvas().style.cursor = '';
         removeHoverTooltip(map);
+        // Remove hover highlight (but keep selection highlight if clicked)
+        clearHoveredFeature(map);
     };
     const handleClick = (e) => {
         showProjectPopup(map, e, layerId);
@@ -507,6 +583,11 @@ export function removeProjectInteractivity(map, layerId) {
 
     // Clean up any remaining tooltips
     removeHoverTooltip(map);
+
+    // Clear any hovered feature highlighting if this layer is being removed
+    if (hoveredLayerId === layerId) {
+        clearHoveredFeature(map);
+    }
 
     // Clear any selected feature highlighting if this layer is being removed
     if (selectedLayerId === layerId) {
