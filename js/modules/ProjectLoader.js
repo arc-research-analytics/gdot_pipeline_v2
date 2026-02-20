@@ -142,6 +142,29 @@ function filterProjectsByJurisdiction(data, jurisdiction, geographyType) {
 }
 
 /**
+ * Filters GeoJSON data based on selected project types
+ * @param {Object} data - The GeoJSON data to filter
+ * @param {string[]} types - Array of selected type values (empty = no filter)
+ * @returns {Object} - Filtered GeoJSON data
+ */
+function filterProjectsByType(data, types) {
+    // If no types selected, return all data
+    if (!types || types.length === 0) {
+        return data;
+    }
+
+    // Create a deep copy of the GeoJSON to avoid modifying the original
+    const filteredData = JSON.parse(JSON.stringify(data));
+
+    // Filter features based on type
+    filteredData.features = filteredData.features.filter(feature =>
+        feature.properties && types.includes(feature.properties.Type)
+    );
+
+    return filteredData;
+}
+
+/**
  * Gets the current jurisdiction value based on geography type
  * @param {string} geographyType - The selected geography type
  * @returns {string|number|null} - The current jurisdiction value
@@ -249,7 +272,7 @@ function updateJurisdictionDropdownVisibility(geographyType) {
  * @param {string} statusFilter - The selected status filter
  * @param {string|number|null} jurisdictionFilter - The selected jurisdiction filter
  */
-export function addProjectsToMap(map, projectData, geographyType, statusFilter = "All", jurisdictionFilter = null) {
+export function addProjectsToMap(map, projectData, geographyType, statusFilter = "All", jurisdictionFilter = null, typeFilter = []) {
     
     
     const sourceId = "projects-source";
@@ -270,9 +293,10 @@ export function addProjectsToMap(map, projectData, geographyType, statusFilter =
         jurisdictionFilter = getCurrentJurisdiction(geographyType);
     }
 
-    // Apply both status and jurisdiction filters
+    // Apply status, jurisdiction, and type filters
     let filteredData = filterProjectsByStatus(projectData, statusFilter);
     filteredData = filterProjectsByJurisdiction(filteredData, jurisdictionFilter, geographyType);
+    filteredData = filterProjectsByType(filteredData, typeFilter);
     
     
 
@@ -350,6 +374,7 @@ export function setupProjectLoaderListener(map) {
     
     const geographySelect = document.getElementById("geographySelect");
     const statusSelect = document.getElementById("statusSelect");
+    const typeSelect = document.getElementById("typeSelect");
 
     if (!geographySelect) {
         console.error("❌ Geography select element not found");
@@ -391,6 +416,7 @@ export function setupProjectLoaderListener(map) {
         const initialGeography = urlFilters.level;
         const initialStatus = urlFilters.status;
         const initialJurisdiction = urlFilters.jurisdiction;
+        const initialTypes = urlFilters.types;
         
         
         
@@ -403,10 +429,13 @@ export function setupProjectLoaderListener(map) {
             geographySelect.value = initialGeography;
         }
         if (statusSelect.value !== initialStatus) {
-            
+
             statusSelect.value = initialStatus;
         }
-        
+        if (typeSelect && initialTypes.length > 0) {
+            typeSelect.value = initialTypes;
+        }
+
         // Set jurisdiction dropdown values based on geography type and URL
         if (initialGeography === "District" && initialJurisdiction !== null) {
             const districtDropdown = document.getElementById("geoDropdownSelect");
@@ -435,7 +464,7 @@ export function setupProjectLoaderListener(map) {
         updateJurisdictionDropdownVisibility(initialGeography);
         
         // Update URL to show current state on initial load
-        updateURLParams(initialGeography, initialJurisdiction, initialStatus);
+        updateURLParams(initialGeography, initialJurisdiction, initialStatus, initialTypes);
         
         // Start loading tracking for initial projects
         loadingManager.startLoading();
@@ -451,8 +480,8 @@ export function setupProjectLoaderListener(map) {
                                 console.warn(`⚠️ No features found in project data:`, projectData);
                             }
                             
-                            addProjectsToMap(map, projectData, initialGeography, initialStatus, initialJurisdiction);
-                            
+                            addProjectsToMap(map, projectData, initialGeography, initialStatus, initialJurisdiction, initialTypes);
+
                             // Stop loading on success
                             loadingManager.stopLoading();
                         })
@@ -461,8 +490,8 @@ export function setupProjectLoaderListener(map) {
                             console.error("❌ Boundary error details:", boundaryError.stack || boundaryError);
                             
                             // Try to add projects anyway without boundaries
-                            addProjectsToMap(map, projectData, initialGeography, initialStatus, initialJurisdiction);
-                            
+                            addProjectsToMap(map, projectData, initialGeography, initialStatus, initialJurisdiction, initialTypes);
+
                             // Stop loading even with boundary error (projects still loaded)
                             loadingManager.stopLoading();
                         });
@@ -493,6 +522,7 @@ export function setupProjectLoaderListener(map) {
     geographySelect.addEventListener("sl-change", (event) => {
         const selectedGeography = event.target.value;
         const selectedStatus = statusSelect.value;
+        const selectedTypes = typeSelect ? typeSelect.value : [];
 
         // Update dropdown visibility when geography changes
         updateJurisdictionDropdownVisibility(selectedGeography);
@@ -503,7 +533,7 @@ export function setupProjectLoaderListener(map) {
             const selectedJurisdiction = getCurrentJurisdiction(selectedGeography);
             
             // Update URL with new filters
-            updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus);
+            updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus, selectedTypes);
 
             // Start loading tracking for geography change
             loadingManager.startLoading();
@@ -513,8 +543,8 @@ export function setupProjectLoaderListener(map) {
                 loadProjectGeoJSON(selectedGeography),
                 updateBoundaryLayer(map, selectedGeography)
             ]).then(([data]) => {
-                addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction);
-                
+                addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction, selectedTypes);
+
                 // Stop loading on success
                 loadingManager.stopLoading();
             }).catch(error => {
@@ -531,17 +561,18 @@ export function setupProjectLoaderListener(map) {
         const selectedGeography = geographySelect.value;
         const selectedStatus = event.target.value;
         const selectedJurisdiction = getCurrentJurisdiction(selectedGeography);
+        const selectedTypes = typeSelect ? typeSelect.value : [];
 
         // Update URL with new filters
-        updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus);
+        updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus, selectedTypes);
 
         // Start loading tracking for status change
         loadingManager.startLoading();
 
         loadProjectGeoJSON(selectedGeography)
             .then(data => {
-                addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction);
-                
+                addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction, selectedTypes);
+
                 // Stop loading on success
                 loadingManager.stopLoading();
             })
@@ -553,8 +584,38 @@ export function setupProjectLoaderListener(map) {
             });
     });
 
+    // Set up event listener for changes to the type multi-select
+    if (typeSelect) {
+        typeSelect.addEventListener("sl-change", (event) => {
+            const selectedGeography = geographySelect.value;
+            const selectedStatus = statusSelect.value;
+            const selectedJurisdiction = getCurrentJurisdiction(selectedGeography);
+            const selectedTypes = event.target.value;
+
+            // Update URL with new filters
+            updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus, selectedTypes);
+
+            // Start loading tracking for type change
+            loadingManager.startLoading();
+
+            loadProjectGeoJSON(selectedGeography)
+                .then(data => {
+                    addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction, selectedTypes);
+
+                    // Stop loading on success
+                    loadingManager.stopLoading();
+                })
+                .catch(error => {
+                    console.error("Type change loading error:", error);
+
+                    // Stop loading on error
+                    loadingManager.stopLoading();
+                });
+        });
+    }
+
     // Set up event listeners for jurisdiction dropdowns
-    setupJurisdictionEventListeners(map, geographySelect, statusSelect);
+    setupJurisdictionEventListeners(map, geographySelect, statusSelect, typeSelect);
 }
 
 /**
@@ -563,7 +624,7 @@ export function setupProjectLoaderListener(map) {
  * @param {HTMLElement} geographySelect - The geography selection element
  * @param {HTMLElement} statusSelect - The status selection element
  */
-function setupJurisdictionEventListeners(map, geographySelect, statusSelect) {
+function setupJurisdictionEventListeners(map, geographySelect, statusSelect, typeSelect) {
     const cityDropdown = document.getElementById("cityDropdownSelect");
     const countyDropdown = document.getElementById("countyDropdownSelect");
     const districtDropdown = document.getElementById("geoDropdownSelect");
@@ -573,9 +634,10 @@ function setupJurisdictionEventListeners(map, geographySelect, statusSelect) {
         const selectedGeography = geographySelect.value;
         const selectedStatus = statusSelect.value;
         const selectedJurisdiction = getCurrentJurisdiction(selectedGeography);
-        
+        const selectedTypes = typeSelect ? typeSelect.value : [];
+
         // Update URL with new filters
-        updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus);
+        updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus, selectedTypes);
 
         // Start loading tracking for jurisdiction change
         loadingManager.startLoading();
@@ -585,8 +647,8 @@ function setupJurisdictionEventListeners(map, geographySelect, statusSelect) {
             loadProjectGeoJSON(selectedGeography),
             updateBoundaryLayer(map, selectedGeography)
         ]).then(([data]) => {
-            addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction);
-            
+            addProjectsToMap(map, data, selectedGeography, selectedStatus, selectedJurisdiction, selectedTypes);
+
             // Stop loading on success
             loadingManager.stopLoading();
         }).catch(error => {

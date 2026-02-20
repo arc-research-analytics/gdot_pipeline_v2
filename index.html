@@ -63,8 +63,8 @@
   <!-- shoelace drawer for filters -->
   <sl-drawer label="" placement="start" class="drawer-placement">
 
-    <div style="text-align: center; margin-top: -20px; margin-bottom: -10px;">
-      <h3>Select Geography Level</h3>
+    <div style="text-align: center; margin-top: -26px; margin-bottom: -10px;">
+      <h3 style="font-size: 1em;">Select Geography Level</h3>
     </div>
 
     <div style="text-align: center;">
@@ -76,8 +76,8 @@
       </sl-radio-group>
     </div>
 
-    <div style="text-align: center; margin-top: 30px; margin-bottom: -10px;">
-      <h3>Filter Projects</h3>
+    <div style="text-align: center; margin-top: 18px; margin-bottom: -10px;">
+      <h3 style="font-size: 1em;">Filter Projects</h3>
     </div>
 
     <!-- City jurisdiction dropdown (shown when City is selected) -->
@@ -215,17 +215,31 @@
       <sl-option value="14">14</sl-option>
     </sl-select>
 
-    <br />
-    <sl-select id="statusSelect" label="Project Status:" value="All">
+    <div style="margin-top: 8px;"></div>
+    <sl-select id="statusSelect" label="By Project Status:" value="All">
       <sl-option value="All">All</sl-option>
       <sl-option value="Pre_Construction">Pre-Construction</sl-option>
       <sl-option value="Under_Construction">Under Construction</sl-option>
       <sl-option value="Completed_Construction">Completed</sl-option>
     </sl-select>
 
+    <div style="margin-top: 8px;"></div>
+    <sl-select id="typeSelect" label="By Project Type:" multiple clearable placeholder="All types">
+      <sl-option value="Maintenance">Maintenance</sl-option>
+      <sl-option value="Reconstruction/Rehabilitation">Reconstruction/Rehabilitation</sl-option>
+      <sl-option value="Replacement">Replacement</sl-option>
+      <sl-option value="Safety">Safety</sl-option>
+      <sl-option value="Enhancement">Enhancement</sl-option>
+      <sl-option value="New Construction">New Construction</sl-option>
+      <sl-option value="Intermodal">Intermodal</sl-option>
+      <sl-option value="Capital">Capital</sl-option>
+      <sl-option value="Operating">Operating</sl-option>
+      <sl-option value="Other">Other</sl-option>
+    </sl-select>
+
     <!-- Project Statistics Summary Table -->
-    <div style="text-align: center; margin-top: 30px; margin-bottom: -5px;">
-      <h3>Filtered Project Statistics</h3>
+    <div style="text-align: center; margin-top: 18px; margin-bottom: -5px;">
+      <h3 style="font-size: 1em;">Filtered Project Statistics</h3>
     </div>
     
     <div style="margin: 10px 0;">
@@ -253,8 +267,8 @@
     </div>
 
     <!-- Dropdown for additional geographic boundaries -->
-    <div style="text-align: center; margin-top: 30px; margin-bottom: -10px;">
-      <h3>Add Basemap Reference</h3>
+    <div style="text-align: center; margin-top: 18px; margin-bottom: -10px;">
+      <h3 style="font-size: 1em;">Add Basemap Reference</h3>
     </div>
     <sl-select id="additionalGeoSelect" label="" value="None">
       <sl-option value="None">None</sl-option>
@@ -265,7 +279,7 @@
       <sl-option value="LCIs">Livable Centers Initiative Areas</sl-option>
     </sl-select>
 
-    <div style="margin-top: 25px;"></div>
+    <div style="margin-top: 14px;"></div>
     <sl-switch id="toggleProjectsSwitch">Show projects layer</sl-switch>
 
     <br />

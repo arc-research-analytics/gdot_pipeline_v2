@@ -28,6 +28,11 @@ sl-drawer.drawer-placement:not(:defined) {
   visibility: hidden;
 }
 
+/* Reduce drawer body padding from default 2rem to 1.25rem */
+.drawer-placement {
+  --body-spacing: 1.25rem;
+}
+
 .arc-logo {
   position: absolute;
   right: 10px;

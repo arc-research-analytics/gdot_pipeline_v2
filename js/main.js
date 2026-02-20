@@ -58,6 +58,12 @@ function updateUIFromFilters(filters) {
     statusSelect.value = filters.status;
   }
 
+  // Update type multi-select
+  const typeSelect = document.getElementById("typeSelect");
+  if (typeSelect) {
+    typeSelect.value = filters.types || [];
+  }
+
   // Update jurisdiction dropdowns based on level
   if (filters.level === "District") {
     const districtSelect = document.getElementById("geoDropdownSelect");
