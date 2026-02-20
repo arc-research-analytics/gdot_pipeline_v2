@@ -7,8 +7,7 @@ body {
 header {
   background-color: #005495;
   color: #fff;
-  text-align: left;
-  padding: 10px;
+  padding: 10px 14px;
   font-size: 25px;
   font-weight: bold;
   position: fixed;
@@ -17,6 +16,10 @@ header {
   left: 0;
   z-index: 2;
   opacity: .95;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 /* Desktop and mobile header title variants */
@@ -33,30 +36,21 @@ sl-drawer.drawer-placement:not(:defined) {
   --body-spacing: 1.25rem;
 }
 
-.arc-logo {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  transform: translateY(-50%);
-  /* Ensures perfect vertical centering */
-  height: 45px;
-  /* Adjust as needed */
-  width: auto;
-  /* Maintains aspect ratio */
-  z-index: 2;
+.header-logos {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
 }
 
-.gdot-logo {
-  position: absolute;
-  right: 140px;
-  bottom: 12px;
-  transform: translateY(-50%);
-  /* Ensures perfect vertical centering */
-  height: 45px;
-  /* Adjust as needed */
+.arc-logo {
+  height: 30px;
   width: auto;
-  /* Maintains aspect ratio */
-  z-index: 2;
+  display: block;
+}
+
+.mapboxgl-ctrl-logo {
+  display: none !important;
 }
 
 /* Base styling for the open drawer button */
@@ -347,7 +341,7 @@ sl-button.openDrawer::part(base):hover {
 
 .map-legend {
   position: absolute;
-  bottom: 95px;
+  bottom: 70px;
   right: 15px;
   background-color: #fff;
   padding: 10px;
@@ -425,12 +419,11 @@ sl-button.openDrawer::part(base):hover {
   }
 
   /* remove the following elements on mobile */
-  .mapboxgl-ctrl-bottom-left .mapboxgl-ctrl-scale,
+  .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-scale,
   .map-overlay,
   .header-logo,
   .mapboxgl-ctrl-geocoder,
-  .gdot-logo,
-  .arc-logo,
+  .header-logos,
   .radio-container-theme,
   .mapboxgl-ctrl-attrib,
   #downloadBtn {
@@ -471,7 +464,7 @@ sl-drawer sl-button.close-button::part(base) {
 #aboutBtn {
   position: absolute;
   left: 10px;
-  bottom: 70px;
+  bottom: 20px;
   z-index: 2;
   background: transparent;
   border: none;

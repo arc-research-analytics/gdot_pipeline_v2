@@ -61,7 +61,7 @@ export function initializeMap() {
     maxWidth: 175,
     unit: "imperial",
   });
-  mapInstance.addControl(scale);
+  mapInstance.addControl(scale, 'bottom-right');
 
   // Populate Info Dialog with last updated date and static info
   fetch(`${BASE_URL}/data/current_date.txt`)
