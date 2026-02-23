@@ -165,11 +165,10 @@ wa-drawer wa-switch {
   display: block;
 }
 
-.header-logos {
+.arc-logo-link {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 14px;
-  flex-shrink: 0;
 }
 
 .arc-logo {
@@ -579,9 +578,8 @@ wa-tooltip {
   /* remove the following elements on mobile */
   .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-scale,
   .map-overlay,
-  .header-logo,
+  .arc-logo-link,
   .mapboxgl-ctrl-geocoder,
-  .header-logos,
   .mapboxgl-ctrl-attrib,
   #downloadBtn {
     display: none !important;
