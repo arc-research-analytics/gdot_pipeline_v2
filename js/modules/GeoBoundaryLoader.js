@@ -325,11 +325,10 @@ export async function updateBoundaryLayer(map, geographyType) {
             layout: {
               "text-field": geographyType === "District" ?
                 ["concat", "District ", ["to-string", ["get", "DISTRICT"]]] :
-                ["format",
-                  ["upcase", ["get", "NAME"]],
-                  { "font-scale": 0.9, "text-font": ["Roboto Bold Italic", "Arial Unicode MS Bold"] }
-                ],
-              "text-font": ["Roboto Bold", "Arial Unicode MS Bold"],
+                ["upcase", ["get", "NAME"]],
+              "text-font": geographyType === "District"
+                ? ["DIN Pro Bold", "Arial Unicode MS Bold"]
+                : ["DIN Pro Bold Italic", "Arial Unicode MS Bold"],
               "text-size": 16,
               "text-allow-overlap": false,
               "text-ignore-placement": false,
@@ -351,11 +350,10 @@ export async function updateBoundaryLayer(map, geographyType) {
             layout: {
               "text-field": geographyType === "District" ?
                 ["concat", "District ", ["to-string", ["get", "DISTRICT"]]] :
-                ["format",
-                  ["upcase", ["get", "NAME"]],
-                  { "font-scale": 0.9, "text-font": ["Roboto Bold Italic", "Arial Unicode MS Bold"] }
-                ],
-              "text-font": ["Roboto Bold", "Arial Unicode MS Bold"],
+                ["upcase", ["get", "NAME"]],
+              "text-font": geographyType === "District"
+                ? ["DIN Pro Bold", "Arial Unicode MS Bold"]
+                : ["DIN Pro Bold Italic", "Arial Unicode MS Bold"],
               "text-size": 16,
               "text-allow-overlap": true,
               "text-ignore-placement": true,
@@ -414,7 +412,7 @@ export function setupGeographyRadioListener(map) {
   }
 
   // Set up event listener for changes to the geography selection
-  geographySelect.addEventListener("sl-change", (event) => {
+  geographySelect.addEventListener("change", (event) => {
     const selectedGeography = event.target.value;
 
     // Update the boundary layer for the new geography type

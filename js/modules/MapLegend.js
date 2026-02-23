@@ -94,7 +94,7 @@ export function initLegend(map, statusColors, statusMapping) {
     updateLegend(statusColors, statusSelect.value, statusMapping);
 
     // Update legend when status changes
-    statusSelect.addEventListener('sl-change', (event) => {
+    statusSelect.addEventListener('change', (event) => {
         updateLegend(statusColors, event.target.value, statusMapping);
     });
 } 

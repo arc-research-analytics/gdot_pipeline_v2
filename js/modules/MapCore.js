@@ -61,7 +61,7 @@ export function initializeMap() {
     maxWidth: 175,
     unit: "imperial",
   });
-  mapInstance.addControl(scale, 'bottom-right');
+  mapInstance.addControl(scale, 'bottom-left');
 
   // Populate Info Dialog with last updated date and static info
   fetch(`${BASE_URL}/data/current_date.txt`)
@@ -72,14 +72,15 @@ export function initializeMap() {
       return response.text();
     })
     .then(dateRaw => {
-      const rawDateText = (dateRaw || '').toString().trim();
-      
+      const lines = (dateRaw || '').toString().trim().split('\n');
+      const rawDateText = lines[0].trim();
+      const excludedCount = parseInt(lines[1], 10) || 0;
+
       // Format the date to remove zero-padding from days
       let dateText = rawDateText;
       try {
         const parsedDate = new Date(rawDateText);
         if (!isNaN(parsedDate.getTime())) {
-          // Format as "Month D, YYYY" without zero-padding
           dateText = parsedDate.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -88,13 +89,16 @@ export function initializeMap() {
         }
       } catch (error) {
         console.warn('Could not parse date, using original format:', error);
-        // Fall back to original dateText if parsing fails
       }
-      
-      const lastUpdatedText = `Welcome to an interactive tracker of Georgia Department of Transportation (GDOT) projects! This application was developed and is maintained by the <a href="https://atlantaregional.org/what-we-do/research-and-data/" target="_blank">Research and Innovation</a> Team at the Atlanta Regional Commission. <br/><br/> Project data last accessed ${dateText} from the GDOT API.`;
+
+      const invalidGeoNote = excludedCount > 0
+        ? ` Note that ${excludedCount} project${excludedCount === 1 ? '' : 's'} featured invalid geography and ${excludedCount === 1 ? 'was' : 'were'} unable to be included on the map.`
+        : '';
+
+      const lastUpdatedText = `Welcome to an interactive tracker of Georgia Department of Transportation (GDOT) projects! This application was developed and is maintained by the <a href="https://atlantaregional.org/what-we-do/research-and-data/" target="_blank">Research and Innovation</a> Team at the Atlanta Regional Commission. <br/><br/> Project data last accessed ${dateText} from the GDOT API.${invalidGeoNote}`;
       const contentEl = document.getElementById('infoDialogContent');
       if (contentEl) {
-        contentEl.innerHTML = `${lastUpdatedText} <br/> <br/> The "total allocated cost" as reported in the tool's side panel is an estimate of a project's total value that falls within the selected jurisdiction's boundaries. It is calculated by determining the proportion of each project's roadway that falls within those boundaries and then applying that proportion to the project's total cost. <br/><br/> For questions, please reach out to <a href="mailto:wwright@atlantaregional.org?subject=GDOT%20tracker%20inquiry">Will Wright</a>, data engineer and web developer on the project.`;
+        contentEl.innerHTML = `${lastUpdatedText} <br/><br/> The "total allocated cost" as reported in the tool's side panel is an estimate of a project's total value that falls within the selected jurisdiction's boundaries. It is calculated by determining the proportion of each project's roadway that falls within those boundaries and then applying that proportion to the project's total cost. <br/><br/> For questions, please reach out to <a href="mailto:wwright@atlantaregional.org?subject=GDOT%20tracker%20inquiry">Will Wright</a>, data engineer and web developer on the project.`;
       } else {
         console.warn('Info dialog content element not found');
       }

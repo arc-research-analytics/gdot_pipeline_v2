@@ -91,7 +91,7 @@ function triggerFilterReload() {
   // Trigger a change event on geography select to reload everything
   const geographySelect = document.getElementById("geographySelect");
   if (geographySelect) {
-    geographySelect.dispatchEvent(new CustomEvent('sl-change', { 
+    geographySelect.dispatchEvent(new CustomEvent('change', { 
       detail: { value: geographySelect.value },
       bubbles: true 
     }));
@@ -106,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const downloadBtn = document.getElementById("downloadBtn");
   const drawer = document.querySelector(".drawer-placement");
   const openButton = document.querySelector(".openDrawer");
-  const closeButton = drawer.querySelector(".close-button");
 
   // if window.innerWidth is less than 768, remove downloadBtn
   if (window.innerWidth < 768) {
@@ -116,14 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Set up CSV export functionality for download button
   setupCSVExportListener();
 
-  openButton.addEventListener("click", () => drawer.show());
-
-  // Attach event listener to close button
-  if (drawer && closeButton) {
-    closeButton.addEventListener("click", () => drawer.hide());
-  } else {
-    console.error("drawer or closeButton not found at DOMContentLoaded.");
-  }
+  openButton.addEventListener("click", () => { drawer.open = true; });
 
   // Initialize projects visibility flag
   if (typeof window.__GDOT_PROJECTS_VISIBLE__ === 'undefined') {
@@ -135,9 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (drawer) {
     // Hide until ready to avoid flash
     drawer.style.visibility = 'hidden';
-    customElements.whenDefined('sl-drawer').then(() => {
-      const isDesktop = window.innerWidth >= 768; // match CSS breakpoint
-      drawer.open = isDesktop;
+    customElements.whenDefined('wa-drawer').then(() => {
+      drawer.open = false;
       // reveal after applying state
       requestAnimationFrame(() => {
         drawer.style.visibility = '';
@@ -154,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize legend visibility based on switch state
     toggleLegendVisibility(toggleProjectsSwitch.checked);
 
-    toggleProjectsSwitch.addEventListener('sl-change', () => {
+    toggleProjectsSwitch.addEventListener('change', () => {
       const shouldShow = toggleProjectsSwitch.checked === true; // switch ON means show projects
       window.__GDOT_PROJECTS_VISIBLE__ = shouldShow;
       const layerId = 'projects-layer';

@@ -8,20 +8,20 @@ import { getFiltersFromURL } from './URLManager.js';
 // Popup theme configuration - colors that work well against each basemap theme
 const POPUP_THEMES = {
     light: {
-        // For light basemap - use darker popup to stand out
-        backgroundColor: '#2c3e50',
+        // For light basemap - branded blue background
+        backgroundColor: '#1270B3',
         textColor: '#ffffff',
-        accentColor: '#3498db',
-        borderColor: '#34495e',
-        linkColor: '#5dade2'
+        accentColor: '#7ab8e4',
+        borderColor: '#0d5a8e',
+        linkColor: '#b8d9f2'
     },
     dark: {
-        // For dark basemap - use lighter popup to stand out  
-        backgroundColor: '#f8f9fa',
-        textColor: '#2c3e50',
-        accentColor: '#2980b9',
-        borderColor: '#dee2e6',
-        linkColor: '#2980b9'
+        // For dark basemap - light gray background
+        backgroundColor: '#E8E8E9',
+        textColor: '#2c2c2e',
+        accentColor: '#58585A',
+        borderColor: '#c8c8ca',
+        linkColor: '#1270B3'
     }
 };
 
@@ -133,27 +133,31 @@ function getJurisdictionLabel() {
 function showHoverTooltip(map, e) {
     // Remove any existing hover tooltip
     removeHoverTooltip(map);
-    
-    // Get theme-appropriate colors
-    const theme = getPopupTheme();
-    
+
+    // Tooltip colors: #58585A in light mode; 20% tint (~#DEDEDE) in dark mode
+    const isDark = getCurrentTheme() === 'dark';
+    const bgColor   = isDark ? '#DEDEDE' : '#58585A';
+    const textColor = isDark ? '#1a1a1a' : '#ffffff';
+    const borderColor = isDark ? '#c0c0c0' : '#3d3d3f';
+
     // Create tooltip div
     const tooltip = document.createElement('div');
     tooltip.id = 'project-hover-tooltip';
     tooltip.innerHTML = 'Click for project detail';
     tooltip.style.cssText = `
         position: absolute;
-        background: ${theme.backgroundColor};
-        color: ${theme.textColor};
+        background: ${bgColor};
+        color: ${textColor};
         padding: 6px 10px;
         border-radius: 4px;
         pointer-events: none;
         font-size: 14px;
-        font-family: 'Roboto', Arial, sans-serif;
+        font-family: 'DINPro', Arial, sans-serif;
+        font-weight: 400;
         z-index: 1000;
         white-space: nowrap;
         box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        border: 1px solid ${theme.borderColor};
+        border: 1px solid ${borderColor};
     `;
     
     // Add to document first to get dimensions
@@ -260,24 +264,24 @@ function showProjectPopup(map, e, layerId) {
 
     // Create popup content HTML with theme-aware styling
     let popupContent = `
-        <div style="font-family: 'Roboto', Arial, sans-serif; max-width: 300px;">
-            <div style="font-weight: bold; font-size: 17px; margin-bottom: 12px; color: ${theme.textColor}; border-bottom: 2px solid ${theme.accentColor}; padding-bottom: 8px;">
+        <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; max-width: 300px;">
+            <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 700; font-size: 17px; margin-bottom: 12px; color: ${theme.textColor}; border-bottom: 2px solid ${theme.accentColor}; padding-bottom: 8px;">
                 Project Details
             </div>
 
             <div style="margin-bottom: 10px;">
-                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 2px; opacity: 0.8;">Description:</div>
-                <div style="color: ${theme.textColor}; line-height: 1.4; font-size: 15px;">${description}</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 500; color: ${theme.textColor}; margin-bottom: 2px;">Description:</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; color: ${theme.textColor}; line-height: 1.4; font-size: 15px;">${description}</div>
             </div>
 
             <div style="margin-bottom: 10px;">
-                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 2px; opacity: 0.8;">Project Type:</div>
-                <div style="color: ${theme.textColor}; font-size: 15px;">${type}</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 500; color: ${theme.textColor}; margin-bottom: 2px;">Project Type:</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; color: ${theme.textColor}; font-size: 15px;">${type}</div>
             </div>
 
             <div style="margin-bottom: 10px;">
-                <div style="font-weight: bold; color: ${theme.textColor}; margin-bottom: 2px; opacity: 0.8;">${jurisdictionLabel}:</div>
-                <div style="color: ${theme.textColor}; font-size: 15px;">${allocatedCost}</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 500; color: ${theme.textColor}; margin-bottom: 2px;">${jurisdictionLabel}:</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; color: ${theme.textColor}; font-size: 15px;">${allocatedCost}</div>
             </div>
     `;
     
@@ -285,7 +289,7 @@ function showProjectPopup(map, e, layerId) {
     if (projectUrl && projectUrl.trim() !== '' && projectUrl !== 'null') {
         popupContent += `
 			<div style="margin-top: 10px; margin-bottom: 2px;">
-				<a href="${projectUrl}" target="_blank" style="color: ${theme.linkColor}; text-decoration: none; word-break: break-all; font-size: 15px;"
+				<a href="${projectUrl}" target="_blank" style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; color: ${theme.linkColor}; text-decoration: none; word-break: break-all; font-size: 15px;"
 				   onmouseover="this.style.textDecoration='underline'"
 				   onmouseout="this.style.textDecoration='none'">
 					Visit Project Site ↗

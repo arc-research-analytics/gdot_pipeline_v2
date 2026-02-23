@@ -16,40 +16,40 @@ const THEMES = {
 // Theme-specific styles
 const THEME_STYLES = {
     [THEMES.LIGHT]: {
-        // mapbox 
+        // mapbox
         basemapUrl: 'https://api.mapbox.com/styles/v1/mapbox/light-v11/tiles/256/{z}/{x}/{y}@2x?access_token=' + MAPBOX_ACCESS_TOKEN,
 
-        // // OR use cartodb 
+        // // OR use cartodb
         // basemapUrl: 'https://a.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png',
 
-        unselectedBoundaryColor: '#737373',
-        selectedBoundaryColor: '#000000',
+        unselectedBoundaryColor: '#b0b0b0',
+        selectedBoundaryColor: '#58585A',
         unselectedLineWidth: 0.5,
         selectedLineWidth: 2,
         textColor: '#000000',
-        // Label styles
-        selectedLabelColor: '#000000',
-        unselectedLabelColor: '#757575',
+        // Label styles — agency gray for selected, lighter gray for unselected
+        selectedLabelColor: '#58585A',
+        unselectedLabelColor: '#b0b0b0',
         selectedLabelHaloColor: '#ffffff',
         unselectedLabelHaloColor: '#ffffff',
         selectedLabelHaloWidth: 2,
         unselectedLabelHaloWidth: 0.5
     },
     [THEMES.DARK]: {
-        // mapbox 
+        // mapbox
         basemapUrl: 'https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/256/{z}/{x}/{y}@2x?access_token=' + MAPBOX_ACCESS_TOKEN,
 
-        // // OR use cartodb 
+        // // OR use cartodb
         // basemapUrl: 'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
-        
-        unselectedBoundaryColor: '#5a5a5a',
-        selectedBoundaryColor: '#ffffff',
+
+        unselectedBoundaryColor: '#787878',
+        selectedBoundaryColor: '#c8c8c8',
         unselectedLineWidth: 0.5,
         selectedLineWidth: 2,
         textColor: '#ffffff',
-        // Label styles
-        selectedLabelColor: '#ffffff',
-        unselectedLabelColor: '#a0a0a0',
+        // Label styles — light gray for selected, darker gray for unselected
+        selectedLabelColor: '#c8c8c8',
+        unselectedLabelColor: '#787878',
         selectedLabelHaloColor: '#000000',
         unselectedLabelHaloColor: '#262626',
         selectedLabelHaloWidth: 2,
@@ -66,16 +66,23 @@ let currentTheme = DEFAULT_THEME;
  * @returns {Object} - The theme manager API
  */
 export function initThemeManager(map) {
-    // Set up theme toggle listener
-    const themeToggle = document.querySelector('.radio-container-theme sl-radio-group');
+    // Set up theme toggle button listener
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
 
-    // Set the UI control to match the configured default theme
-    if (themeToggle) {
-        themeToggle.value = currentTheme;
-        
-        themeToggle.addEventListener('sl-change', (event) => {
-            const selectedTheme = event.target.value;
-            applyTheme(map, selectedTheme);
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const newTheme = currentTheme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
+            applyTheme(map, newTheme);
+
+            const icon = themeToggleBtn.querySelector('wa-icon');
+            const tooltip = document.getElementById('themeTooltip');
+            if (newTheme === THEMES.DARK) {
+                if (icon) icon.name = 'sun';
+                if (tooltip) tooltip.textContent = 'Enable light mode';
+            } else {
+                if (icon) icon.name = 'moon';
+                if (tooltip) tooltip.textContent = 'Enable dark mode';
+            }
         });
     }
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <title>GDOT Projects</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/front-loader.png">
+  <link rel="icon" type="image/svg+xml" href="assets/helmet-safety.svg">
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 
   <!-- mapbox -->
@@ -23,10 +23,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
 
-  <!-- shoelace for UI components -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.0/cdn/themes/light.css" />
-  <script type="module"
-    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.0/cdn/shoelace-autoloader.js"></script>
+  <!-- Web Awesome for UI components -->
+  <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.5/dist/styles/webawesome.css" />
+  <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.5/dist/webawesome.loader.js"></script>
 
   <!-- Google Material Icons -->
   <link rel="stylesheet"
@@ -40,7 +39,7 @@
   <!-- Loading overlay (initially hidden) -->
   <div id="loadingOverlay" class="loading-overlay" style="display: none;">
     <div class="loading-content">
-      <sl-spinner style="font-size: 3rem; --indicator-color: #3498db;"></sl-spinner>
+      <wa-spinner style="font-size: 3rem; --indicator-color: #3498db;"></wa-spinner>
       <p style="margin-top: 1rem; font-size: 1.1rem; color: #333;">Loading projects...</p>
     </div>
   </div>
@@ -63,276 +62,253 @@
     </div>
   </header>
 
-  <!-- shoelace drawer for filters -->
-  <sl-drawer label="" placement="start" class="drawer-placement">
+  <!-- drawer for filters -->
+  <wa-drawer label="" placement="start" class="drawer-placement">
 
-    <div style="text-align: center; margin-top: -26px; margin-bottom: -10px;">
-      <h3 style="font-size: 1em;">Select Geography Level</h3>
+    <div class="drawer-section-heading">
+      <h3>Select Geography Level</h3>
     </div>
 
-    <div style="text-align: center;">
-      <sl-radio-group id="geographySelect" label="" value="District">
-        <sl-radio-button value="Statewide">State</sl-radio-button>
-        <sl-radio-button value="District">District</sl-radio-button>
-        <sl-radio-button value="County">County</sl-radio-button>
-        <sl-radio-button value="City">City</sl-radio-button>
-      </sl-radio-group>
+    <div style="display: flex; justify-content: center;">
+      <wa-radio-group id="geographySelect" label="" value="District" orientation="horizontal">
+        <wa-radio appearance="button" value="Statewide">State</wa-radio>
+        <wa-radio appearance="button" value="District">District</wa-radio>
+        <wa-radio appearance="button" value="County">County</wa-radio>
+        <wa-radio appearance="button" value="City">City</wa-radio>
+      </wa-radio-group>
     </div>
 
-    <div style="text-align: center; margin-top: 18px; margin-bottom: -10px;">
-      <h3 style="font-size: 1em;">Filter Projects</h3>
+    <div class="drawer-section-heading">
+      <h3>Filter Projects</h3>
     </div>
 
     <!-- City jurisdiction dropdown (shown when City is selected) -->
-    <sl-select id="cityDropdownSelect" label="By City:" value="Atlanta" style="display: none;">
-      <sl-option value="Acworth">Acworth</sl-option>
-      <sl-option value="Alpharetta">Alpharetta</sl-option>
-      <sl-option value="Atlanta">Atlanta</sl-option>
-      <sl-option value="Auburn">Auburn</sl-option>
-      <sl-option value="Austell">Austell</sl-option>
-      <sl-option value="Avondale_Estates">Avondale Estates</sl-option>
-      <sl-option value="Ball_Ground">Ball Ground</sl-option>
-      <sl-option value="Berkeley_Lake">Berkeley Lake</sl-option>
-      <sl-option value="Braselton">Braselton</sl-option>
-      <sl-option value="Brookhaven">Brookhaven</sl-option>
-      <sl-option value="Buford">Buford</sl-option>
-      <sl-option value="Canton">Canton</sl-option>
-      <sl-option value="Carrollton">Carrollton</sl-option>
-      <sl-option value="Cartersville">Cartersville</sl-option>
-      <sl-option value="Chamblee">Chamblee</sl-option>
-      <sl-option value="Chattahoochee_Hills">Chattahoochee Hills</sl-option>
-      <sl-option value="Clarkston">Clarkston</sl-option>
-      <sl-option value="Clermont">Clermont</sl-option>
-      <sl-option value="College_Park">College Park</sl-option>
-      <sl-option value="Conyers">Conyers</sl-option>
-      <sl-option value="Covington">Covington</sl-option>
-      <sl-option value="Cumming">Cumming</sl-option>
-      <sl-option value="Dacula">Dacula</sl-option>
-      <sl-option value="Dallas">Dallas</sl-option>
-      <sl-option value="Dawsonville">Dawsonville</sl-option>
-      <sl-option value="Decatur">Decatur</sl-option>
-      <sl-option value="Doraville">Doraville</sl-option>
-      <sl-option value="Douglasville">Douglasville</sl-option>
-      <sl-option value="Duluth">Duluth</sl-option>
-      <sl-option value="Dunwoody">Dunwoody</sl-option>
-      <sl-option value="East_Point">East Point</sl-option>
-      <sl-option value="Emerson">Emerson</sl-option>
-      <sl-option value="Fairburn">Fairburn</sl-option>
-      <sl-option value="Fayetteville">Fayetteville</sl-option>
-      <!-- <sl-option value="Flowery_Branch">Flowery Branch</sl-option> -->
-      <sl-option value="Forest_Park">Forest Park</sl-option>
-      <!-- <sl-option value="Gainesville">Gainesville</sl-option> -->
-      <sl-option value="Grayson">Grayson</sl-option>
-      <sl-option value="Griffin">Griffin</sl-option>
-      <sl-option value="Hampton">Hampton</sl-option>
-      <sl-option value="Hapeville">Hapeville</sl-option>
-      <sl-option value="Holly_Springs">Holly Springs</sl-option>
-      <sl-option value="Hoschton">Hoschton</sl-option>
-      <sl-option value="Johns_Creek">Johns Creek</sl-option>
-      <sl-option value="Jonesboro">Jonesboro</sl-option>
-      <sl-option value="Kennesaw">Kennesaw</sl-option>
-      <sl-option value="Lake_City">Lake City</sl-option>
-      <sl-option value="Lawrenceville">Lawrenceville</sl-option>
-      <sl-option value="Lilburn">Lilburn</sl-option>
-      <sl-option value="Lithonia">Lithonia</sl-option>
-      <sl-option value="Locust_Grove">Locust Grove</sl-option>
-      <sl-option value="Loganville">Loganville</sl-option>
-      <sl-option value="Lovejoy">Lovejoy</sl-option>
-      <sl-option value="Mableton">Mableton</sl-option>
-      <sl-option value="Marietta">Marietta</sl-option>
-      <sl-option value="McDonough">McDonough</sl-option>
-      <sl-option value="Milton">Milton</sl-option>
-      <sl-option value="Monroe">Monroe</sl-option>
-      <sl-option value="Morrow">Morrow</sl-option>
-      <sl-option value="Mulberry">Mulberry</sl-option>
-      <sl-option value="Newnan">Newnan</sl-option>
-      <sl-option value="Norcross">Norcross</sl-option>
-      <!-- <sl-option value="Oakwood">Oakwood</sl-option> -->
-      <sl-option value="Oxford">Oxford</sl-option>
-      <sl-option value="Palmetto">Palmetto</sl-option>
-      <sl-option value="Peachtree_City">Peachtree City</sl-option>
-      <sl-option value="Peachtree_Corners">Peachtree Corners</sl-option>
-      <sl-option value="Powder_Springs">Powder Springs</sl-option>
-      <sl-option value="Riverdale">Riverdale</sl-option>
-      <sl-option value="Roswell">Roswell</sl-option>
-      <sl-option value="Sandy_Springs">Sandy Springs</sl-option>
-      <sl-option value="Senoia">Senoia</sl-option>
-      <sl-option value="Smyrna">Smyrna</sl-option>
-      <sl-option value="Snellville">Snellville</sl-option>
-      <sl-option value="Social_Circle">Social Circle</sl-option>
-      <sl-option value="South_Fulton">South Fulton</sl-option>
-      <sl-option value="Statham">Statham</sl-option>
-      <sl-option value="Stockbridge">Stockbridge</sl-option>
-      <sl-option value="Stone_Mountain">Stone Mountain</sl-option>
-      <sl-option value="Stonecrest">Stonecrest</sl-option>
-      <sl-option value="Sugar_Hill">Sugar Hill</sl-option>
-      <sl-option value="Suwanee">Suwanee</sl-option>
-      <sl-option value="Tucker">Tucker</sl-option>
-      <sl-option value="Union_City">Union City</sl-option>
-      <sl-option value="Villa_Rica">Villa Rica</sl-option>
-      <sl-option value="Waleska">Waleska</sl-option>
-      <sl-option value="Winder">Winder</sl-option>
-      <sl-option value="Woodstock">Woodstock</sl-option>
-    </sl-select>
+    <wa-select id="cityDropdownSelect" label="By City:" value="Atlanta" style="display: none;">
+      <wa-option value="Acworth">Acworth</wa-option>
+      <wa-option value="Alpharetta">Alpharetta</wa-option>
+      <wa-option value="Atlanta">Atlanta</wa-option>
+      <wa-option value="Auburn">Auburn</wa-option>
+      <wa-option value="Austell">Austell</wa-option>
+      <wa-option value="Avondale_Estates">Avondale Estates</wa-option>
+      <wa-option value="Ball_Ground">Ball Ground</wa-option>
+      <wa-option value="Berkeley_Lake">Berkeley Lake</wa-option>
+      <wa-option value="Braselton">Braselton</wa-option>
+      <wa-option value="Brookhaven">Brookhaven</wa-option>
+      <wa-option value="Buford">Buford</wa-option>
+      <wa-option value="Canton">Canton</wa-option>
+      <wa-option value="Carrollton">Carrollton</wa-option>
+      <wa-option value="Cartersville">Cartersville</wa-option>
+      <wa-option value="Chamblee">Chamblee</wa-option>
+      <wa-option value="Chattahoochee_Hills">Chattahoochee Hills</wa-option>
+      <wa-option value="Clarkston">Clarkston</wa-option>
+      <wa-option value="Clermont">Clermont</wa-option>
+      <wa-option value="College_Park">College Park</wa-option>
+      <wa-option value="Conyers">Conyers</wa-option>
+      <wa-option value="Covington">Covington</wa-option>
+      <wa-option value="Cumming">Cumming</wa-option>
+      <wa-option value="Dacula">Dacula</wa-option>
+      <wa-option value="Dallas">Dallas</wa-option>
+      <wa-option value="Dawsonville">Dawsonville</wa-option>
+      <wa-option value="Decatur">Decatur</wa-option>
+      <wa-option value="Doraville">Doraville</wa-option>
+      <wa-option value="Douglasville">Douglasville</wa-option>
+      <wa-option value="Duluth">Duluth</wa-option>
+      <wa-option value="Dunwoody">Dunwoody</wa-option>
+      <wa-option value="East_Point">East Point</wa-option>
+      <wa-option value="Emerson">Emerson</wa-option>
+      <wa-option value="Fairburn">Fairburn</wa-option>
+      <wa-option value="Fayetteville">Fayetteville</wa-option>
+      <!-- <wa-option value="Flowery_Branch">Flowery Branch</wa-option> -->
+      <wa-option value="Forest_Park">Forest Park</wa-option>
+      <!-- <wa-option value="Gainesville">Gainesville</wa-option> -->
+      <wa-option value="Grayson">Grayson</wa-option>
+      <wa-option value="Griffin">Griffin</wa-option>
+      <wa-option value="Hampton">Hampton</wa-option>
+      <wa-option value="Hapeville">Hapeville</wa-option>
+      <wa-option value="Holly_Springs">Holly Springs</wa-option>
+      <wa-option value="Hoschton">Hoschton</wa-option>
+      <wa-option value="Johns_Creek">Johns Creek</wa-option>
+      <wa-option value="Jonesboro">Jonesboro</wa-option>
+      <wa-option value="Kennesaw">Kennesaw</wa-option>
+      <wa-option value="Lake_City">Lake City</wa-option>
+      <wa-option value="Lawrenceville">Lawrenceville</wa-option>
+      <wa-option value="Lilburn">Lilburn</wa-option>
+      <wa-option value="Lithonia">Lithonia</wa-option>
+      <wa-option value="Locust_Grove">Locust Grove</wa-option>
+      <wa-option value="Loganville">Loganville</wa-option>
+      <wa-option value="Lovejoy">Lovejoy</wa-option>
+      <wa-option value="Mableton">Mableton</wa-option>
+      <wa-option value="Marietta">Marietta</wa-option>
+      <wa-option value="McDonough">McDonough</wa-option>
+      <wa-option value="Milton">Milton</wa-option>
+      <wa-option value="Monroe">Monroe</wa-option>
+      <wa-option value="Morrow">Morrow</wa-option>
+      <wa-option value="Mulberry">Mulberry</wa-option>
+      <wa-option value="Newnan">Newnan</wa-option>
+      <wa-option value="Norcross">Norcross</wa-option>
+      <!-- <wa-option value="Oakwood">Oakwood</wa-option> -->
+      <wa-option value="Oxford">Oxford</wa-option>
+      <wa-option value="Palmetto">Palmetto</wa-option>
+      <wa-option value="Peachtree_City">Peachtree City</wa-option>
+      <wa-option value="Peachtree_Corners">Peachtree Corners</wa-option>
+      <wa-option value="Powder_Springs">Powder Springs</wa-option>
+      <wa-option value="Riverdale">Riverdale</wa-option>
+      <wa-option value="Roswell">Roswell</wa-option>
+      <wa-option value="Sandy_Springs">Sandy Springs</wa-option>
+      <wa-option value="Senoia">Senoia</wa-option>
+      <wa-option value="Smyrna">Smyrna</wa-option>
+      <wa-option value="Snellville">Snellville</wa-option>
+      <wa-option value="Social_Circle">Social Circle</wa-option>
+      <wa-option value="South_Fulton">South Fulton</wa-option>
+      <wa-option value="Statham">Statham</wa-option>
+      <wa-option value="Stockbridge">Stockbridge</wa-option>
+      <wa-option value="Stone_Mountain">Stone Mountain</wa-option>
+      <wa-option value="Stonecrest">Stonecrest</wa-option>
+      <wa-option value="Sugar_Hill">Sugar Hill</wa-option>
+      <wa-option value="Suwanee">Suwanee</wa-option>
+      <wa-option value="Tucker">Tucker</wa-option>
+      <wa-option value="Union_City">Union City</wa-option>
+      <wa-option value="Villa_Rica">Villa Rica</wa-option>
+      <wa-option value="Waleska">Waleska</wa-option>
+      <wa-option value="Winder">Winder</wa-option>
+      <wa-option value="Woodstock">Woodstock</wa-option>
+    </wa-select>
 
     <!-- County jurisdiction dropdown (shown when County is selected) -->
-    <sl-select id="countyDropdownSelect" label="By County:" value="Fulton" style="display: none;">
-      <sl-option value="Barrow">Barrow</sl-option>
-      <sl-option value="Bartow">Bartow</sl-option>
-      <sl-option value="Carroll">Carroll</sl-option>
-      <sl-option value="Cherokee">Cherokee</sl-option>
-      <sl-option value="Clayton">Clayton</sl-option>
-      <sl-option value="Cobb">Cobb</sl-option>
-      <sl-option value="Coweta">Coweta</sl-option>
-      <sl-option value="Dawson">Dawson</sl-option>
-      <sl-option value="DeKalb">DeKalb</sl-option>
-      <sl-option value="Douglas">Douglas</sl-option>
-      <sl-option value="Fayette">Fayette</sl-option>
-      <sl-option value="Forsyth">Forsyth</sl-option>
-      <sl-option value="Fulton">Fulton</sl-option>
-      <sl-option value="Gwinnett">Gwinnett</sl-option>
-      <!-- <sl-option value="Hall">Hall</sl-option> -->
-      <sl-option value="Henry">Henry</sl-option>
-      <sl-option value="Newton">Newton</sl-option>
-      <sl-option value="Paulding">Paulding</sl-option>
-      <sl-option value="Rockdale">Rockdale</sl-option>
-      <sl-option value="Spalding">Spalding</sl-option>
-      <sl-option value="Walton">Walton</sl-option>
-    </sl-select>
+    <wa-select id="countyDropdownSelect" label="By County:" value="Fulton" style="display: none;">
+      <wa-option value="Barrow">Barrow</wa-option>
+      <wa-option value="Bartow">Bartow</wa-option>
+      <wa-option value="Carroll">Carroll</wa-option>
+      <wa-option value="Cherokee">Cherokee</wa-option>
+      <wa-option value="Clayton">Clayton</wa-option>
+      <wa-option value="Cobb">Cobb</wa-option>
+      <wa-option value="Coweta">Coweta</wa-option>
+      <wa-option value="Dawson">Dawson</wa-option>
+      <wa-option value="DeKalb">DeKalb</wa-option>
+      <wa-option value="Douglas">Douglas</wa-option>
+      <wa-option value="Fayette">Fayette</wa-option>
+      <wa-option value="Forsyth">Forsyth</wa-option>
+      <wa-option value="Fulton">Fulton</wa-option>
+      <wa-option value="Gwinnett">Gwinnett</wa-option>
+      <!-- <wa-option value="Hall">Hall</wa-option> -->
+      <wa-option value="Henry">Henry</wa-option>
+      <wa-option value="Newton">Newton</wa-option>
+      <wa-option value="Paulding">Paulding</wa-option>
+      <wa-option value="Rockdale">Rockdale</wa-option>
+      <wa-option value="Spalding">Spalding</wa-option>
+      <wa-option value="Walton">Walton</wa-option>
+    </wa-select>
 
     <!-- District jurisdiction dropdown (shown when District is selected) -->
-    <sl-select id="geoDropdownSelect" label="By Congressional District:" value="4">
-      <sl-option value="1">1</sl-option>
-      <sl-option value="2">2</sl-option>
-      <sl-option value="3">3</sl-option>
-      <sl-option value="4">4</sl-option>
-      <sl-option value="5">5</sl-option>
-      <sl-option value="6">6</sl-option>
-      <sl-option value="7">7</sl-option>
-      <sl-option value="8">8</sl-option>
-      <sl-option value="9">9</sl-option>
-      <sl-option value="10">10</sl-option>
-      <sl-option value="11">11</sl-option>
-      <sl-option value="12">12</sl-option>
-      <sl-option value="13">13</sl-option>
-      <sl-option value="14">14</sl-option>
-    </sl-select>
+    <wa-select id="geoDropdownSelect" label="By Congressional District:" value="4">
+      <wa-option value="1">1</wa-option>
+      <wa-option value="2">2</wa-option>
+      <wa-option value="3">3</wa-option>
+      <wa-option value="4">4</wa-option>
+      <wa-option value="5">5</wa-option>
+      <wa-option value="6">6</wa-option>
+      <wa-option value="7">7</wa-option>
+      <wa-option value="8">8</wa-option>
+      <wa-option value="9">9</wa-option>
+      <wa-option value="10">10</wa-option>
+      <wa-option value="11">11</wa-option>
+      <wa-option value="12">12</wa-option>
+      <wa-option value="13">13</wa-option>
+      <wa-option value="14">14</wa-option>
+    </wa-select>
 
-    <div style="margin-top: 8px;"></div>
-    <sl-select id="statusSelect" label="By Project Status:" value="All">
-      <sl-option value="All">All</sl-option>
-      <sl-option value="Pre_Construction">Pre-Construction</sl-option>
-      <sl-option value="Under_Construction">Under Construction</sl-option>
-      <sl-option value="Completed_Construction">Completed</sl-option>
-    </sl-select>
+    <wa-select id="statusSelect" label="By Project Status:" value="All">
+      <wa-option value="All">All</wa-option>
+      <wa-option value="Pre_Construction">Pre-Construction</wa-option>
+      <wa-option value="Under_Construction">Under Construction</wa-option>
+      <wa-option value="Completed_Construction">Completed</wa-option>
+    </wa-select>
 
-    <div style="margin-top: 8px;"></div>
-    <sl-select id="typeSelect" label="By Project Type:" multiple clearable placeholder="All types">
-      <sl-option value="Maintenance">Maintenance</sl-option>
-      <sl-option value="Reconstruction/Rehabilitation">Reconstruction/Rehabilitation</sl-option>
-      <sl-option value="Replacement">Replacement</sl-option>
-      <sl-option value="Safety">Safety</sl-option>
-      <sl-option value="Enhancement">Enhancement</sl-option>
-      <sl-option value="New Construction">New Construction</sl-option>
-      <sl-option value="Intermodal">Intermodal</sl-option>
-      <sl-option value="Capital">Capital</sl-option>
-      <sl-option value="Operating">Operating</sl-option>
-      <sl-option value="Other">Other</sl-option>
-    </sl-select>
+    <wa-select id="typeSelect" label="By Project Type:" multiple clearable placeholder="All types">
+      <wa-option value="Maintenance">Maintenance</wa-option>
+      <wa-option value="Reconstruction/Rehabilitation">Reconstruction/Rehabilitation</wa-option>
+      <wa-option value="Replacement">Replacement</wa-option>
+      <wa-option value="Safety">Safety</wa-option>
+      <wa-option value="Enhancement">Enhancement</wa-option>
+      <wa-option value="New Construction">New Construction</wa-option>
+      <wa-option value="Intermodal">Intermodal</wa-option>
+      <wa-option value="Capital">Capital</wa-option>
+      <wa-option value="Operating">Operating</wa-option>
+      <wa-option value="Other">Other</wa-option>
+    </wa-select>
 
     <!-- Project Statistics Summary Table -->
-    <div style="text-align: center; margin-top: 18px; margin-bottom: -5px;">
-      <h3 style="font-size: 1em;">Filtered Project Statistics</h3>
+    <div class="drawer-section-heading">
+      <h3>Filtered Project Statistics</h3>
     </div>
     
-    <div style="margin: 10px 0;">
-      <table id="projectStatsTable" style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+    <table id="projectStatsTable" style="width: 100%; border-collapse: collapse;">
         <tbody style="font-size: 15px;">
-          <tr style="border-bottom: 1px solid #eee;">
-            <td style="padding: 8px 4px; font-weight: bold; text-align: left;">Total Projects:</td>
-            <td id="totalProjects" style="padding: 8px 4px; text-align: right;">-</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #eee;">
-            <td style="padding: 8px 4px; font-weight: bold; text-align: left;">
-              Total Allocated Cost:
-              <sl-tooltip content="The 'total allocated cost' is an estimate of a project's total value that falls within the selected jurisdiction's boundaries. It is calculated by determining the proportion of each project's roadway that falls within those boundaries and then applying that proportion to the project's total cost.">
-                <sl-icon name="info-circle-fill" style="margin-left: 5px; cursor: pointer; font-size: 14px; vertical-align: middle;"></sl-icon>
-              </sl-tooltip>
-            </td>
-            <td id="totalAllocatedCost" style="padding: 8px 4px; text-align: right;">-</td>
+          <tr>
+            <td style="padding: 4px 4px; font-weight: bold; text-align: left;">Total Projects:</td>
+            <td id="totalProjects" style="padding: 4px 4px; text-align: right;">-</td>
           </tr>
           <tr>
-            <td style="padding: 8px 4px; font-weight: bold; text-align: left;">Average Allocated Cost:</td>
-            <td id="averageProjectCost" style="padding: 8px 4px; text-align: right;">-</td>
+            <td style="padding: 4px 4px; font-weight: bold; text-align: left;">
+              Total Allocated Cost:
+              <wa-tooltip for="totalCostInfo">The 'total allocated cost' is an estimate of a project's total value that falls within the selected jurisdiction's boundaries. It is calculated by determining the proportion of each project's roadway that falls within those boundaries and then applying that proportion to the project's total cost.</wa-tooltip>
+              <wa-icon id="totalCostInfo" name="circle-info" style="margin-left: 5px; cursor: pointer; font-size: 14px; vertical-align: middle;"></wa-icon>
+            </td>
+            <td id="totalAllocatedCost" style="padding: 4px 4px; text-align: right;">-</td>
+          </tr>
+          <tr>
+            <td style="padding: 4px 4px; font-weight: bold; text-align: left;">Average Allocated Cost:</td>
+            <td id="averageProjectCost" style="padding: 4px 4px; text-align: right;">-</td>
           </tr>
         </tbody>
       </table>
-    </div>
 
     <!-- Dropdown for additional geographic boundaries -->
-    <div style="text-align: center; margin-top: 18px; margin-bottom: -10px;">
-      <h3 style="font-size: 1em;">Add Basemap Reference</h3>
+    <div class="drawer-section-heading">
+      <h3>Add Basemap Reference</h3>
     </div>
-    <sl-select id="additionalGeoSelect" label="" value="None">
-      <sl-option value="None">None</sl-option>
-      <sl-option value="Workforce">Workforce Board Areas</sl-option>
-      <sl-option value="Aging">Area Agencies on Aging</sl-option>
-      <sl-option value="RCs">Regional Commissions</sl-option>
-      <sl-option value="CIDs">Community Improvement Districts</sl-option>
-      <sl-option value="LCIs">Livable Centers Initiative Areas</sl-option>
-    </sl-select>
+    <wa-select id="additionalGeoSelect" label="" value="None">
+      <wa-option value="None">None</wa-option>
+      <wa-option value="Workforce">Workforce Board Areas</wa-option>
+      <wa-option value="Aging">Area Agencies on Aging</wa-option>
+      <wa-option value="RCs">Regional Commissions</wa-option>
+      <wa-option value="CIDs">Community Improvement Districts</wa-option>
+      <wa-option value="LCIs">Livable Centers Initiative Areas</wa-option>
+    </wa-select>
 
-    <div style="margin-top: 14px;"></div>
-    <sl-switch id="toggleProjectsSwitch">Show projects layer</sl-switch>
+    <wa-switch id="toggleProjectsSwitch" checked>Show projects layer</wa-switch>
 
-    <br />
-
-      <!-- buttons for Carto base map selection -->
-  <div class="radio-container-theme">
-    <sl-radio-group label="" name="a" value="light">
-        <sl-radio-button value="dark">
-          <sl-icon name="moon"></sl-icon>
-        </sl-radio-button>
-        <sl-radio-button value="light">
-          <sl-icon name="brightness-high"></sl-icon>
-        </sl-radio-button>
-    </sl-radio-group>
-  </div>
-
-    <!-- footer button: Close -->
-    <sl-button slot="footer" class="close-button" variant="primary">
-      <sl-icon name="arrow-bar-left" style="margin-right: 5px;"></sl-icon>Close
-    </sl-button>
-  </sl-drawer>
+    <!-- footer: About + theme toggle -->
+    <wa-button slot="footer" id="aboutBtn" onclick="document.getElementById('infoDialog').open = true">
+      <wa-icon name="info-circle" style="margin-right: 5px;"></wa-icon>About
+    </wa-button>
+    <wa-tooltip id="themeTooltip" for="themeToggleBtn">Enable dark mode</wa-tooltip>
+    <wa-button slot="footer" id="themeToggleBtn" appearance="outlined">
+      <wa-icon name="moon"></wa-icon>
+    </wa-button>
+  </wa-drawer>
 
   <!-- Info dialog -->
-  <sl-dialog id="infoDialog" label="About this map">
+  <wa-dialog id="infoDialog" label="About this map">
     <div id="infoDialogContent" style="line-height: 1.6; font-size: 14px;">
       Loading info...
     </div>
-    <sl-button slot="footer" variant="primary" onclick="document.getElementById('infoDialog').hide()">Close</sl-button>
-  </sl-dialog>
+    <wa-button slot="footer" variant="primary" onclick="document.getElementById('infoDialog').open = false">Close</wa-button>
+  </wa-dialog>
 
   <!-- Download data button -->
-  <sl-tooltip content="Download all projects at this geography level.">
-    <sl-button id="downloadBtn" variant="plain" outline>
-      <sl-icon name="download" style="font-size: 18px; margin-top: 10px;"></sl-icon>
-    </sl-button>
-  </sl-tooltip>
+  <wa-tooltip for="downloadBtn">Download all projects at this geography level.</wa-tooltip>
+  <wa-button id="downloadBtn"> 
+    <wa-icon name="download" style="font-size: 18px;"></wa-icon>
+  </wa-button>
 
   <!-- open map settings -->
-  <sl-button class="openDrawer" variant="plain" outline>
-    <p style="margin-left: 15px; margin-right: -5px; margin-top: 0px; margin-bottom: 0px;">Filters</p>
-    <sl-icon slot="suffix" name="arrow-bar-right" style="margin-right: 15px;"></sl-icon>
-  </sl-button>
-  <!-- </sl-tooltip> -->
+  <wa-button class="openDrawer">
+    Map Options <wa-icon name="arrow-right"></wa-icon>
+  </wa-button>
+  <!-- </wa-tooltip> -->
 
-  <!-- About button anchored bottom-left -->
-  <sl-button id="aboutBtn" variant="plain" outline onclick="document.getElementById('infoDialog').show()">
-    <sl-icon name="info-circle" style="margin-right: 5px;"></sl-icon>About
-  </sl-button>
-
-  <!-- Reference the external JavaScript file -->
+<!-- Reference the external JavaScript file -->
   <script src="js/main.js" , type="module"></script>
 </body>
 

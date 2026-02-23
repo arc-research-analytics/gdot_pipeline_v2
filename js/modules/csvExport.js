@@ -123,7 +123,7 @@ export async function exportCurrentProjectsAsCSV() {
         
         if (downloadBtn) {
             downloadBtn.disabled = true;
-            downloadBtn.innerHTML = '<sl-icon name="hourglass" style="font-size: 18px; margin-top: 10px;"></sl-icon>';
+            downloadBtn.innerHTML = '<wa-icon name="hourglass" style="font-size: 18px; margin-top: 10px;"></wa-icon>';
         }
         
         // Load the full dataset for this geography type
@@ -170,10 +170,10 @@ export async function exportCurrentProjectsAsCSV() {
         const downloadBtn = document.getElementById("downloadBtn");
         if (downloadBtn) {
             downloadBtn.disabled = false;
-            downloadBtn.innerHTML = '<sl-icon name="exclamation-triangle" style="font-size: 18px; margin-top: 10px; color: red;"></sl-icon>';
+            downloadBtn.innerHTML = '<wa-icon name="triangle-exclamation" style="font-size: 18px; margin-top: 10px; color: red;"></wa-icon>';
             
             setTimeout(() => {
-                downloadBtn.innerHTML = '<sl-icon name="download" style="font-size: 18px; margin-top: 10px;"></sl-icon>';
+                downloadBtn.innerHTML = '<wa-icon name="download" style="font-size: 18px; margin-top: 10px;"></wa-icon>';
             }, 3000);
         }
         

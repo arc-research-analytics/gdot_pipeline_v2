@@ -1,3 +1,46 @@
+@font-face {
+  font-family: 'DINPro';
+  src: url('../assets/fonts/DINPro.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DINPro';
+  src: url('../assets/fonts/DINPro-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DINPro';
+  src: url('../assets/fonts/DINPro-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DINPro';
+  src: url('../assets/fonts/DINPro-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MinionPro';
+  src: url('../assets/fonts/MinionPro-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MinionPro';
+  src: url('../assets/fonts/MinionPro-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -5,17 +48,21 @@ body {
 }
 
 header {
-  background-color: #005495;
+  background-color: #1270B3;
   color: #fff;
-  padding: 10px 14px;
-  font-size: 25px;
-  font-weight: bold;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 29px;
+  font-weight: 700;
+  font-family: 'DINPro', Arial, sans-serif;
   position: fixed;
   width: 100%;
+  height: 50px; 
   top: 0;
   left: 0;
   z-index: 2;
-  opacity: .95;
+  opacity: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,13 +74,88 @@ header {
 .header-title-desktop { display: inline; }
 
 /* Prevent flash of unstyled drawer before Web Component upgrades */
-sl-drawer.drawer-placement:not(:defined) {
+wa-drawer.drawer-placement:not(:defined) {
   visibility: hidden;
 }
 
-/* Reduce drawer body padding from default 2rem to 1.25rem */
+/* Reduce drawer body padding */
 .drawer-placement {
-  --body-spacing: 1.25rem;
+  --body-spacing: 0.85rem;
+}
+
+/* Drawer typography — headings */
+wa-drawer h3 {
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Section heading wrapper — adds top border and spacing between sections */
+.drawer-section-heading {
+  text-align: center;
+  margin-top: 14px;
+  margin-bottom: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+}
+
+/* First section has no top border */
+.drawer-section-heading:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Drawer typography — selects, switches, table */
+wa-drawer wa-select,
+wa-drawer wa-switch {
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 400;
+}
+
+/* Spacing between consecutive wa-select elements */
+wa-drawer wa-select + wa-select {
+  margin-top: 8px;
+}
+
+/* Compress wa-select height to match geo radio buttons */
+wa-drawer wa-select::part(combobox) {
+  min-height: unset;
+  height: 34px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+wa-drawer wa-select::part(form-control-label) {
+  margin-bottom: 2px;
+  font-size: 0.85rem;
+}
+
+wa-drawer wa-select::part(display-input) {
+  font-size: 0.85rem;
+}
+
+/* Geography radio buttons — DINPro Regular, smaller size (inherited into shadow DOM) */
+wa-drawer wa-radio {
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+/* Stats table font and no borders */
+#projectStatsTable,
+#projectStatsTable tr,
+#projectStatsTable td {
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 400;
+  border: none !important;
+}
+
+/* Switch spacing */
+wa-drawer wa-switch {
+  margin-top: 20px;
+  display: block;
 }
 
 .header-logos {
@@ -53,40 +175,45 @@ sl-drawer.drawer-placement:not(:defined) {
   display: none !important;
 }
 
+.mapboxgl-ctrl-attrib-inner {
+  display: none !important;
+}
+
 /* Base styling for the open drawer button */
-sl-button.openDrawer {
+wa-button.openDrawer {
   position: absolute;
   top: 70px;
   left: 15px;
   z-index: 99;
-  /* Remove any background or border from the host element */
-  background: transparent;
-  border: none;
 }
 
 /* Target the shadow parts of the button to change border-radius and remove background */
-sl-button.openDrawer::part(base) {
+wa-button.openDrawer::part(base) {
   border-radius: var(--border-radius);
   background-color: #efefef;
   opacity: var(--opacity-value);
-  color: black;
+  color: #58585A;
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 500;
   font-size: 16px;
-  width: 105px;
-  transition: var(--sl-transition-medium) background-color ease, var(--sl-transition-medium) border ease;
-  border: 1px solid black;
-  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 14px;
+  transition: var(--wa-transition-medium) background-color ease, var(--wa-transition-medium) border ease;
+  border: 1px solid #58585A;
 }
 
 /* Style the button part to match the base part */
-sl-button.openDrawer::part(button) {
+wa-button.openDrawer::part(button) {
   border-radius: var(--border-radius);
-  width: 100%;
-  height: 100%;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* Hover effect: blue background, white text */
-sl-button.openDrawer::part(base):hover {
-  background-color: #005495;
+wa-button.openDrawer::part(base):hover {
+  background-color: #1270B3; 
   color: white;
   border: 1px solid white;
 }
@@ -106,23 +233,27 @@ sl-button.openDrawer::part(base):hover {
   border-radius: var(--border-radius);
   background-color: #efefef;
   opacity: var(--opacity-value);
-  color: black;
-  font-size: 20px;
-  width: 80px;
-  transition: var(--sl-transition-medium) background-color ease, var(--sl-transition-medium) border ease;
-  border: 1px solid black;
-  overflow: hidden;
+  color: #58585A;
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  white-space: nowrap;
+  padding: 0 14px;
+  transition: var(--wa-transition-medium) background-color ease, var(--wa-transition-medium) border ease;
+  border: 1px solid #58585A;
 }
 
 /* Style the button part to match the base part */
 #downloadBtn::part(button) {
   border-radius: var(--border-radius);
-  width: 100%;
-  height: 100%;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #downloadBtn::part(base):hover {
-  background-color: #005495;
+  background-color: #1270B3;
   color: white;
   border: 1px solid white;
 }
@@ -156,6 +287,22 @@ sl-button.openDrawer::part(base):hover {
   --opacity-value: 0.90;
   --topline-margin: 25px;
   --border-radius: 8px;
+
+  /* Override Web Awesome brand color ramp to ARC Agency Blue */
+  --wa-color-brand-95: #ddeef9;
+  --wa-color-brand-90: #b8d9f2;
+  --wa-color-brand-80: #7ab8e4;
+  --wa-color-brand-70: #4897d0;
+  --wa-color-brand-60: #1a85d0;
+  --wa-color-brand-50: #1270B3;
+  --wa-color-brand-40: #0d5a8e;
+  --wa-color-brand-30: #094070;
+  --wa-color-brand-20: #062a4a;
+  --wa-color-brand-10: #031525;
+
+  /* Tooltip styling — charcoal gray background */
+  --wa-tooltip-background-color: #58585A;
+  --wa-tooltip-color: #ffffff;
 }
 
 /* place the geocoder at the top left of the screen */
@@ -239,7 +386,7 @@ sl-button.openDrawer::part(base):hover {
 
 .legend {
   position: absolute;
-  bottom: 100px;
+  bottom: 25px;
   right: 15px;
   background-color: #f0f0f0;
   padding: 10px;
@@ -302,46 +449,24 @@ sl-button.openDrawer::part(base):hover {
   /* Ensures consistent alignment */
 }
 
-/* Target the theme toggle radio group specifically */
-.radio-container-theme sl-radio-group {
-  border: none;
-  border-radius: 10px;
-  padding: 0px;
-  background-color: #efefef;
-  position: absolute;
-  bottom: 21px;
-  left: 15px;
-  opacity: var(--opacity-value);
-}
-
-/* Using Shoelace CSS custom properties for the theme toggle */
-.radio-container-theme sl-radio-group {
-  --sl-input-border-color: gray;
-  --sl-input-border-width: 2px;
-  --sl-input-border-radius-medium: 8px;
-  --sl-input-background-color: #f0f5ff;
-}
-
-/* Styling the radio buttons within the theme toggle */
-.radio-container-theme sl-radio-button::part(base) {
-  --sl-color-primary-600: #0084c6;
-  /* Selected state color */
-}
-
-/* Customizing the theme toggle icons */
-.radio-container-theme sl-radio-button sl-icon {
+/* Theme toggle button inside the drawer */
+#themeToggleBtn wa-icon {
   font-size: 1.2rem;
-  /* Make icons larger */
 }
-
-/* Add hover effects just to the theme toggle */
-.radio-container-theme sl-radio-button::part(base):hover {
-  background-color: none;
+#themeToggleBtn::part(base) {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* colors handled by the footer button rule below */
 }
 
 .map-legend {
-  position: absolute;
-  bottom: 70px;
+  position: fixed;
+  bottom: 25px;
   right: 15px;
   background-color: #fff;
   padding: 10px;
@@ -357,6 +482,8 @@ sl-button.openDrawer::part(base):hover {
 .map-legend h4 {
   margin: 0 0 8px 0;
   font-size: 16px;
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 500;
   border-bottom: 1px solid #eee;
   padding-bottom: 5px;
 }
@@ -365,6 +492,8 @@ sl-button.openDrawer::part(base):hover {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 400;
 }
 
 .legend-key {
@@ -393,10 +522,34 @@ sl-button.openDrawer::part(base):hover {
   outline-offset: 1px;
 }
 
+/* About dialog — MinionPro body font */
+#infoDialogContent {
+  font-family: 'MinionPro', Georgia, serif;
+  font-weight: 400;
+}
+
+/* About dialog — MinionPro Semibold title */
+#infoDialog::part(title) {
+  font-family: 'MinionPro', Georgia, serif;
+  font-weight: 600;
+}
+
+/* About dialog — Close button blue */
+#infoDialog wa-button[variant="primary"]::part(base) {
+  background-color: #1270B3;
+  border-color: #1270B3;
+  color: #fff;
+}
+
+#infoDialog wa-button[variant="primary"]::part(base):hover {
+  background-color: #005495;
+  border-color: #005495;
+}
+
 @media screen and (max-width: 768px) {
 
   /* reposition Filter button to be centered left-to-right */
-  sl-button.openDrawer {
+  wa-button.openDrawer {
     top: 60px;
     left: 10px;
     width: 75px;
@@ -404,18 +557,9 @@ sl-button.openDrawer::part(base):hover {
 
   /* reposition legend */
   .map-legend {
-    position: absolute;
-    bottom: 10px;
+    position: fixed;
+    bottom: 80px;
     right: 10px;
-  }
-
-  #aboutBtn {
-    position: absolute;
-    left: 10px;
-    bottom: 37px !important;
-    z-index: 2;
-    background: transparent;
-    border: none;
   }
 
   /* remove the following elements on mobile */
@@ -424,7 +568,6 @@ sl-button.openDrawer::part(base):hover {
   .header-logo,
   .mapboxgl-ctrl-geocoder,
   .header-logos,
-  .radio-container-theme,
   .mapboxgl-ctrl-attrib,
   #downloadBtn {
     display: none !important;
@@ -433,65 +576,48 @@ sl-button.openDrawer::part(base):hover {
   /* Swap header titles on mobile */
   .header-title-desktop { display: none; }
   .header-title-mobile { display: inline; }
+
+  header { font-size: 21px; }
 }
 
 /* Position the Info button to the left within the drawer footer */
-sl-drawer .drawer-info-left {
+wa-drawer .drawer-info-left {
   margin-right: auto; /* push following footer buttons (e.g., Close) to the right */
 }
 
-sl-drawer .drawer-info-left::part(base) {
+wa-drawer .drawer-info-left::part(base) {
   margin-right: auto; /* push following footer buttons (e.g., Close) to the right */
 }
 
 /* Ensure footer uses space-between and provides a gap between controls */
-sl-drawer::part(footer) {
+wa-drawer::part(footer) {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
 }
 
-/* Push the drawer Close button to the bottom-right within the footer */
-sl-drawer sl-button.close-button {
-  margin-left: auto;
-}
-sl-drawer sl-button.close-button::part(base) {
-  margin-left: auto;
-}
-
-/* About button anchored at bottom-left of the map */
-#aboutBtn {
-  position: absolute;
-  left: 10px;
-  bottom: 20px;
-  z-index: 2;
-  background: transparent;
-  border: none;
+/* About and theme toggle buttons in drawer footer — no fill, gray border/text, blue on hover */
+#aboutBtn::part(base),
+#themeToggleBtn::part(base) {
+  background-color: transparent;
+  border: 1px solid #58585A;
+  color: #58585A;
+  transition: var(--wa-transition-medium) background-color ease, var(--wa-transition-medium) border ease;
 }
 
-#aboutBtn::part(base) {
-  border-radius: var(--border-radius);
-  background-color: #efefef;
-  opacity: var(--opacity-value);
-  color: black;
-  font-size: 16px;
-  width: 100px;
-  transition: var(--sl-transition-medium) background-color ease, var(--sl-transition-medium) border ease;
-  border: 1px solid black;
-  overflow: hidden;
+#aboutBtn::part(base):hover,
+#themeToggleBtn::part(base):hover {
+  background-color: #1270B3;
+  border-color: #1270B3;
+  color: #ffffff;
 }
 
-#aboutBtn::part(button) {
-  border-radius: var(--border-radius);
-  width: 100%;
-  height: 100%;
-}
-
-#aboutBtn::part(base):hover {
-  background-color: #005495;
-  color: white;
-  border: 1px solid white;
+/* Remove focus ring on wa-select combobox */
+wa-select::part(combobox):focus,
+wa-select::part(combobox):focus-within {
+  outline: none;
+  box-shadow: none;
 }
 
 /* Loading overlay styles */

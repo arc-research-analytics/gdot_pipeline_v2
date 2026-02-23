@@ -308,7 +308,7 @@ export function setupAdditionalGeosListener(map) {
   loadAdditionalGeo(map, select.value);
 
   // Listen for changes
-  select.addEventListener('sl-change', (event) => {
+  select.addEventListener('change', (event) => {
     const value = event.target.value;
     loadAdditionalGeo(map, value);
   });

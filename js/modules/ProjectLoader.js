@@ -29,9 +29,9 @@ export const DEFAULT_JURISDICTIONS = {
 
 // Define colors for each status
 export const STATUS_COLORS = {
-    "PRE-CONSTRUCTION": "#3498db", // Blue
-    "UNDER-CONSTRUCTION": "#f39c12", // Orange
-    "COMPLETED-CONSTRUCTION": "#27ae60" // Green
+    "PRE-CONSTRUCTION": "#42ADD3",
+    "UNDER-CONSTRUCTION": "#FDB713",
+    "COMPLETED-CONSTRUCTION": "#98AE3E"
 };
 
 // Import the map legend module
@@ -519,7 +519,7 @@ export function setupProjectLoaderListener(map) {
     }
 
     // Set up event listener for changes to the geography selection
-    geographySelect.addEventListener("sl-change", (event) => {
+    geographySelect.addEventListener("change", (event) => {
         const selectedGeography = event.target.value;
         const selectedStatus = statusSelect.value;
         const selectedTypes = typeSelect ? typeSelect.value : [];
@@ -557,7 +557,7 @@ export function setupProjectLoaderListener(map) {
     });
 
     // Set up event listener for changes to the status selection
-    statusSelect.addEventListener("sl-change", (event) => {
+    statusSelect.addEventListener("change", (event) => {
         const selectedGeography = geographySelect.value;
         const selectedStatus = event.target.value;
         const selectedJurisdiction = getCurrentJurisdiction(selectedGeography);
@@ -586,7 +586,7 @@ export function setupProjectLoaderListener(map) {
 
     // Set up event listener for changes to the type multi-select
     if (typeSelect) {
-        typeSelect.addEventListener("sl-change", (event) => {
+        typeSelect.addEventListener("change", (event) => {
             const selectedGeography = geographySelect.value;
             const selectedStatus = statusSelect.value;
             const selectedJurisdiction = getCurrentJurisdiction(selectedGeography);
@@ -661,16 +661,16 @@ function setupJurisdictionEventListeners(map, geographySelect, statusSelect, typ
 
     // City dropdown change listener
     if (cityDropdown) {
-        cityDropdown.addEventListener("sl-change", reloadProjectsWithCurrentFilters);
+        cityDropdown.addEventListener("change", reloadProjectsWithCurrentFilters);
     }
 
     // County dropdown change listener
     if (countyDropdown) {
-        countyDropdown.addEventListener("sl-change", reloadProjectsWithCurrentFilters);
+        countyDropdown.addEventListener("change", reloadProjectsWithCurrentFilters);
     }
 
     // District dropdown change listener (existing one, just need to update it)
     if (districtDropdown) {
-        districtDropdown.addEventListener("sl-change", reloadProjectsWithCurrentFilters);
+        districtDropdown.addEventListener("change", reloadProjectsWithCurrentFilters);
     }
 }
