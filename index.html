@@ -70,11 +70,15 @@
     </div>
 
     <div style="display: flex; justify-content: center;">
+      <wa-tooltip for="radioState">All statewide projects (no geo filter)</wa-tooltip>
+      <wa-tooltip for="radioDistrict">Statewide congressional district</wa-tooltip>
+      <wa-tooltip for="radioCounty">Metro Atlanta counties only</wa-tooltip>
+      <wa-tooltip for="radioCity">Metro Atlanta cities only</wa-tooltip>
       <wa-radio-group id="geographySelect" label="" value="District" orientation="horizontal">
-        <wa-radio appearance="button" value="Statewide">State</wa-radio>
-        <wa-radio appearance="button" value="District">District</wa-radio>
-        <wa-radio appearance="button" value="County">County</wa-radio>
-        <wa-radio appearance="button" value="City">City</wa-radio>
+        <wa-radio id="radioState" appearance="button" value="Statewide">State</wa-radio>
+        <wa-radio id="radioDistrict" appearance="button" value="District">District</wa-radio>
+        <wa-radio id="radioCounty" appearance="button" value="County">County</wa-radio>
+        <wa-radio id="radioCity" appearance="button" value="City">City</wa-radio>
       </wa-radio-group>
     </div>
 
@@ -297,7 +301,7 @@
   </wa-dialog>
 
   <!-- Download data button -->
-  <wa-tooltip for="downloadBtn">Download projects on map to CSV</wa-tooltip>
+  <wa-tooltip for="downloadBtn" placement="bottom-end">Download filtered projects to CSV</wa-tooltip>
   <wa-button id="downloadBtn"> 
     <wa-icon name="download" style="font-size: 18px;"></wa-icon>
   </wa-button>
