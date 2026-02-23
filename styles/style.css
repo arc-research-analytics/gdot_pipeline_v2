@@ -70,8 +70,8 @@ header {
 }
 
 /* Desktop and mobile header title variants */
-.header-title-mobile { display: none; }
-.header-title-desktop { display: inline; }
+.header-title-mobile { display: none; line-height: 1; padding-bottom: 3px; }
+.header-title-desktop { display: inline; line-height: 1; padding-bottom: 3px; }
 
 /* Prevent flash of unstyled drawer before Web Component upgrades */
 wa-drawer.drawer-placement:not(:defined) {
