@@ -1,8 +1,8 @@
 // CSV Export Module for GDOT Projects
 // Exports GeoJSON project data as CSV files without geometry
 
-// Import project loading functionality
-import { loadProjectGeoJSON } from './ProjectLoader.js';
+// Import project loading and filtering functionality
+import { getVisibleProjectData } from './ProjectLoader.js';
 
 /**
  * Converts GeoJSON features to CSV format
@@ -126,10 +126,9 @@ export async function exportCurrentProjectsAsCSV() {
             downloadBtn.innerHTML = '<wa-icon name="hourglass" style="font-size: 18px; margin-top: 10px;"></wa-icon>';
         }
         
-        // Load the full dataset for this geography type
-        
-        const projectData = await loadProjectGeoJSON(geographyType);
-        
+        // Load only the currently visible (filtered) projects
+        const projectData = await getVisibleProjectData(geographyType);
+
         if (!projectData || !projectData.features || projectData.features.length === 0) {
             throw new Error(`No project data found for ${geographyType}`);
         }

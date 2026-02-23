@@ -143,6 +143,13 @@ wa-drawer wa-radio {
   font-size: 0.8rem;
 }
 
+/* Selected geo radio button — agency blue fill, white text */
+wa-drawer wa-radio[checked]::part(button) {
+  background-color: #1270B3;
+  border-color: #1270B3;
+  color: #ffffff;
+}
+
 /* Stats table font and no borders */
 #projectStatsTable,
 #projectStatsTable tr,
@@ -303,6 +310,13 @@ wa-button.openDrawer::part(base):hover {
   /* Tooltip styling — charcoal gray background */
   --wa-tooltip-background-color: #58585A;
   --wa-tooltip-color: #ffffff;
+}
+
+/* Tooltip font — DINPro Regular */
+wa-tooltip {
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
 }
 
 /* place the geocoder at the top left of the screen */

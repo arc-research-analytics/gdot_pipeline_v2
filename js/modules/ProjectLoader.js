@@ -73,6 +73,22 @@ export async function loadProjectGeoJSON(geographyType) {
 }
 
 /**
+ * Loads and applies all current UI filters (status, jurisdiction, type) to the
+ * project GeoJSON, returning only the features currently visible on the map.
+ * @param {string} geographyType - The geography type
+ * @returns {Promise<Object>} Filtered GeoJSON matching the map view
+ */
+export async function getVisibleProjectData(geographyType) {
+    const data = await loadProjectGeoJSON(geographyType);
+    const { status, jurisdiction, types } = getFiltersFromURL();
+    const jurisdictionFilter = jurisdiction || getCurrentJurisdiction(geographyType);
+    let filtered = filterProjectsByStatus(data, status);
+    filtered = filterProjectsByJurisdiction(filtered, jurisdictionFilter, geographyType);
+    filtered = filterProjectsByType(filtered, types);
+    return filtered;
+}
+
+/**
  * Filters GeoJSON data based on the selected status
  * @param {Object} data - The GeoJSON data to filter
  * @param {string} status - The selected status filter value

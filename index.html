@@ -245,20 +245,20 @@
     <table id="projectStatsTable" style="width: 100%; border-collapse: collapse;">
         <tbody style="font-size: 15px;">
           <tr>
-            <td style="padding: 4px 4px; font-weight: bold; text-align: left;">Total Projects:</td>
-            <td id="totalProjects" style="padding: 4px 4px; text-align: right;">-</td>
+            <td style="padding: 4px 4px; font-weight: 400; text-align: left;">Total Projects:</td>
+            <td id="totalProjects" style="padding: 4px 4px; font-weight: bold; text-align: right;">-</td>
           </tr>
           <tr>
-            <td style="padding: 4px 4px; font-weight: bold; text-align: left;">
+            <td style="padding: 4px 4px; font-weight: 400; text-align: left;">
               Total Allocated Cost:
               <wa-tooltip for="totalCostInfo">The 'total allocated cost' is an estimate of a project's total value that falls within the selected jurisdiction's boundaries. It is calculated by determining the proportion of each project's roadway that falls within those boundaries and then applying that proportion to the project's total cost.</wa-tooltip>
               <wa-icon id="totalCostInfo" name="circle-info" style="margin-left: 5px; cursor: pointer; font-size: 14px; vertical-align: middle;"></wa-icon>
             </td>
-            <td id="totalAllocatedCost" style="padding: 4px 4px; text-align: right;">-</td>
+            <td id="totalAllocatedCost" style="padding: 4px 4px; font-weight: bold; text-align: right;">-</td>
           </tr>
           <tr>
-            <td style="padding: 4px 4px; font-weight: bold; text-align: left;">Average Allocated Cost:</td>
-            <td id="averageProjectCost" style="padding: 4px 4px; text-align: right;">-</td>
+            <td style="padding: 4px 4px; font-weight: 400; text-align: left;">Average Allocated Cost:</td>
+            <td id="averageProjectCost" style="padding: 4px 4px; font-weight: bold; text-align: right;">-</td>
           </tr>
         </tbody>
       </table>
@@ -297,7 +297,7 @@
   </wa-dialog>
 
   <!-- Download data button -->
-  <wa-tooltip for="downloadBtn">Download all projects at this geography level.</wa-tooltip>
+  <wa-tooltip for="downloadBtn">Download projects on map to CSV</wa-tooltip>
   <wa-button id="downloadBtn"> 
     <wa-icon name="download" style="font-size: 18px;"></wa-icon>
   </wa-button>
