@@ -606,7 +606,13 @@ export function setupProjectLoaderListener(map) {
             const selectedGeography = geographySelect.value;
             const selectedStatus = statusSelect.value;
             const selectedJurisdiction = getCurrentJurisdiction(selectedGeography);
-            const selectedTypes = event.target.value;
+            let selectedTypes = event.target.value;
+
+            // Enforce max 4 selections
+            if (selectedTypes.length > 4) {
+                typeSelect.value = selectedTypes.slice(0, 4);
+                selectedTypes = typeSelect.value;
+            }
 
             // Update URL with new filters
             updateURLParams(selectedGeography, selectedJurisdiction, selectedStatus, selectedTypes);

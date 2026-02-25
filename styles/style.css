@@ -127,6 +127,18 @@ wa-drawer wa-select::part(combobox) {
   padding-bottom: 0;
 }
 
+/* Allow the type multi-select to expand vertically with multiple chips */
+#typeSelect::part(combobox) {
+  height: auto;
+  min-height: 34px;
+  align-items: center;
+}
+
+#typeSelect::part(tags) {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 wa-drawer wa-select::part(form-control-label) {
   margin-bottom: 2px;
   font-size: 0.85rem;
