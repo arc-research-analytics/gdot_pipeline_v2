@@ -182,6 +182,72 @@ export async function exportCurrentProjectsAsCSV() {
 }
 
 /**
+ * Exports the current geography level's projects as GeoJSON
+ */
+export async function exportCurrentProjectsAsGeoJSON() {
+    try {
+        const geographyType = getCurrentGeographyType();
+
+        const downloadBtn = document.getElementById("downloadBtn");
+        const originalContent = downloadBtn ? downloadBtn.innerHTML : '';
+
+        if (downloadBtn) {
+            downloadBtn.disabled = true;
+            downloadBtn.innerHTML = '<wa-icon name="hourglass" style="font-size: 18px; margin-top: 10px;"></wa-icon>';
+        }
+
+        const projectData = await getVisibleProjectData(geographyType);
+
+        if (!projectData || !projectData.features || projectData.features.length === 0) {
+            throw new Error(`No project data found for ${geographyType}`);
+        }
+
+        const featureCollection = {
+            type: 'FeatureCollection',
+            features: projectData.features
+        };
+
+        const jsonContent = JSON.stringify(featureCollection, null, 2);
+
+        const timestamp = new Date().toISOString().slice(0, 10);
+        const filename = `GDOT_${geographyType}_Projects_${timestamp}.geojson`;
+
+        const blob = new Blob([jsonContent], { type: 'application/json' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        if (downloadBtn) {
+            setTimeout(() => {
+                downloadBtn.disabled = false;
+                downloadBtn.innerHTML = originalContent;
+            }, 1000);
+        }
+
+    } catch (error) {
+        console.error('❌ GeoJSON export failed:', error);
+
+        const downloadBtn = document.getElementById("downloadBtn");
+        if (downloadBtn) {
+            downloadBtn.disabled = false;
+            downloadBtn.innerHTML = '<wa-icon name="triangle-exclamation" style="font-size: 18px; margin-top: 10px; color: red;"></wa-icon>';
+
+            setTimeout(() => {
+                downloadBtn.innerHTML = '<wa-icon name="download" style="font-size: 18px; margin-top: 10px;"></wa-icon>';
+            }, 3000);
+        }
+
+        alert(`Failed to export GeoJSON: ${error.message}`);
+    }
+}
+
+/**
  * Sets up the download button event listener
  */
 export function setupCSVExportListener() {
@@ -195,9 +261,22 @@ export function setupCSVExportListener() {
     
     downloadBtn.addEventListener('click', (event) => {
         event.preventDefault();
-        
-        exportCurrentProjectsAsCSV();
+        document.getElementById('downloadDialog').open = true;
     });
-    
-    
+
+    const downloadCSVConfirmBtn = document.getElementById('downloadCSVConfirmBtn');
+    if (downloadCSVConfirmBtn) {
+        downloadCSVConfirmBtn.addEventListener('click', () => {
+            document.getElementById('downloadDialog').open = false;
+            exportCurrentProjectsAsCSV();
+        });
+    }
+
+    const downloadGeoJSONBtn = document.getElementById('downloadGeoJSONBtn');
+    if (downloadGeoJSONBtn) {
+        downloadGeoJSONBtn.addEventListener('click', () => {
+            document.getElementById('downloadDialog').open = false;
+            exportCurrentProjectsAsGeoJSON();
+        });
+    }
 }

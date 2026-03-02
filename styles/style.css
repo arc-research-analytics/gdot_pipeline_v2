@@ -539,6 +539,8 @@ wa-tooltip {
   line-height: 38px !important; /* vertically center the × */
   font-size: 24px !important;   /* make the × a bit larger */
   padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
 }
 
 .mapboxgl-popup .mapboxgl-popup-close-button:hover {
@@ -546,8 +548,40 @@ wa-tooltip {
 }
 
 .mapboxgl-popup .mapboxgl-popup-close-button:focus {
-  outline: 2px solid #3498db;
-  outline-offset: 1px;
+  outline: none;
+}
+
+/* Download dialog — compact width */
+#downloadDialog {
+  --width: 420px;
+}
+
+/* Download dialog — DINPro Medium header */
+#downloadDialog::part(title) {
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 500;
+}
+
+/* Download dialog — side-by-side buttons */
+.download-dialog-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+/* Download dialog — branded blue buttons */
+#downloadDialog wa-button[variant="primary"]::part(base) {
+  background-color: #1270B3;
+  border-color: #1270B3;
+  color: #fff;
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 400;
+}
+
+#downloadDialog wa-button[variant="primary"]::part(base):hover {
+  background-color: #005495;
+  border-color: #005495;
 }
 
 /* About dialog — widen via wa-dialog's built-in custom property */
