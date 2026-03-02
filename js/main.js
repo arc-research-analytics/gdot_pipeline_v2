@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const downloadBtn = document.getElementById("downloadBtn");
   const drawer = document.querySelector(".drawer-placement");
-  const openButton = document.querySelector(".openDrawer");
+  const openButtons = document.querySelectorAll(".openDrawer");
 
   // if window.innerWidth is less than 768, remove downloadBtn
   if (window.innerWidth < 768) {
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Set up CSV export functionality for download button
   setupCSVExportListener();
 
-  openButton.addEventListener("click", () => { drawer.open = true; });
+  openButtons.forEach(btn => btn.addEventListener("click", () => { drawer.open = true; }));
 
   // Initialize projects visibility flag
   if (typeof window.__GDOT_PROJECTS_VISIBLE__ === 'undefined') {

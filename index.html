@@ -292,7 +292,7 @@
 
   <!-- Info dialog -->
   <wa-dialog id="infoDialog" label="About this map">
-    <div id="infoDialogContent" style="line-height: 1.6; font-size: 14px;">
+    <div id="infoDialogContent">
       Loading info...
     </div>
     <wa-button slot="footer" variant="primary" onclick="document.getElementById('infoDialog').open = false">Close</wa-button>
@@ -304,9 +304,13 @@
     <wa-icon name="download" style="font-size: 18px;"></wa-icon>
   </wa-button>
 
-  <!-- open map settings -->
-  <wa-button class="openDrawer">
+  <!-- open map settings (desktop) -->
+  <wa-button class="openDrawer openDrawer-desktop">
     Map Options <wa-icon name="arrow-right"></wa-icon>
+  </wa-button>
+  <!-- open map settings (mobile) -->
+  <wa-button class="openDrawer openDrawer-mobile">
+    Options <wa-icon name="arrow-right"></wa-icon>
   </wa-button>
   <!-- </wa-tooltip> -->
 

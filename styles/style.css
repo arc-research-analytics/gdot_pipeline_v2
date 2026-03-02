@@ -70,8 +70,11 @@ header {
 }
 
 /* Desktop and mobile header title variants */
-.header-title-mobile { display: none; line-height: 1; padding-bottom: 3px; }
-.header-title-desktop { display: inline; line-height: 1; padding-bottom: 3px; }
+.header-title-mobile { display: none; line-height: 1;}
+.header-title-desktop { display: inline; line-height: 1;}
+
+/* Hide mobile-only drawer button on desktop */
+.openDrawer-mobile { display: none; }
 
 /* Prevent flash of unstyled drawer before Web Component upgrades */
 wa-drawer.drawer-placement:not(:defined) {
@@ -547,10 +550,17 @@ wa-tooltip {
   outline-offset: 1px;
 }
 
+/* About dialog — widen via wa-dialog's built-in custom property */
+#infoDialog {
+  --width: 800px;
+}
+
 /* About dialog — MinionPro body font */
 #infoDialogContent {
   font-family: 'MinionPro', Georgia, serif;
   font-weight: 400;
+  font-size: 18px;
+  line-height: 1.6em;
 }
 
 /* About dialog — MinionPro Semibold title */
@@ -573,35 +583,36 @@ wa-tooltip {
 
 @media screen and (max-width: 768px) {
 
-  /* reposition Filter button to be centered left-to-right */
+  /* reposition drawer button on mobile */
   wa-button.openDrawer {
     top: 60px;
     left: 10px;
-    width: 75px;
   }
 
-  /* reposition legend */
+  /* swap desktop/mobile drawer buttons */
+  .openDrawer-desktop { display: none; }
+  .openDrawer-mobile { display: block; }
+
+  /* reposition legend to bottom-right corner */
   .map-legend {
     position: fixed;
-    bottom: 80px;
+    bottom: 15px;
     right: 10px;
   }
 
   /* remove the following elements on mobile */
   .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-scale,
   .map-overlay,
-  .arc-logo-link,
   .mapboxgl-ctrl-geocoder,
   .mapboxgl-ctrl-attrib,
   #downloadBtn {
     display: none !important;
-    /* Hides elements on smaller screens */
   }
   /* Swap header titles on mobile */
   .header-title-desktop { display: none; }
   .header-title-mobile { display: inline; }
 
-  header { font-size: 21px; }
+  header { font-size: 25px; }
 }
 
 /* Position the Info button to the left within the drawer footer */
