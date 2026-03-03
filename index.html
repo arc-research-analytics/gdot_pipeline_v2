@@ -293,14 +293,17 @@
   <!-- Download options dialog -->
   <wa-dialog id="downloadDialog" label="Download options">
     <div class="download-dialog-buttons">
-      <wa-tooltip for="downloadGeoJSONBtn" placement="bottom">Download filtered project attribute and geometry data</wa-tooltip>
-      <wa-button id="downloadGeoJSONBtn" variant="primary">
-        <wa-icon name="map" slot="prefix"></wa-icon>Download to GeoJSON
-      </wa-button>
-      <wa-tooltip for="downloadCSVConfirmBtn" placement="bottom">Download filtered project attribute data only</wa-tooltip>
-      <wa-button id="downloadCSVConfirmBtn" variant="primary">
-        <wa-icon name="table" slot="prefix"></wa-icon>Download to CSV
-      </wa-button>
+      <p style="font-size: 18px;">Select an option below to download only the filtered project data.</p>
+      <div class="download-btn-row">
+        <wa-tooltip for="downloadGeoJSONBtn" placement="bottom">Includes project attribute and geometry data</wa-tooltip>
+        <wa-button id="downloadGeoJSONBtn" variant="primary">
+          <wa-icon name="map" slot="prefix"></wa-icon>Download to GeoJSON
+        </wa-button>
+        <wa-tooltip for="downloadCSVConfirmBtn" placement="bottom">Includes project attribute data only</wa-tooltip>
+        <wa-button id="downloadCSVConfirmBtn" variant="primary">
+          <wa-icon name="table" slot="prefix"></wa-icon>Download to CSV
+        </wa-button>
+      </div>
     </div>
   </wa-dialog>
 

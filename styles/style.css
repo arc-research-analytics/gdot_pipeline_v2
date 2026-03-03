@@ -330,7 +330,7 @@ wa-button.openDrawer::part(base):hover {
 wa-tooltip {
   font-family: 'DINPro', Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* place the geocoder at the top left of the screen */
@@ -562,12 +562,26 @@ wa-tooltip {
   font-weight: 500;
 }
 
-/* Download dialog — side-by-side buttons */
+/* Download dialog — stacked layout: text above side-by-side buttons */
 .download-dialog-buttons {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 12px;
   padding: 8px 0;
+}
+
+.download-dialog-buttons p {
+  font-family: 'DINPro', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  margin: 0;
+  text-align: center;
+}
+
+.download-dialog-buttons .download-btn-row {
+  display: flex;
+  gap: 12px;
 }
 
 /* Download dialog — branded blue buttons */

@@ -113,7 +113,7 @@ function getJurisdictionLabel() {
 
     switch (level) {
         case 'Statewide':
-            return 'Total Allocated Cost in the State';
+            return 'Total Cost';
         case 'District':
             return `Total Allocated Cost in District ${jurisdiction}`;
         case 'County':
@@ -151,7 +151,7 @@ function showHoverTooltip(map, e) {
         padding: 6px 10px;
         border-radius: 4px;
         pointer-events: none;
-        font-size: 14px;
+        font-size: 16px;
         font-family: 'DINPro', Arial, sans-serif;
         font-weight: 400;
         z-index: 1000;
@@ -264,24 +264,24 @@ function showProjectPopup(map, e, layerId) {
 
     // Create popup content HTML with theme-aware styling
     let popupContent = `
-        <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; max-width: 300px;">
-            <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 700; font-size: 17px; margin-bottom: 12px; color: ${theme.textColor}; border-bottom: 2px solid ${theme.accentColor}; padding-bottom: 8px;">
+        <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; max-width: 300px; min-width: 250px;">
+            <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 700; font-size: 19px; margin-bottom: 12px; color: ${theme.textColor}; border-bottom: 2px solid ${theme.accentColor}; padding-bottom: 8px;">
                 Project Details
             </div>
 
             <div style="margin-bottom: 10px;">
-                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 500; color: ${theme.textColor}; margin-bottom: 2px;">Description:</div>
-                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; color: ${theme.textColor}; line-height: 1.4; font-size: 15px;">${description}</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 900; color: ${theme.textColor}; margin-bottom: 2px; font-size: 15px;">Description:</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; color: ${theme.textColor}; line-height: 1.4; font-size: 17px;">${description}</div>
             </div>
 
             <div style="margin-bottom: 10px;">
-                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 500; color: ${theme.textColor}; margin-bottom: 2px;">Project Type:</div>
-                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; color: ${theme.textColor}; font-size: 15px;">${type}</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 900; color: ${theme.textColor}; margin-bottom: 2px; font-size: 15px;">Project Type:</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; color: ${theme.textColor}; font-size: 17px;">${type}</div>
             </div>
 
             <div style="margin-bottom: 10px;">
-                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 500; color: ${theme.textColor}; margin-bottom: 2px;">${jurisdictionLabel}:</div>
-                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; color: ${theme.textColor}; font-size: 15px;">${allocatedCost}</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 900; color: ${theme.textColor}; margin-bottom: 2px; font-size: 15px;">${jurisdictionLabel}:</div>
+                <div style="font-family: 'DINPro', Arial, sans-serif; font-weight: 400; color: ${theme.textColor}; font-size: 17px;">${allocatedCost}</div>
             </div>
     `;
     
