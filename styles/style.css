@@ -562,6 +562,10 @@ wa-tooltip {
   font-weight: 500;
 }
 
+#downloadDialog::part(body) {
+  padding-top: 2px;
+}
+
 /* Download dialog — stacked layout: text above side-by-side buttons */
 .download-dialog-buttons {
   display: flex;
