@@ -63,6 +63,11 @@ export function initializeMap() {
   });
   mapInstance.addControl(scale, 'bottom-left');
 
+  // disable map rotation
+  mapInstance.dragRotate.disable();
+  mapInstance.touchZoomRotate.disableRotation();
+
+
   // Populate Info Dialog with last updated date and static info
   fetch(`${BASE_URL}/data/current_date.txt`)
     .then(response => {
