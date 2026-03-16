@@ -657,7 +657,10 @@ wa-tooltip {
   .map-overlay,
   .mapboxgl-ctrl-geocoder,
   .mapboxgl-ctrl-attrib,
-  #downloadBtn {
+  #downloadBtn,
+  #basemapHeading,
+  #additionalGeoSelect,
+  #toggleProjectsSwitch {
     display: none !important;
   }
   /* Swap header titles on mobile */
@@ -665,6 +668,11 @@ wa-tooltip {
   .header-title-mobile { display: inline; }
 
   header { font-size: 25px; }
+
+  /* Add padding above the About dialog Close button so it doesn't cut off body text */
+  #infoDialog::part(footer) {
+    padding-top: 16px;
+  }
 }
 
 /* Position the Info button to the left within the drawer footer */
