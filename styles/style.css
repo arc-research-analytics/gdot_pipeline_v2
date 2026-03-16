@@ -667,7 +667,14 @@ wa-tooltip {
   .header-title-desktop { display: none; }
   .header-title-mobile { display: inline; }
 
-  header { font-size: 25px; }
+  header { 
+    font-size: 25px; 
+    padding-left: 13px;
+  }
+
+  .arc-logo { 
+    height: 22px; 
+  }
 
   /* Add padding above the About dialog Close button so it doesn't cut off body text */
   #infoDialog::part(footer) {
