@@ -553,7 +553,7 @@ wa-tooltip {
 
 /* Download dialog — compact width */
 #downloadDialog {
-  --width: 420px;
+  --width: 580px;
 }
 
 /* Download dialog — DINPro Medium header */
