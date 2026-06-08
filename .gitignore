@@ -9,12 +9,13 @@ scraped/
 
 data/Workforce/ga_xwalk.csv
 
-python-prep/
+# The data pipeline is tracked, but exclude scratch files and bytecode:
+python-prep/misc/
+python-prep/__pycache__/
+python-prep/**/__pycache__/
 
 .cursor/
 
 impact-layer/
 
 js/config.js
-
-CLAUDE.md

@@ -279,23 +279,6 @@ wa-button.openDrawer::part(base):hover {
   border: 1px solid white;
 }
 
-/* #geocoder-container {
-  position: absolute;
-  top: 0.5px;
-  right: 0px !important;
-  z-index: 99 !important;
-}
-
-#geocoder-container:hover {
-  opacity: 1 !important;
-}
-
-#geocoder-container .mapboxgl-ctrl-geocoder input {
-  outline: none !important;
-  box-shadow: none !important;
-} */
-
-
 #map {
   position: absolute;
   top: 0;
@@ -305,7 +288,7 @@ wa-button.openDrawer::part(base):hover {
 
 /* set global styling variables */
 :root {
-  --opacity-value: 0.90;
+  --opacity-value: 1;
   --topline-margin: 25px;
   --border-radius: 8px;
 
@@ -331,15 +314,6 @@ wa-tooltip {
   font-family: 'DINPro', Arial, sans-serif;
   font-weight: 400;
   font-size: 16px;
-}
-
-/* place the geocoder at the top left of the screen */
-.mapboxgl-ctrl-geocoder {
-  width: 300px !important;
-  margin-top: 6px !important;
-  margin-right: 20px !important;
-  opacity: var(--opacity-value);
-  z-index: 999 !important;
 }
 
 .map-overlay {
@@ -496,15 +470,17 @@ wa-tooltip {
   position: fixed;
   bottom: 25px;
   right: 15px;
-  background-color: #fff;
+  /* Match the Map Options / Download buttons: shared color, border, radius, and
+     the single --opacity-value token so all three overlays stay consistent. */
+  background-color: #efefef;
   padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  border: 1px solid #58585A;
+  border-radius: var(--border-radius);
   z-index: 1;
   font-size: 14px;
   line-height: 1.5;
   max-width: 250px;
-  opacity: 0.9;
+  opacity: var(--opacity-value);
 }
 
 .map-legend h4 {
@@ -655,7 +631,6 @@ wa-tooltip {
   /* remove the following elements on mobile */
   .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-scale,
   .map-overlay,
-  .mapboxgl-ctrl-geocoder,
   .mapboxgl-ctrl-attrib,
   #downloadBtn,
   #basemapHeading,

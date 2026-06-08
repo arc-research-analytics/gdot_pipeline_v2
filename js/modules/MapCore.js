@@ -1,7 +1,7 @@
 // Handles core map initialization and basic map controls
 import { MAPBOX_ACCESS_TOKEN } from '../config.js';
 import { DEFAULT_THEME } from '../app-config.js';
-import { getBasemapUrl } from './ThemeManager.js';
+import { getBasemapUrl, getBasemapOpacity } from './ThemeManager.js';
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
@@ -34,7 +34,7 @@ export function initializeMap() {
           ],
           tileSize: 256,
           attribution:
-            '&copy; <a href="https://www.mapbox.com/">Mapbox</a> | <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         },
       },
       glyphs: "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
@@ -45,6 +45,11 @@ export function initializeMap() {
           source: "carto",
           minzoom: 0,
           maxzoom: 20,
+          // Bake in the per-theme opacity so the very first render is muted
+          // correctly (ThemeManager's first updateBasemap can run pre-style-load).
+          paint: {
+            "raster-opacity": getBasemapOpacity(DEFAULT_THEME),
+          },
         },
       ],
     },

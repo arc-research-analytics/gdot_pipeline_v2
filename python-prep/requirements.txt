@@ -1,0 +1,11 @@
+# Python dependencies for the GDOT Tracker data pipeline (python-prep/).
+# Tested with Python 3.11. After installing, also run:  playwright install chromium
+#
+# Versions below are the ones the pipeline was last verified against. They can
+# be bumped over time, but pin them again once a new combination is confirmed
+# to run cleanly end-to-end (the geopandas/shapely stack is the most sensitive).
+
+pandas==2.2.3
+geopandas==1.1.3
+shapely==2.1.0
+playwright==1.51.0
