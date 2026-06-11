@@ -114,6 +114,11 @@ create it manually:
 export const MAPBOX_ACCESS_TOKEN = "your_token_here";
 ```
 
+The token is URL-restricted; `http://localhost:5501` (VS Code Live Server's
+default port) is already on the allowlist. If you serve on a different port or
+use `python3 -m http.server`, you'll need to ask whoever manages the ARC Mapbox
+account to add your local URL to the `gdot` token's allowlist.
+
 ---
 
 ## Deployment
@@ -137,13 +142,13 @@ first pipeline run.
   it was somehow disabled. Check under Settings → Pages.
 - [ ] **`MAPBOX_ACCESS_TOKEN` secret** — the live map is deployed using a
   Mapbox token stored as a GitHub secret. Confirm it exists under Settings →
-  Secrets and variables → Actions. If it needs to be rotated, generate a new
-  token in the ARC Mapbox account, set URL restrictions to
+  Secrets and variables → Actions. If it needs to be rotated, find the token
+  named **`gdot`** in the ARC Mapbox account console, set URL restrictions to
   `https://arc-research-analytics.github.io/gdot_pipeline_v2/*`, and update
   the secret value.
 - [ ] **Local `js/config.js`** — this file is gitignored and must be created
-  manually for local development. Get the Mapbox token from the ARC Mapbox
-  account and create the file:
+  manually for local development. Get the token named **`gdot`** from the ARC
+  Mapbox account console and create the file:
 
   ```js
   export const MAPBOX_ACCESS_TOKEN = "your_token_here";
