@@ -44,8 +44,20 @@ the scrape step takes roughly 12–15 hours.**
 
 ### One-time setup
 
-You need Python 3.11+ and the following packages. We recommend a dedicated
-virtual environment (conda or venv):
+You need Python 3.11+. Create a dedicated virtual environment first (recommended
+to keep pipeline dependencies isolated):
+
+```bash
+# Using conda (recommended):
+conda create -n gdot-tracker python=3.11
+conda activate gdot-tracker
+
+# Or using venv:
+python3 -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+```
+
+Then install dependencies:
 
 ```bash
 pip install -r python-prep/requirements.txt
@@ -53,7 +65,12 @@ playwright install chromium    # required — the scraper drives a headless brow
 ```
 
 You also need **write access to this repository** with git configured locally,
-because the pipeline commits and pushes the results automatically.
+because the pipeline commits and pushes the results automatically. Confirm you
+can push to `main` before your first run:
+
+```bash
+git push --dry-run origin main
+```
 
 ### Running it
 
@@ -106,11 +123,44 @@ Mapbox token from the `MAPBOX_ACCESS_TOKEN` GitHub secret and publishes the site
 to GitHub Pages. The monthly data push (above) therefore redeploys
 automatically — no separate deploy step is needed.
 
-## Maintainer responsibilities
+## Taking over as maintainer
+
+If you are inheriting this project, work through this checklist before your
+first pipeline run.
+
+### Access and credentials
+
+- [ ] **GitHub repo access** — you need write (collaborator) access to
+  `arc-research-analytics/gdot_pipeline_v2`. Contact the repo owner or an
+  organization admin at ARC to be added.
+- [ ] **GitHub Pages** — already enabled on this repo; no action needed unless
+  it was somehow disabled. Check under Settings → Pages.
+- [ ] **`MAPBOX_ACCESS_TOKEN` secret** — the live map is deployed using a
+  Mapbox token stored as a GitHub secret. Confirm it exists under Settings →
+  Secrets and variables → Actions. If it needs to be rotated, generate a new
+  token in the ARC Mapbox account, set URL restrictions to
+  `https://arc-research-analytics.github.io/gdot_pipeline_v2/*`, and update
+  the secret value.
+- [ ] **Local `js/config.js`** — this file is gitignored and must be created
+  manually for local development. Get the Mapbox token from the ARC Mapbox
+  account and create the file:
+
+  ```js
+  export const MAPBOX_ACCESS_TOKEN = "your_token_here";
+  ```
+
+- [ ] **Python environment** — follow the one-time setup steps in the
+  "Updating the data" section below. Make sure the environment is activated
+  every time you run the pipeline.
+- [ ] **Git push access confirmed** — the pipeline auto-commits and pushes at
+  the end. Run `git push --dry-run origin main` to confirm your credentials
+  work before starting an overnight scrape.
+
+### Ongoing responsibilities
 
 - **Run the pipeline ~monthly** and confirm the live site updated afterward.
-- **Repo write access** is required to push the monthly data updates.
-- **Mapbox token:** the live map depends on the `MAPBOX_ACCESS_TOKEN` secret in
-  this repo's settings (Settings → Secrets and variables → Actions). It should
-  point at an ARC-owned Mapbox account, ideally with a URL restriction scoping
-  it to the live site domain.
+- After each run, check `data/history/run_summary.csv` to review new projects,
+  status changes, and any data anomalies (see "Monitoring" in the pipeline
+  section below).
+- Keep the `MAPBOX_ACCESS_TOKEN` GitHub secret current if the token is ever
+  rotated or expires.

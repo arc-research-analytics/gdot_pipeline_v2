@@ -22,10 +22,10 @@ Since there is no build process, open `index.html` directly in a browser or use 
 python3 -m http.server 8000
 ```
 
-The Mapbox token lives in `js/config.js` (gitignored). In CI/CD it is injected from GitHub Secrets (`MAPBOX_TOKEN`). Locally, create `js/config.js` manually:
+The Mapbox token lives in `js/config.js` (gitignored). In CI/CD it is injected from GitHub Secrets (`MAPBOX_ACCESS_TOKEN`). Locally, create `js/config.js` manually:
 
 ```js
-export const MAPBOX_TOKEN = 'your_token_here';
+export const MAPBOX_ACCESS_TOKEN = 'your_token_here';
 ```
 
 There are no tests, linting, or build commands.
@@ -114,11 +114,10 @@ public and unauthenticated — **no credentials or `.env` file are required.**
 
 `data/history/` is an append-only time series for tracking month-over-month change — new
 projects, status transitions, pre-construction cost revisions, construction-% movement,
-completion-date slippage, and data anomalies. It exists partly to answer how often the
-pipeline actually needs to run (monthly vs. quarterly). See
-`python-prep/MONITORING_DESIGN.md` for the full design and run-cadence strategy. The
-frontend does not read these files.
+completion-date slippage, and data anomalies. After each run, review `run_summary.csv`
+to assess whether the monthly cadence is appropriate. The frontend does not read these
+files.
 
 ## Deployment
 
-Push to `main` triggers `.github/workflows/deploy.yml`, which injects the Mapbox token from `MAPBOX_TOKEN` secret into `js/config.js` and deploys to GitHub Pages.
+Push to `main` triggers `.github/workflows/deploy.yml`, which injects the Mapbox token from `MAPBOX_ACCESS_TOKEN` secret into `js/config.js` and deploys to GitHub Pages.
