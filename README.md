@@ -64,13 +64,32 @@ pip install -r python-prep/requirements.txt
 playwright install chromium    # required — the scraper drives a headless browser
 ```
 
-You also need **write access to this repository** with git configured locally,
-because the pipeline commits and pushes the results automatically. Confirm you
-can push to `main` before your first run:
+You also need **write access to this repository** with git properly configured,
+because the pipeline commits and pushes the results automatically.
 
-```bash
-git push --dry-run origin main
-```
+### Git prerequisites
+
+1. **Identity** — git needs your name and email to author the auto-commit:
+
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "you@atlantaregional.org"
+   ```
+
+2. **Authentication** — GitHub no longer accepts passwords over HTTPS. You have
+   two options:
+   - **SSH (recommended):** Add an SSH key to your GitHub account. See
+     [GitHub's SSH setup guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
+     Clone the repo using the SSH URL (`git@github.com:arc-research-analytics/gdot_pipeline_v2.git`).
+   - **HTTPS with a Personal Access Token:** Generate a token at
+     GitHub → Settings → Developer settings → Personal access tokens. Use it
+     in place of a password when prompted.
+
+3. **Confirm push access** before starting an overnight scrape:
+
+   ```bash
+   git push --dry-run origin main
+   ```
 
 ### Running it
 
