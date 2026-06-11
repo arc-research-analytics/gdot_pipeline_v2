@@ -100,24 +100,20 @@ The script walks through five steps:
 
 ## Local development
 
-No build step. Serve the folder and open it in a browser:
+No build step. The recommended way to run locally is the **VS Code Live Server
+extension**, which serves on `http://localhost:5501` — the port already on the
+Mapbox token's URL allowlist. Just open the repo in VS Code and click "Go Live."
 
-```bash
-python3 -m http.server 8000
-# then visit http://localhost:8000
-```
-
-The Mapbox token lives in `js/config.js`, which is gitignored. To run locally,
-create it manually:
+The Mapbox token lives in `js/config.js`, which is gitignored. Create it
+manually before launching:
 
 ```js
 export const MAPBOX_ACCESS_TOKEN = "your_token_here";
 ```
 
-The token is URL-restricted; `http://localhost:5501` (VS Code Live Server's
-default port) is already on the allowlist. If you serve on a different port or
-use `python3 -m http.server`, you'll need to ask whoever manages the ARC Mapbox
-account to add your local URL to the `gdot` token's allowlist.
+The token is URL-restricted to `http://localhost:5501`. If you need to serve on
+a different port, ask whoever manages the ARC Mapbox account to add that URL to
+the `gdot` token's allowlist.
 
 ---
 
