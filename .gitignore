@@ -19,3 +19,7 @@ python-prep/**/__pycache__/
 impact-layer/
 
 js/config.js
+
+# pixi environments
+.pixi/*
+!.pixi/config.toml
