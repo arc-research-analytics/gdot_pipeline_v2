@@ -35,8 +35,8 @@ def run_script(script):
 
 def prompt_fresh_or_resume():
     """
-    If an existing scrape file is found, ask whether to start fresh or resume.
-    Returns True if starting fresh, False if resuming.
+    If an existing scrape file is found, ask whether to start fresh, resume, or skip to git.
+    Returns True if starting fresh, False if resuming, 'git' to skip straight to commit/push.
     If no scrape file exists, returns True (fresh start) automatically.
     """
     if not os.path.exists(SCRAPED_CSV):
@@ -49,8 +49,9 @@ def prompt_fresh_or_resume():
     print(f"\n What next?")
     print(f"  a) Start so fresh and so clean clean! (Delete existing scrape and re-pull from API)")
     print(f"  b) Resume. (Pick up where the scrape left off)")
+    print(f"  c) Skip to git commit/push. (Data files are already ready — just commit and push)")
     while True:
-        answer = input("\n  Enter a or b: ").strip().lower()
+        answer = input("\n  Enter a, b, or c: ").strip().lower()
         if answer == 'a':
             os.remove(SCRAPED_CSV)
             print("  Deleted existing scrape file. Starting fresh.")
@@ -58,7 +59,10 @@ def prompt_fresh_or_resume():
         elif answer == 'b':
             print("  Resuming existing scrape.")
             return False
-        print("  Please enter a or b.")
+        elif answer == 'c':
+            print("  Skipping to git commit/push.")
+            return 'git'
+        print("  Please enter a, b, or c.")
 
 
 def print_scrape_summary():
@@ -108,9 +112,21 @@ def main():
     print("║         GDOT Tracker Data Pipeline               ║")
     print("╚══════════════════════════════════════════════════╝")
 
-    # ── Step 1: API call (skipped if resuming) ────────────
-    fresh_start = prompt_fresh_or_resume()
-    if fresh_start:
+    # ── Step 1: API call (skipped if resuming or git-only) ───
+    mode = prompt_fresh_or_resume()
+
+    if mode == 'git':
+        if not os.path.exists(STATEWIDE_GEOJSON):
+            print("\n  No statewide GeoJSON found. Run the full pipeline first.")
+            sys.exit(1)
+        step("Step 5 — Commit & push (git-only mode)")
+        with open(STATEWIDE_GEOJSON) as f:
+            project_count = len(json.load(f)['features'])
+        run_git(project_count)
+        print("\n✅ Done!")
+        return
+
+    if mode:
         step("Step 1 — API call")
         run_script('sub-scripts/1-api-call.py')
     else:
