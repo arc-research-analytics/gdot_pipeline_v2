@@ -1,3 +1,4 @@
 snapshot_date,total_projects,new_projects,status_changes,cost_changes,pct_movements,completion_date_slips,work_stoppages,anomalies_dropped,pct_of_universe_changed
 2026-06-05,5987,60,30,143,0,0,587,33,47.67
 2026-06-25,5992,30,14,56,122,5,11,25,4.52
+2026-08-21,5870,98,143,224,316,45,40,220,17.77
