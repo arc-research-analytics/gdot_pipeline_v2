@@ -16,15 +16,14 @@ const THEMES = {
 // Theme-specific styles
 const THEME_STYLES = {
   [THEMES.LIGHT]: {
-    // CartoDB Voyager (raster). Mapbox light fallback kept commented below.
+    // Mapbox Light (raster). CARTO basemaps now require their own API key
+    // (since Sept 2026), so we use Mapbox tiles with the existing token.
     basemapUrl:
-      "https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png",
+      "https://api.mapbox.com/styles/v1/mapbox/light-v11/tiles/256/{z}/{x}/{y}@2x?access_token=" +
+      MAPBOX_ACCESS_TOKEN,
 
-    // basemapUrl: 'https://api.mapbox.com/styles/v1/mapbox/light-v11/tiles/256/{z}/{x}/{y}@2x?access_token=' + MAPBOX_ACCESS_TOKEN,
-
-    // Mute Voyager slightly (blends toward the white page background) so its
-    // colors don't compete with the blue/green/gold project lines.
-    basemapOpacity: 0.7,
+    // Mapbox Light is already muted, no extra fading needed.
+    basemapOpacity: 1,
 
     unselectedBoundaryColor: "#b0b0b0",
     selectedBoundaryColor: "#58585A",
@@ -40,12 +39,11 @@ const THEME_STYLES = {
     unselectedLabelHaloWidth: 0.5,
   },
   [THEMES.DARK]: {
-    // CartoDB Dark (raster). Mapbox dark fallback kept commented below.
-    basemapUrl: "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png",
+    // Mapbox Dark (raster).
+    basemapUrl:
+      "https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/256/{z}/{x}/{y}@2x?access_token=" +
+      MAPBOX_ACCESS_TOKEN,
 
-    // basemapUrl: 'https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/256/{z}/{x}/{y}@2x?access_token=' + MAPBOX_ACCESS_TOKEN,
-
-    // Full opacity — CartoDB dark is already subdued, no muting needed.
     basemapOpacity: 1,
 
     unselectedBoundaryColor: "#787878",
@@ -136,18 +134,18 @@ function applyTheme(map, theme) {
  * @param {string} theme - The theme to apply
  */
 function updateBasemap(map, theme) {
-  if (!map.getSource("carto")) {
-    console.warn("Carto source not found on map");
+  if (!map.getSource("basemap")) {
+    console.warn("Basemap source not found on map");
     return;
   }
 
   const newTileUrl = THEME_STYLES[theme].basemapUrl;
-  map.getSource("carto").setTiles([newTileUrl]);
+  map.getSource("basemap").setTiles([newTileUrl]);
 
-  // Apply the per-theme basemap opacity (mutes Voyager in light mode; dark stays full)
+  // Apply the per-theme basemap opacity
   const opacity = THEME_STYLES[theme].basemapOpacity ?? 1;
-  if (map.getLayer("carto-layer")) {
-    map.setPaintProperty("carto-layer", "raster-opacity", opacity);
+  if (map.getLayer("basemap-layer")) {
+    map.setPaintProperty("basemap-layer", "raster-opacity", opacity);
   }
 }
 

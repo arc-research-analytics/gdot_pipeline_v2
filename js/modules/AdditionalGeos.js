@@ -150,9 +150,9 @@ function addAdditionalGeoLayer(map, geojson) {
   } else {
     // As a fallback, place as the bottom-most overlay above the base raster
     const layers = map.getStyle().layers || [];
-    const cartoIndex = layers.findIndex(l => l.id === 'carto-layer');
-    if (cartoIndex >= 0 && layers[cartoIndex + 1]) {
-      beforeLayerId = layers[cartoIndex + 1].id;
+    const basemapIndex = layers.findIndex(l => l.id === 'basemap-layer');
+    if (basemapIndex >= 0 && layers[basemapIndex + 1]) {
+      beforeLayerId = layers[basemapIndex + 1].id;
     }
   }
 

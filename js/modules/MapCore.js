@@ -27,22 +27,22 @@ export function initializeMap() {
     style: {
       version: 8,
       sources: {
-        carto: {
+        basemap: {
           type: "raster",
           tiles: [
             getBasemapUrl(DEFAULT_THEME),
           ],
           tileSize: 256,
           attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         },
       },
       glyphs: "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
       layers: [
         {
-          id: "carto-layer",
+          id: "basemap-layer",
           type: "raster",
-          source: "carto",
+          source: "basemap",
           minzoom: 0,
           maxzoom: 20,
           // Bake in the per-theme opacity so the very first render is muted
